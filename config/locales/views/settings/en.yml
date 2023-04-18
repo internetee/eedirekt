@@ -1,0 +1,18 @@
+en:
+  settings:
+    est_tld:
+      validations:
+        create:
+          epp_forbidden: "EPP Authorization message: %{exception}"
+          ssl_error: "SSL certificate error: %{exception}"
+    configurations:
+      index:
+        submit: Create
+        username: Username
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
+        server_failed_msg: Validation failed on server side
+        server_success_msg: Validation pass validation on server side
+        send_form_failed_msg: Failed occur by sending form
+        upload_error_msg: Upload error

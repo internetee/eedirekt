@@ -1,0 +1,8 @@
+en:
+  registrar:
+    sessions:
+      new:
+        submit: Login
+        username: Username
+        password: Password
+        title: Registrar login

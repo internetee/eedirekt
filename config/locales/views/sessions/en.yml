@@ -1,0 +1,6 @@
+en:
+  sessions:
+    new:
+      submit: Login
+      username: Username
+      password: Password

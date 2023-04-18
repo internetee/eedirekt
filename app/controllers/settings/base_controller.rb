@@ -1,0 +1,11 @@
+module Settings
+  class BaseController < ApplicationController
+    before_action :redirect_to_admin_session
+
+    private
+
+    def redirect_to_admin_session
+      redirect_to new_admin_sessions_path, status: :see_other if SuperUser.count > 0
+    end
+  end
+end

@@ -1,0 +1,36 @@
+<div class='container mx-auto h-screen flex flex-col items-center justify-center space-x-8'>
+  <h2 class='text-gray-900 text-2xl font-bold'><%= t('.title') %></h2>
+
+  <div class='flex flex-row items-center'>
+    <div class='border-r border-r-gray-700 pr-6'>
+      <%= form_with url: registrar_users_path, model: RegistrarUser.new, class: 'w-full mt-8' do |form| %>
+        <div class='flex items-center'>
+          <%= form.label :username, class: 'text-bold text-sm text-gray-700 w-20' %>
+          <%= form.text_field :username, placeholder: t('.username'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+        </div>
+        <div class='mt-2 flex items-center'>
+          <%= form.label :password, class: 'text-bold text-sm text-gray-700 w-20' %>
+          <%= form.password_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+        </div>
+        <div class='mt-2 flex items-center'>
+          <%= form.label :password_confrimation, class: 'text-bold text-sm text-gray-700 w-20' %>
+          <%= form.password_field :password_confrimation, placeholder: t('.password_confirmation'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+        </div>
+
+        <h2 class='my-3 font-bold text-2xl'>For EEID:</h2>
+        <div class='flex items-center'>
+          <%= form.label :name, class: 'text-bold text-sm text-gray-700 w-20' %>
+          <%= form.text_field :name, placeholder: t('.name'), class: 'px-2 py-1 border border-gray-400' %>
+        </div>
+        <div class='flex items-center'>
+          <%= form.label :code, class: 'text-bold text-sm text-gray-700 w-20' %>
+          <%= form.text_field :code, placeholder: t('.code'), class: 'px-2 py-1 border border-gray-400' %>
+        </div>
+
+        <div class='w-full flex justify-end'>
+          <%= form.submit t('.submit'), class: 'px-5 py-2 bg-green-600 hover:bg-green-700 text-white mt-4' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

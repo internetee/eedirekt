@@ -1,0 +1,51 @@
+---
+- name: Deploy Ruby on Rails application
+  hosts: staging
+  become: yes
+  gather_facts: no
+
+  vars:
+    app_name: eedirekt
+    deploy_directory: /home/eedirekt/{{ app_name }}
+    repo_url: https://github.com/internetee/eedirekt.git
+    git_branch: master
+    environment: staging
+
+  tasks:
+    - name: Create deploy directory
+      file:
+        path: "{{ deploy_directory }}"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0755'
+
+    - name: Clone Rails application from Git repository
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ deploy_directory }}"
+        version: "{{ git_branch }}"
+        force: yes
+      become_user: "{{ ansible_user }}"
+
+    - name: Install bundler and application dependencies
+      shell: |
+        gem install bundler
+        bundle install --deployment --without development test
+      args:
+        chdir: "{{ deploy_directory }}"
+      become_user: "{{ ansible_user }}"
+
+    - name: Precompile assets
+      shell: |
+        RAILS_ENV={{ environment }} bundle exec rake assets:precompile
+      args:
+        chdir: "{{ deploy_directory }}"
+      become_user: "{{ ansible_user }}"
+
+    - name: Run Rails application
+      shell: |
+        RAILS_ENV={{ environment }} bundle exec puma -C config/puma.rb
+      args:
+        chdir: "{{ deploy_directory }}"
+      become_user: "{{ ansible_user }}"

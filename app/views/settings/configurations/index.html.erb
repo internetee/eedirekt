@@ -1,0 +1,69 @@
+<div class='container mx-auto h-screen flex flex-col items-center justify-center space-x-8'>
+  <h1 class='text-gray-900 text-2xl font-bold'>Welcome</h1>
+
+  <div class='flex flex-row justify-center items-center'>
+      <%= form_with url: settings_configurations_path, class: 'w-full mt-8',
+      data: {
+        controller: 'applications-upload',
+        applications_upload_server_failed_msg_value: t('.server_failed_msg'),
+        applications_upload_server_success_msg_value: t('.server_success_msg'),
+        applications_upload_send_form_failed_msg_value: t('.send_form_failed_msg'),
+        applications_upload_upload_error_msg_value: t('.upload_error_msg'),
+        applications_upload_validation_url_value: settings_est_tld_validations_path,
+      } do |form| %>
+        <h2 class='text-gray-900 text-xl font-bold mb-3 mt-6'>User admin credentials</h2>
+
+        <%= form.fields_for SuperUser.new do |f| %>
+          <div class='flex items-center'>
+            <%= f.label :username, class: 'text-bold text-sm text-gray-700 w-32' %>
+            <%= f.text_field :username, placeholder: t('.username'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+          </div>
+
+          <div class='mt-2 flex items-center'>
+            <%= f.label :email, class: 'text-bold text-sm text-gray-700 w-32' %>
+            <%= f.text_field :email, placeholder: t('.username'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+          </div>
+
+          <div class='mt-2 flex items-center'>
+            <%= f.label :password, class: 'text-bold text-sm text-gray-700 w-32' %>
+            <%= f.text_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+          </div>
+
+          <div class='mt-2 flex items-center'>
+            <%= f.label :password_confirmation, class: 'text-bold text-sm text-gray-700 w-32' %>
+            <%= f.text_field :password_confirmation, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+          </div>
+        <% end %>
+
+        <h2 class='text-gray-900 text-xl font-bold mb-3 mt-6'>Estonian TLD</h2>
+          <%= form.fields_for Tld.new do |f| %>
+            <span id='error-box'></span>
+
+            <div class='flex items-center'>
+              <%= f.label :username, class: 'text-bold text-sm text-gray-700 w-32' %>
+              <%= f.text_field :username, placeholder: t('.username'), required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+            </div>
+
+            <div class='mt-2 flex items-center'>
+              <%= f.label :password, class: 'text-bold text-sm text-gray-700 w-32' %>
+              <%= f.text_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+            </div>
+
+            <div class='mt-2 flex items-center'>
+              <%= f.label :crt, class: 'text-bold text-sm text-gray-700 w-32' %>
+              <%= f.file_field :crt, placeholder: t('.crt'), direct_upload: true, required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+            </div>
+
+            <div class='mt-2 flex items-center'>
+              <%= f.label :key, class: 'text-bold text-sm text-gray-700 w-32' %>
+              <%= f.file_field :key, placeholder: t('.key'), direct_upload: true, required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+            </div>
+          <% end %>
+
+
+        <div class='w-full flex justify-end'>
+          <%= form.submit t('.submit'), class: 'px-5 py-2 bg-green-600 hover:bg-green-700 text-white mt-4' %>
+        </div>
+      <% end %>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+FROM ruby:3.2.0-alpine3.16 AS builder
+
+RUN apk add --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/main \
+  --repository=http://dl-cdn.alpinelinux.org/alpine/v3.14/community \
+#   --repository=http://dl-cdn.alpinelinux.org/alpine/v3.16/community \
+  # --repository http://dl-3.alpinelinux.org/alpine/edge/community \
+  # --repository http://dl-3.alpinelinux.org/alpine/edge/main \
+  build-base \
+  linux-headers \
+  git \
+  nodejs \
+  yarn \
+  libpq-dev \
+  ruby-dev \
+  libxml2-dev \
+  postgresql13-dev \
+  postgresql13 \
+  postgresql13-client \
+#   python2 \
+  tzdata
+
+ENV BUNDLER_VERSION 2.2.24
+ENV BUNDLE_JOBS 8
+ENV BUNDLE_RETRY 5
+ENV BUNDLE_CACHE_ALL true
+ENV APP_PATH /opt/webapps/app
+
+WORKDIR $APP_PATH
+
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler -v $BUNDLER_VERSION
+
+RUN bundle config --global frozen 1 && \
+  bundle install && \
+  rm -rf /usr/local/bundle/cache/*.gem && \
+  find /usr/local/bundle/gems/ -name "*.c" -delete && \
+  find /usr/local/bundle/gems/ -name "*.o" -delete
+
+
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --non-interactive --production
+
+ADD . $APP_PATH
+
+RUN rails assets:clobber assets:precompile --trace && \
+  yarn cache clean && \
+  rm -rf node_modules tmp/cache vendor/assets test
+
+FROM ruby:3.2.0-alpine3.16
+
+RUN mkdir -p /opt/webapps/app
+WORKDIR /opt/webapps/app
+ENV RAILS_SERVE_STATIC_FILES true
+
+
+COPY --from=builder /usr/lib /usr/lib
+COPY --from=builder /usr/share/zoneinfo/ /usr/share/zoneinfo/
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+COPY --from=builder /opt/webapps/app /opt/webapps/app
+
+
+EXPOSE 3000
+
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
