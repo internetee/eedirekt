@@ -31,5 +31,6 @@ module Eedirect
     end
 
     config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env) }
+    config.secret_key_base = Figaro.env.secret_key_base
   end
 end

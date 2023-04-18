@@ -6,7 +6,7 @@ class Ability
   def initialize(user)
     @user = user || User.new
 
-    case @user.&.class&.name
+    case @user&.class&.name
     when 'SuperUser'
       admin_can
     when 'RegistrarUser'
