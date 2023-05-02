@@ -16,3 +16,6 @@ en:
         server_success_msg: Validation pass validation on server side
         send_form_failed_msg: Failed occur by sending form
         upload_error_msg: Upload error
+        crt: CA certificate
+        key: Private key
+        base_url: REPP Base url

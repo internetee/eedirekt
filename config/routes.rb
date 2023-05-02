@@ -1,5 +1,9 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   root 'dashboards#index'
+  mount Sidekiq::Web => '/sidekiq'
+  mount ActionCable.server => '/cable'
 
   namespace :admin do
     resource :sessions, only: %i[new create]

@@ -22,13 +22,15 @@ module Settings
       validate_existance_in_server
 
       @super_user = SuperUser.new(user_params)
-      @tld = Tld.new(tld_params)
+      @tld = Tld::Estonian.new(tld_params)
 
       if @super_user.valid? && @tld.valid?
         @super_user.save! && @tld.save!
         @app_session = create_app_session
 
         log_in @app_session
+
+        EstonianTld::ContactsJob.set(wait: 10.seconds).perform_later(Tld.first)
         redirect_to root_path, notice: t('.signed_in'), status: :see_other
       else
         Rails.logger.warn @super_user.errors.full_messages
@@ -55,7 +57,7 @@ module Settings
     end
 
     def tld_params
-      params.require(:tld).permit(Tld.permitted_attributes)
+      params.require(:tld).permit(Tld::Estonian.permitted_attributes)
     end
   end
 end

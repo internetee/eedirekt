@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://registry:3000/repp/v1/domains?details=true&limit=10&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Basic b2xlZ2hhc2phbm92OjEyMzQ1Ng==
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept
+      Etag:
+      - W/"f556fc5b9a98a14c04145dfe92068217"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 2867c227-d8a1-4a17-a210-fac5e14ac8d3
+      X-Runtime:
+      - '0.115716'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"code":1000,"message":"Command completed successfully","data":{"new_domain":[{"name":"qbvkrumxbq.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:56:58.813+03:00","updated_at":"2023-04-27T15:56:58.813+03:00","expire_time":"2024-04-27T15:56:58.747+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"YXUOLTLQKB:YYENUZAMMP","type":"AdminDomainContact","name":"BYJRJDJPJM"},{"code":"YXUOLTLQKB:YYENUZAMMP","type":"TechDomainContact","name":"BYJRJDJPJM"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"48787a8d0ae3a6431dd58422cdb92d3c"}],"domains":[{"name":"error1.ee","registrant":{"name":"Oleg
+        Hasjanov","code":"ACCR:9CA34557"},"created_at":"2023-02-20T13:29:43.519+02:00","updated_at":"2023-02-20T13:30:19.709+02:00","expire_time":"2024-02-21T00:00:00.000+02:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"ACCR:9CA34557","type":"AdminDomainContact","name":"Oleg
+        Hasjanov"},{"code":"ACCR:9CA34557","type":"TechDomainContact","name":"Oleg
+        Hasjanov"}],"nameservers":[{"id":1,"hostname":"ns1.nameserver.ee","ipv4":["127.0.0.1"],"ipv6":[]},{"id":2,"hostname":"ns2.nameserver.ee","ipv4":["127.0.0.1"],"ipv6":[]}],"dnssec_keys":[],"statuses":{"ok":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"d4b3d92eecbefe098d5503958a1c1ebb"},{"name":"bibptxlqlt.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:20.483+03:00","updated_at":"2023-04-27T15:48:20.483+03:00","expire_time":"2024-04-27T15:48:20.340+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"UXDNFJKKVQ:COIKRHDSYO","type":"AdminDomainContact","name":"DPLWIVIJQC"},{"code":"UXDNFJKKVQ:COIKRHDSYO","type":"TechDomainContact","name":"DPLWIVIJQC"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"2558a7811f3ed28b38d82531e40b85d1"},{"name":"dfeopsmvdy.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:20.599+03:00","updated_at":"2023-04-27T15:48:20.599+03:00","expire_time":"2024-04-27T15:48:20.545+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"TKNUGWINOX:GPUAKBWYBC","type":"AdminDomainContact","name":"PELPCKCTYD"},{"code":"TKNUGWINOX:GPUAKBWYBC","type":"TechDomainContact","name":"PELPCKCTYD"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"928fc279d25e0d85090eb8520a8ade76"},{"name":"tpaqylqxbw.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:20.680+03:00","updated_at":"2023-04-27T15:48:20.680+03:00","expire_time":"2024-04-27T15:48:20.623+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"OPKGAPBZIR:YSXSLUMWEF","type":"AdminDomainContact","name":"OLGYNMLHHV"},{"code":"OPKGAPBZIR:YSXSLUMWEF","type":"TechDomainContact","name":"OLGYNMLHHV"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"96c42ebe2ffa388f4702c2651d53c61f"},{"name":"fycnxbevbn.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:20.759+03:00","updated_at":"2023-04-27T15:48:20.759+03:00","expire_time":"2024-04-27T15:48:20.706+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"EFKCZHCMCP:DUPONXDPJG","type":"AdminDomainContact","name":"SDPMKYARYY"},{"code":"EFKCZHCMCP:DUPONXDPJG","type":"TechDomainContact","name":"SDPMKYARYY"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"415ddb599f0748a119b62df0287ac4fe"},{"name":"rjfceychex.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:20.848+03:00","updated_at":"2023-04-27T15:48:20.848+03:00","expire_time":"2024-04-27T15:48:20.790+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"MAWPYUWRRJ:CAWYGMXTCS","type":"AdminDomainContact","name":"ANMQCUHYEA"},{"code":"MAWPYUWRRJ:CAWYGMXTCS","type":"TechDomainContact","name":"ANMQCUHYEA"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"1a98bd4716ee4f81b1f3d3b034140cd2"},{"name":"yckdiqiqyf.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:20.925+03:00","updated_at":"2023-04-27T15:48:20.924+03:00","expire_time":"2024-04-27T15:48:20.872+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"HCXZOGQPON:PPKLLWGQNQ","type":"AdminDomainContact","name":"WFIQKHSWMF"},{"code":"HCXZOGQPON:PPKLLWGQNQ","type":"TechDomainContact","name":"WFIQKHSWMF"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"ec902fa966eea56f56c96c5f8beec748"},{"name":"ymcudaforg.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:21.004+03:00","updated_at":"2023-04-27T15:48:21.004+03:00","expire_time":"2024-04-27T15:48:20.949+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"QSRSYQHUHB:VEZXERGVGC","type":"AdminDomainContact","name":"OAAGZCOGTC"},{"code":"QSRSYQHUHB:VEZXERGVGC","type":"TechDomainContact","name":"OAAGZCOGTC"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"69b24e5ff837f45b70e0dfafe09c1353"},{"name":"zjhrcpfvkd.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:21.090+03:00","updated_at":"2023-04-27T15:48:21.090+03:00","expire_time":"2024-04-27T15:48:21.033+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"GKOAVIADER:EUQHYMNUNZ","type":"AdminDomainContact","name":"WHYHZKXGUC"},{"code":"GKOAVIADER:EUQHYMNUNZ","type":"TechDomainContact","name":"WHYHZKXGUC"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"a1406e148ca316667d7e0feed280b362"},{"name":"kgvdzsijda.ee","registrant":{"name":"KYPCFCAJWW","code":"GIUFIHTLIQ:MBYGEWLUXY"},"created_at":"2023-04-27T15:48:21.170+03:00","updated_at":"2023-04-27T15:48:21.170+03:00","expire_time":"2024-04-27T15:48:21.114+03:00","outzone_at":null,"delete_date":null,"force_delete_date":null,"contacts":[{"code":"UWFSSQXTDG:UHNHDYXZAY","type":"AdminDomainContact","name":"SLXCADLORG"},{"code":"UWFSSQXTDG:UHNHDYXZAY","type":"TechDomainContact","name":"SLXCADLORG"}],"nameservers":[],"dnssec_keys":[],"statuses":{"inactive":""},"registrar":{"name":"NORM","website":"https://normal.ee"},"dispute":false,"transfer_code":"d3081c127a9d73540ef45a6932bc4361"}],"count":5001,"statuses":["clientDeleteProhibited","serverDeleteProhibited","clientHold","serverHold","clientRenewProhibited","serverRenewProhibited","clientTransferProhibited","serverTransferProhibited","clientUpdateProhibited","serverUpdateProhibited","inactive","ok","pendingCreate","pendingDelete","pendingDeleteConfirmation","pendingRenew","pendingTransfer","pendingUpdate","serverManualInzone","serverRegistrantChangeProhibited","serverAdminChangeProhibited","serverTechChangeProhibited","serverForceDelete","deleteCandidate","expired","disputed","serverReleaseProhibited","serverExtensionUpdateProhibited","serverObjUpdateProhibited"]}}'
+  recorded_at: Tue, 02 May 2023 12:17:05 GMT
+recorded_with: VCR 6.1.0

@@ -1,0 +1,6 @@
+:concurrency: 5
+:namespace: sidekiq_eedirect
+:queues:
+  - critical
+  - high
+  - default

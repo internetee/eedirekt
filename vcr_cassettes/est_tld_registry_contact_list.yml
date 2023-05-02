@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://registry:3000/repp/v1/contacts?details=true&limit=10&offset=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Basic b2xlZ2hhc2phbm92OjEyMzQ1Ng==
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Accept
+      Etag:
+      - W/"4a1e663a57c4ba994377e8ca2bedd3d1"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - befb579c-5f4e-4ddd-a038-f36126f6ba1f
+      X-Runtime:
+      - '0.466421'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"code":1000,"message":"Command completed successfully","data":{"contacts":[{"code":"GIUFIHTLIQ:MBYGEWLUXY","name":"KYPCFCAJWW","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.897+03:00","auth_info":"30c562c2995db49db65a67","email":"TLMNXGJWMR@KAPUDYMFRQ.ee","statuses":{"ok":"","linked":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"IHSHGSWGTN","zip":"12323","city":"QWKOZLJZBL","state":null,"country_code":"EE"}},{"code":"PXWCDBVZWL:JPJQUIXAOD","name":"QNWLLNCDYV","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.874+03:00","auth_info":"b50aad631bfb6d6f65c51b","email":"ICSTXGNTCH@XKGAZHKXLH.ee","statuses":{"ok":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"BLIWJVXMZK","zip":"12323","city":"AYBVCWZIJK","state":null,"country_code":"EE"}},{"code":"VRVRMWXLRZ:NADPRHZQVJ","name":"WFSOXZLHLH","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.851+03:00","auth_info":"79c489687163d617af66d3","email":"AGWRFBYDQN@BIGGVYTPUQ.ee","statuses":{"ok":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"TROYAQEOCE","zip":"12323","city":"AOLYGNEZDF","state":null,"country_code":"EE"}},{"code":"YGXWFIQVAM:WLUXZILJQZ","name":"IGSFUICYST","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.827+03:00","auth_info":"c7a4cf3f319335f3ec72f8","email":"SRCHSBWWPB@DQTAZSFSEJ.ee","statuses":{"ok":"","linked":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"FBUHJEHCRF","zip":"12323","city":"JJQQDOMZQS","state":null,"country_code":"EE"}},{"code":"RDRJXTSTGJ:CTUCVGXZPO","name":"OWZHDKQKRA","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.803+03:00","auth_info":"c3935ed6e37ce826be146a","email":"CBJWMBOEMI@FFUWMJUBBO.ee","statuses":{"ok":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"TJHMBKRRDR","zip":"12323","city":"HGQYZMUHDZ","state":null,"country_code":"EE"}},{"code":"BZRGCPNTMH:KPMCBPDFBF","name":"FHKKFEZKII","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.771+03:00","auth_info":"fcac29156688ffe0b7aa21","email":"CPSWGPFUFO@PEOGWCGJYB.ee","statuses":{"ok":"","linked":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"CDYSWKREJQ","zip":"12323","city":"UTDHGVYGWK","state":null,"country_code":"EE"}},{"code":"CGHOELIWDA:GWBCTXRJPZ","name":"XPSEHXZVXP","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.745+03:00","auth_info":"ab4980ea6822b200918163","email":"PDYULZLAPH@IFLTRHMUPI.ee","statuses":{"ok":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"SVFNUHBNJI","zip":"12323","city":"OBMHUJQJJR","state":null,"country_code":"EE"}},{"code":"WQXWRIEAIN:UZHRAWIWZH","name":"JXUFNBUKBG","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.721+03:00","auth_info":"8550373b8779af00f4e70e","email":"LBAUKUSONH@GNSFLTVHYF.ee","statuses":{"ok":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"SYTGZJRRLE","zip":"12323","city":"MNPJGWHUVM","state":null,"country_code":"EE"}},{"code":"WRMSBCNTZZ:YEVAGKFUJN","name":"JBXONWAVXL","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.698+03:00","auth_info":"6405a76bc3b73e5907f832","email":"PXISXJPIJX@MYPHOSSTSX.ee","statuses":{"ok":"","linked":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"VWMBFYJJBT","zip":"12323","city":"PDNDNCOUDT","state":null,"country_code":"EE"}},{"code":"ZIQSLZSBGW:SOUJIHTMGU","name":"HYZEYCHOVM","ident":{"code":"38903110313","type":"priv","country_code":"EE"},"phone":"+372.59813318","created_at":"2023-04-25T11:21:52.669+03:00","auth_info":"20789faf311d5c7258a12c","email":"DCBWCYCBNF@HVCQLNSSDN.ee","statuses":{"ok":""},"disclosed_attributes":[],"registrar":{"name":"NORM","website":"https://normal.ee"},"address":{"street":"GWUYJLHQLA","zip":"12323","city":"TCBOCDBYHR","state":null,"country_code":"EE"}}],"count":8001,"statuses":["clientDeleteProhibited","serverDeleteProhibited","clientTransferProhibited","serverTransferProhibited","clientUpdateProhibited","serverUpdateProhibited","ok","pendingCreate","pendingDelete","pendingTransfer","pendingUpdate","linked"],"ident_types":["org","priv","birthday"]}}'
+  recorded_at: Tue, 02 May 2023 08:00:44 GMT
+recorded_with: VCR 6.1.0

@@ -20,3 +20,8 @@ registrar_tara_identifier: ''
 registrar_tara_secret: ''
 user_tara_identifier: ''
 user_tara_secret: ''
+
+secret_key_base: ''
+
+sikideq_username: admin
+sikideq_password: password

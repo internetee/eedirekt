@@ -19,6 +19,15 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  config.active_job.queue_adapter     = :sidekiq
+
+  config.action_cable.url = "ws://0.0.0.0:3000/cable"
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/, /file:\/\/*/, 'file://', nil]
+  config.web_console.allowed_ips = '0.0.0.0/0'
+
+  config.action_cable.logger = Logger.new(STDOUT)
+  # config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/, /file:\/\/*/, 'file://', nil]
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?

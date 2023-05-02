@@ -26,12 +26,12 @@
 
           <div class='mt-2 flex items-center'>
             <%= f.label :password, class: 'text-bold text-sm text-gray-700 w-32' %>
-            <%= f.text_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+            <%= f.password_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
           </div>
 
           <div class='mt-2 flex items-center'>
             <%= f.label :password_confirmation, class: 'text-bold text-sm text-gray-700 w-32' %>
-            <%= f.text_field :password_confirmation, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+            <%= f.password_field :password_confirmation, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
           </div>
         <% end %>
 
@@ -46,7 +46,7 @@
 
             <div class='mt-2 flex items-center'>
               <%= f.label :password, class: 'text-bold text-sm text-gray-700 w-32' %>
-              <%= f.text_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+              <%= f.password_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
             </div>
 
             <div class='mt-2 flex items-center'>
@@ -57,6 +57,11 @@
             <div class='mt-2 flex items-center'>
               <%= f.label :key, class: 'text-bold text-sm text-gray-700 w-32' %>
               <%= f.file_field :key, placeholder: t('.key'), direct_upload: true, required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+            </div>
+
+            <div class='mt-2 flex items-center'>
+              <%= f.label :base_url, class: 'text-bold text-sm text-gray-700 w-32' %>
+              <%= f.text_field :base_url, placeholder: t('.base_url'), required: true, class: 'px-2 py-1 border border-gray-400' %>
             </div>
           <% end %>
 

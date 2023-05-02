@@ -46,17 +46,17 @@ RUN rails assets:clobber assets:precompile --trace && \
   yarn cache clean && \
   rm -rf node_modules tmp/cache vendor/assets test
 
-FROM ruby:3.2.0-alpine3.16
+# FROM ruby:3.2.0-alpine3.16
 
-RUN mkdir -p /opt/webapps/app
-WORKDIR /opt/webapps/app
-ENV RAILS_SERVE_STATIC_FILES true
+# RUN mkdir -p /opt/webapps/app
+# WORKDIR /opt/webapps/app
+# ENV RAILS_SERVE_STATIC_FILES true
 
 
-COPY --from=builder /usr/lib /usr/lib
-COPY --from=builder /usr/share/zoneinfo/ /usr/share/zoneinfo/
-COPY --from=builder /usr/local/bundle /usr/local/bundle
-COPY --from=builder /opt/webapps/app /opt/webapps/app
+# COPY --from=builder /usr/lib /usr/lib
+# COPY --from=builder /usr/share/zoneinfo/ /usr/share/zoneinfo/
+# COPY --from=builder /usr/local/bundle /usr/local/bundle
+# COPY --from=builder /opt/webapps/app /opt/webapps/app
 
 
 EXPOSE 3000

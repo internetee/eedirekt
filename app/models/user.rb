@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include HasSession
   include Authentication
 
-  enum sex: { male: 'male', female: 'female', unknown: 'unknown' }
+  enum gender: { male: 'male', female: 'female', unknown: 'unknown' }
 
   def self.from_omniauth(tara_params)
     full_name = "#{tara_params['given_name']} #{tara_params['family_name']}"
@@ -18,11 +18,11 @@ class User < ApplicationRecord
   def sex(identity_code:)
     case identity_code[0]
     when '1', '3', '5'
-      sexes[:male]
+      User.genders[:male]
     when '2', '4', '6'
-      sexes[:female]
+      User.genders[:female]
     else
-      sexes[:unknown]
+      User.genders[:unknown]
     end
   end
 

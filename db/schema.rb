@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_06_113109) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -54,6 +54,65 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_06_113109) do
     t.index ["sessionable_type", "sessionable_id"], name: "index_app_sessions_on_sessionable"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.string "phone"
+    t.string "ident"
+    t.string "code"
+    t.string "authInfo"
+    t.integer "role"
+    t.string "country_code"
+    t.jsonb "information", default: {}
+    t.datetime "remote_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dnssec_keys", force: :cascade do |t|
+    t.integer "flags"
+    t.integer "protocol"
+    t.integer "algorithm"
+    t.string "public_key"
+    t.bigint "domain_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain_id"], name: "index_dnssec_keys_on_domain_id"
+  end
+
+  create_table "domain_contacts", force: :cascade do |t|
+    t.bigint "domain_id"
+    t.bigint "contact_id"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_domain_contacts_on_contact_id"
+    t.index ["domain_id"], name: "index_domain_contacts_on_domain_id"
+  end
+
+  create_table "domains", force: :cascade do |t|
+    t.string "name"
+    t.string "statuses", default: [], array: true
+    t.datetime "remote_created_at"
+    t.datetime "remote_updated_at"
+    t.datetime "expire_at"
+    t.jsonb "information", default: {}
+    t.bigint "registrant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registrant_id"], name: "index_domains_on_registrant_id"
+  end
+
+  create_table "nameservers", force: :cascade do |t|
+    t.string "hostname"
+    t.string "ipv4", default: [], array: true
+    t.string "ipv6", default: [], array: true
+    t.bigint "domain_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain_id"], name: "index_nameservers_on_domain_id"
+  end
+
   create_table "registrar_users", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "name"
@@ -76,7 +135,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_06_113109) do
   create_table "tlds", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "username"
-    t.string "password_digest"
+    t.string "base_url"
+    t.string "encrypted_password"
+    t.string "encrypted_password_iv"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -91,4 +153,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_06_113109) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "domains", "contacts", column: "registrant_id"
 end
