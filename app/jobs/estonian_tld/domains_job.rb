@@ -15,7 +15,7 @@ class EstonianTld::DomainsJob < ApplicationJob
 
     dirty_domains = EstonianTld::DomainService.new(tld:).domain_list(url_params:)
 
-    unless dirty_domains.success?
+    unless dirty_domains.success
       EstonianTld::InformAdminService.call({tld: Tld.first, message: "Error fetching domains: #{dirty_domains.body['message']}"})
       return
     end

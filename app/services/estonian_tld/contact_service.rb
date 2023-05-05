@@ -6,10 +6,15 @@ module EstonianTld
 
     def initialize(tld:)
       @tld = tld
+      @url = "#{tld.base_url}#{REPP_ENDPOINT}"
     end
 
     def contact_list(url_params: {})
-      request(url: "#{tld.base_url}#{REPP_ENDPOINT}/contacts?#{url_params.to_query}", method: 'get', params: {}, headers: nil)
+      request(url: "#{@url}/contacts?#{url_params.to_query}", method: 'get', params: {}, headers: nil)
+    end
+
+    def create_contact(payload: nil)
+      request(url: "#{@url}/contacts", method: 'post', params: { contact: payload.payload.compact_blank.as_json }, headers: nil)
     end
   end
 end

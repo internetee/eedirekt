@@ -1,6 +1,8 @@
 class CreateContacts < ActiveRecord::Migration[7.0]
   def change
     create_table :contacts do |t|
+      t.uuid :uuid, default: 'gen_random_uuid()'
+
       t.string :email, null: true
       t.string :name, null: true
       t.string :phone, null: true

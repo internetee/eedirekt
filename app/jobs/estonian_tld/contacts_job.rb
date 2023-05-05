@@ -4,6 +4,7 @@ class EstonianTld::ContactsJob < ApplicationJob
   STEP = 200
 
   def perform(tld)
+    @tld = tld
     # NB! Synchronization should be run only one time when tld is added to the system
     return unless Contact.count.zero?
 
@@ -15,8 +16,8 @@ class EstonianTld::ContactsJob < ApplicationJob
 
     dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
 
-    unless dirty_contacs.success?
-      EstonianTld::InformAdminService.call({tld: Tld.first, message: "Error fetching contacts: #{dirty_contacs.body['message']}"})
+    unless dirty_contacs.success
+      EstonianTld::InformAdminService.call({tld: , message: "Error fetching contacts: #{dirty_contacs.body['message']}"})
       return
     end
 
@@ -24,7 +25,7 @@ class EstonianTld::ContactsJob < ApplicationJob
     contact_count = dirty_contacs['body']['data']['contacts'].count
     contact_creator(dirty_contacs)
 
-    EstonianTld::InformAdminService.call({tld: Tld.first, message: 'Contacts start synchronizing!'})
+    EstonianTld::InformAdminService.call({tld: , message: 'Contacts start synchronizing!'})
 
     return if contact_count < STEP
 
@@ -33,11 +34,11 @@ class EstonianTld::ContactsJob < ApplicationJob
       dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
       contact_creator(dirty_contacs)
 
-      EstonianTld::InformAdminService.call({tld: Tld.first, message: "Processed contacts #{url_params[:offset]} of #{total_count}"})
+      EstonianTld::InformAdminService.call({tld: , message: "Processed contacts #{url_params[:offset]} of #{total_count}"})
       Rails.logger.info "Processed contacts #{url_params[:offset]} of #{total_count}"
     end
 
-    EstonianTld::InformAdminService.call({tld: Tld.first, message: 'All contacts were synchronized!'})
+    EstonianTld::InformAdminService.call({tld: , message: 'All contacts were synchronized!'})
   end
 
   def contact_creator(dirty_contacs)
@@ -52,6 +53,6 @@ class EstonianTld::ContactsJob < ApplicationJob
   end
 
   after_perform do |_job|
-    EstonianTld::DomainsJob.perform_later(Tld.first)
+    EstonianTld::DomainsJob.perform_later(@tld)
   end
 end

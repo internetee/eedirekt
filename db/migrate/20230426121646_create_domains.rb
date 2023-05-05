@@ -1,6 +1,8 @@
 class CreateDomains < ActiveRecord::Migration[7.0]
   def change
     create_table :domains do |t|
+      t.uuid :uuid, default: 'gen_random_uuid()'
+
       t.string :name
       t.string :statuses, array: true, default: []
       t.datetime :remote_created_at

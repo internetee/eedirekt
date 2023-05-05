@@ -1,23 +1,7 @@
 class DashboardsController < ApplicationController
-  def index; end
-
-  private
-
-  # def server
-  #   crt_content = Tld.first.crt.download
-  #   key_content = Tld.first.key.download
-
-  #   @server ||= Epp::Server.new({
-  #     server: 'epp_proxy',
-  #     tag: 'oleghasjanov',
-  #     password: '123456',
-  #     port: '700',
-  #     cert: OpenSSL::X509::Certificate.new(crt_content),
-  #     key: OpenSSL::PKey::RSA.new(key_content)
-  #   })
-  # end
-
-  # def api_user
-  #   @tld_user = Tld.first
-  # end
+  def index
+    @tld = Tld.first
+    all_notifications = EstonianTld::PollMessageService.new(tld: @tld).all_notifications
+    @all_notifications = EstonianTld::NotificationSerializer.call(dirty: all_notifications)
+  end
 end

@@ -1,4 +1,4 @@
-module Contact::EstTldRoles
+module Contact::EstTld::Roles
   extend ActiveSupport::Concern
 
   included do

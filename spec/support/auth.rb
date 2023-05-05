@@ -4,7 +4,7 @@ module Auth
   end
 
   def registrar_login_basic_auth(user)
-    post registrar_sessions_path, params: { username: user.username, password: user.password }
+    post registrar_sessions_url, params: { username: user.username, password: user.password }
   end
 
   def registrar_login_tara_auth(_user)

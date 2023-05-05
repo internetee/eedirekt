@@ -28,6 +28,9 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uuidtools' # For unique IDs (used by the epp gem)
+gem 'i18n-tasks', '~> 1.0.12'
+gem 'pagy', '~> 6.0'
+gem 'country_select'
 
 # gem "kredis"
 # gem "image_processing", "~> 1.2"

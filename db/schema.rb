@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
   end
 
   create_table "contacts", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "email"
     t.string "name"
     t.string "phone"
@@ -70,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
   end
 
   create_table "dnssec_keys", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.integer "flags"
     t.integer "protocol"
     t.integer "algorithm"
@@ -81,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
   end
 
   create_table "domain_contacts", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.bigint "domain_id"
     t.bigint "contact_id"
     t.string "type"
@@ -91,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
   end
 
   create_table "domains", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "name"
     t.string "statuses", default: [], array: true
     t.datetime "remote_created_at"
@@ -104,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
   end
 
   create_table "nameservers", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "hostname"
     t.string "ipv4", default: [], array: true
     t.string "ipv6", default: [], array: true

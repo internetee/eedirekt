@@ -1,0 +1,55 @@
+<h2 class='text-xl font-bold'><%= t('.general') %></h2>
+<div class='flex items-center space-x-2'>
+  <%= form.label :country_code, t('.country_code'), class: 'w-32' %>
+  <%= form.country_select :country_code, { priority_countries: ["EE", "LV", "LT"]},  { class: 'px-2 py-2 border border-black w-96 bg-white' } %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :ident, class: 'w-32' %>
+  <%= form.text_field :ident, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label 'Role', class: 'w-32' %>
+  <%= form.select :role, Contact.human_enum_options(:role), {}, { class: 'px-2 py-2 border border-black w-96 bg-white' } %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :name, class: 'w-32' %>
+  <%= form.text_field :name, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :phone, class: 'w-32' %>
+  <%= form.text_field :phone, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :email, class: 'w-32' %>
+  <%= form.email_field :email, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<h2 class='text-xl font-bold'><%= t('.address') %></h2>
+<div class='flex items-center space-x-2'>
+  <%= form.label :address_country_code, t('.country_code'), class: 'w-32' %>
+  <%= form.country_select :address_country_code, { priority_countries: ["EE", "LV", "LT"]},  { class: 'px-2 py-2 border border-black w-96 bg-white' } %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :state, class: 'w-32' %>
+  <%= form.text_field :state, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :city, class: 'w-32' %>
+  <%= form.text_field :city, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :zip, class: 'w-32' %>
+  <%= form.text_field :zip, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<div class='flex items-center space-x-2'>
+  <%= form.label :street, class: 'w-32' %>
+  <%= form.text_field :street, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+<h2 class='text-xl font-bold'><%= t('.legal') %></h2>
+<div class='flex items-center space-x-2'>
+  <%= form.label :legal_document, class: 'file' do %>
+    <%= form.file_field :legal_document, class: 'not_visible', accept: [] %>
+    <i class="fas fa-folder-open"></i>
+    <strong><%=t(:choose_file) %></strong>
+    <span>(max. 8MB)</span>
+  <% end %>
+</div>

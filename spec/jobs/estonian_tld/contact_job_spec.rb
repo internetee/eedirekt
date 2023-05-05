@@ -6,7 +6,7 @@ RSpec.describe EstonianTld::ContactsJob, type: :job do
 
   let(:mock_contact_list) do
     OpenStruct.new(
-      success?: true,
+      success: true,
       body: {
         'data' => {
           'count' => 2,
@@ -15,6 +15,7 @@ RSpec.describe EstonianTld::ContactsJob, type: :job do
               'name' => 'John Doe',
               'email' => 'john@example.com',
               'phone' => '123456789',
+              'country_code' => 'US',
               'ident' => { 'code' => '1', 'type' => 'priv', 'country_code' => 'US' },
               'code' => '123',
               'auth_info' => 'secret',
@@ -24,6 +25,7 @@ RSpec.describe EstonianTld::ContactsJob, type: :job do
               'name' => 'Jane Doe',
               'email' => 'jane@example.com',
               'phone' => '987654321',
+              'country_code' => 'US',
               'ident' => { 'code' => '2', 'type' => 'priv', 'country_code' => 'US' },
               'code' => '456',
               'auth_info' => 'top_secret',

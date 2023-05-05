@@ -7,7 +7,7 @@ RSpec.describe EstonianTld::DomainsJob, type: :job do
 
   let(:mock_domain_list) do
     OpenStruct.new(
-      success?: true,
+      success: true,
       body: {
         'data' => {
           'count' => 2,

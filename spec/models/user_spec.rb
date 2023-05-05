@@ -35,9 +35,9 @@ RSpec.describe User, type: :model do
 
   describe 'birthday' do
     let(:user) { User.new }
-  
+
     it 'returns the correct birth date from identity code' do
-      expect(user.birthday(identity_code: '38903110313')).to eq(Date.parse('890311'))
+      expect(user.birthday(identity_code: '30303039914')).to eq(Date.parse('030303'))
     end
   end  
 end

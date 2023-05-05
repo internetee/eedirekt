@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    attributes:
+      contact:
+        roles:
+          priv: "Private"
+          org: "Organization"

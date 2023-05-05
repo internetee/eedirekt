@@ -4,7 +4,10 @@ class RegistrarUser < ApplicationRecord
 
   has_secure_password validations: false
 
-  enum sex: { male: 'male', female: 'female', unknown: 'unknown' }
+  GENDER = { male: 'male', female: 'female', unknown: 'unknown' }.freeze
+
+  # validates :code, presence: true, uniqueness: true
+  # validates :name, presence: true
 
   def self.from_omniauth(tara_params)
     full_name = "#{tara_params['given_name']} #{tara_params['family_name']}"
@@ -22,11 +25,11 @@ class RegistrarUser < ApplicationRecord
   def sex(identity_code:)
     case identity_code[0]
     when '1', '3', '5'
-      sexes[:male]
+      GENDER[:male]
     when '2', '4', '6'
-      sexes[:female]
+      GENDER[:female]
     else
-      sexes[:unknown]
+      GENDER[:unknown]
     end
   end
 

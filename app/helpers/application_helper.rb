@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def admin?
     current_user&.class&.name == 'SuperUser'
   end
