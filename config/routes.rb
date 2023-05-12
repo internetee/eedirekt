@@ -26,7 +26,12 @@ Rails.application.routes.draw do
 
   namespace :registrar do
     resources :poll_messages, only: %i[update]
-    resources :contacts, param: :uuid
+    resources :contacts, param: :uuid do
+      collection do
+        get :search
+      end
+    end
+    resources :domains, param: :uuid
     resource :sessions, only: %i[new create destroy]
     namespace :tara do
       get '/callback', to: 'tara#callback'

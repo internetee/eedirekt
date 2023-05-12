@@ -21,7 +21,7 @@ RSpec.describe Registrar::ContactsController, type: :request do
       city: 'example_city',
       street: 'example_street',
       state: 'example_state',
-      zip: 'example_zip'
+      zip: 'example_zip',
       # legal_document: "example_legal_document"
     }
   end
@@ -78,5 +78,66 @@ RSpec.describe Registrar::ContactsController, type: :request do
     end
   end
 
-  # Добавьте остальные тесты для update и destroy, аналогично примерам выше
+  describe 'GET #edit' do
+    it 'returns a success response' do
+      contact = Contact.create! valid_attributes
+      contact.reload
+      get edit_registrar_contact_path(uuid: contact.uuid)
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'PATCH #update' do
+    context 'with valid params' do
+      let(:new_attributes) do
+        { email: 'updated_email@example.com' }
+      end
+
+      it 'updates the requested contact' do
+        contact = Contact.create! valid_attributes
+        contact.reload
+
+        patch registrar_contact_path(uuid: contact.uuid), params: { contact: new_attributes }
+        contact.reload
+        expect(contact.email).to eq(new_attributes[:email])
+      end
+
+      it 'redirects to the contacts list' do
+        contact = Contact.create! valid_attributes
+        contact.reload
+
+        patch registrar_contact_path(uuid: contact.uuid), params: { contact: new_attributes }
+        expect(response).to redirect_to(registrar_contacts_path)
+      end
+    end
+
+    context 'with invalid params' do
+      it 'does not update the contact' do
+        contact = Contact.create! valid_attributes
+        contact.reload
+
+        patch registrar_contact_path(uuid: contact.uuid), params: { contact: invalid_attributes }
+        expect(contact.reload.email).not_to eq(invalid_attributes[:email])
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'destroys the requested contact' do
+      contact = Contact.create! valid_attributes
+      contact.reload
+
+      expect do
+        delete registrar_contact_path(uuid: contact.uuid)
+      end.to change(Contact, :count).by(-1)
+    end
+
+    it 'redirects to the contacts list' do
+      contact = Contact.create! valid_attributes
+      contact.reload
+
+      delete registrar_contact_path(uuid: contact.uuid)
+      expect(response).to redirect_to(registrar_contacts_path)
+    end
+  end
 end

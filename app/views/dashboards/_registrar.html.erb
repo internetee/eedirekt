@@ -1,14 +1,16 @@
-<h2>List of notifications:</h2>
-<div class='container mx-auto'>
+<div class='container mx-auto space-y-4'>
   <div>
-  <%= link_to t('.new_contact'), new_registrar_contact_path, class: 'text-indigo-500' %>
+    <%= link_to t('.contacts'), registrar_contacts_path, class: 'text-indigo-500' %> - 
+    <%= link_to t('.new_contact'), new_registrar_contact_path, class: 'text-indigo-500' %>
   </div>
 
   <div>
-  <%= link_to t('.contacts'), registrar_contacts_path, class: 'text-indigo-500' %>
+    <%= link_to t('.domains'), registrar_domains_path, class: 'text-indigo-500' %> - 
+    <%= link_to t('.new_domain'), new_registrar_domain_path, class: 'text-indigo-500' %>
   </div>
 </div>
 
+<h2 class='mt-8'>List of notifications:</h2>
 <% @all_notifications.each do |n| %>
   <p><%= n %></p> <%= button_to ('.mark_as_read'), registrar_poll_message_path(n.id), method: :put, class: 'px-5 py-2 bg-indigo-400 text-white' %>
 <% end if @all_notifications.present? %>

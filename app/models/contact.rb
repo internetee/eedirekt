@@ -11,6 +11,10 @@ class Contact < ApplicationRecord
                  :statuses,
                  :registrar
 
+  def self.search(query)
+    where("name ILIKE ? OR ident ILIKE ?", "%#{query}%", "%#{query}%")
+  end
+
   def zip
     address['zip'] if address
   end
