@@ -1,7 +1,7 @@
 <div class='container mx-auto'>
   <h2><%= t('.title') %></h2>
 
-  <%= form_with model: @contact, url: registrar_contact_path(uuid: @contact.uuid), method: :put, class: 'flex flex-col mt-8 space-y-3 items-center', multipart: true, data: { turbo: true } do |form| %>
+  <%= form_with model: @domain, url: registrar_domain_path(uuid: @domain.uuid), method: :put, class: 'flex flex-col mt-8 space-y-3 items-center', multipart: true, data: { turbo: true } do |form| %>
       <%= render 'form', form: form %>
 
       <%= form.submit t('.create'), class: 'px-3 py-1 rounded-md text-white bg-indigo-400 hover:bg-indigo-500 cursor-pointer' %>

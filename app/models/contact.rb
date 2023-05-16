@@ -70,4 +70,8 @@ class Contact < ApplicationRecord
   def registrar_website=(value)
     self.registrar = (registrar || {}).merge('website' => value)
   end
+
+  def to_s
+    "#{name} - #{code}"
+  end
 end

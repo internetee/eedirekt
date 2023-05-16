@@ -12,6 +12,7 @@
       <%= form.label :registrant, class: 'w-32' %>
       <%= form.text_field :registrant,
                           class: 'px-2 py-1 border border-black w-96',
+                          value: @domain.registrant ? @domain.registrant.name + ' - ' + @domain.registrant.code : '',
                           data: { action: "input->form--autocomplete#search", form__autocomplete_target: "input"
                           } %>
       <ul class="autocomplete-results" data-form--autocomplete-target="results"></ul>

@@ -1,5 +1,7 @@
 module Registrar
   class DomainsController < ApplicationController
+    before_action :load_domain, only: %i[show edit update destroy]
+
     def index
       @pagy, @domains = pagy(Domain.all.order(created_at: :desc), items: 15, link_extra: 'data-turbo-action="advance"')
     end
@@ -18,18 +20,12 @@ module Registrar
 
     def create
       domain_params_modified = domain_params.except(:period)
-      domain_params_modified[:dnssec_keys_attributes].each do |dnssec_key_params|
-        dnssec_key_params[:flags] = dnssec_key_params[:flags].to_i
-        dnssec_key_params[:protocol] = dnssec_key_params[:protocol].to_i
-        dnssec_key_params[:algorithm] = dnssec_key_params[:algorithm].to_i
-      end
-
       @domain = Domain.new(domain_params_modified)
       period = params[:domain][:period].to_i
       @domain.expire_at = calculate_expiry(period)
 
       if @domain.save
-        redirect_to root_path, notice: 'Domain was successfully created.'
+        redirect_to root_path, status: :see_other, notice: t('.success')
       else
         Rails.logger.info @domain.errors.inspect
         flash[:alert] = @domain.errors.full_messages.join(', ')
@@ -37,7 +33,39 @@ module Registrar
       end
     end
 
+    def show; end
+
+    def edit; end
+
+    def update
+      domain_params_modified = domain_params.except(:period)
+      period = params[:domain][:period].to_i
+      domain_params_modified[:expire_at] = calculate_expiry(period)
+
+      if @domain.update(domain_params_modified)
+        redirect_to registrar_domains_path, status: :see_other, notice: t('.success')
+      else
+        Rails.logger.info @domain.errors.inspect
+        flash[:alert] = @domain.errors.full_messages.join(', ')
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      if @domain.destroy
+        redirect_to registrar_domains_path, status: :see_other, notice: t('.success')
+      else
+        Rails.logger.info @domain.errors.inspect
+        flash[:alert] = @domain.errors.full_messages.join(', ')
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
     private
+
+    def load_domain
+      @domain = Domain.find_by(uuid: params[:uuid])
+    end
 
     def calculate_expiry(period)
       (Time.zone.now.advance(months: period) + 1.day).beginning_of_day
@@ -45,9 +73,9 @@ module Registrar
 
     def domain_params
       params.require(:domain).permit(:name, :registrant_id, :period, :reserved_pw,
-        domain_contacts_attributes: [:id, :contact_id, :type, :_destroy],
-        nameservers_attributes: [:id, :hostname, :ipv4, :ipv6, :_destroy],
-        dnssec_keys_attributes: [:id, :flags, :protocol, :algorithm, :public_key, :_destroy])
+                                     domain_contacts_attributes: %i[id contact_id type _destroy],
+                                     nameservers_attributes: %i[id hostname ipv4 ipv6 _destroy],
+                                     dnssec_keys_attributes: %i[id flags protocol algorithm public_key _destroy])
     end
   end
 end

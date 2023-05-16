@@ -76,9 +76,9 @@ RSpec.describe Registrar::DomainsController, type: :request do
       end
 
       it 'creates a new domain' do
-        expect {
+        expect do
           post registrar_domains_path, params: valid_params
-        }.to change(Domain, :count).by(1)
+        end.to change(Domain, :count).by(1)
       end
 
       it 'redirects to the root path' do
@@ -130,10 +130,98 @@ RSpec.describe Registrar::DomainsController, type: :request do
       end
 
       it 'does not create a new domain' do
-        expect {
+        expect do
           post registrar_domains_path, params: invalid_params
-        }.not_to change(Domain, :count)
+        end.not_to change(Domain, :count)
       end
+    end
+  end
+
+  describe 'GET #show' do
+    let(:domain) { create(:domain) }
+    before(:each) do
+      domain.reload
+    end
+
+    it 'returns a successful response' do
+      get registrar_domain_path(uuid: domain.uuid)
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET #edit' do
+    let(:domain) { create(:domain) }
+    before(:each) do
+      domain.reload
+    end
+
+    it 'returns a successful response' do
+      get edit_registrar_domain_path(uuid: domain.uuid)
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'PATCH #update' do
+    let(:domain) { create(:domain) }
+    before(:each) do
+      domain.reload
+    end
+
+    context 'with valid parameters' do
+      let(:valid_params) do
+        {
+          domain: {
+            name: 'updated.com'
+            # add other attributes you want to update
+          }
+        }
+      end
+
+      it 'updates the domain' do
+        patch registrar_domain_path(uuid: domain.uuid), params: valid_params
+        domain.reload
+        expect(domain.name).to eq('updated.com')
+      end
+
+      it 'redirects to the domains path' do
+        patch registrar_domain_path(uuid: domain.uuid), params: valid_params
+        expect(response).to redirect_to(registrar_domains_path)
+      end
+    end
+
+    context 'with invalid parameters' do
+      let(:invalid_params) do
+        {
+          domain: {
+            name: ''
+            # add other attributes you want to update
+          }
+        }
+      end
+
+      it 'does not update the domain' do
+        patch registrar_domain_path(uuid: domain.uuid), params: invalid_params
+        domain.reload
+        expect(domain.name).not_to eq('')
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let!(:domain) { create(:domain) }
+    before(:each) do
+      domain.reload
+    end
+
+    it 'deletes the domain' do
+      expect do
+        delete registrar_domain_path(uuid: domain.uuid)
+      end.to change(Domain, :count).by(-1)
+    end
+
+    it 'redirects to the domains path' do
+      delete registrar_domain_path(uuid: domain.uuid)
+      expect(response).to redirect_to(registrar_domains_path)
     end
   end
 end

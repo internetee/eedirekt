@@ -1,6 +1,6 @@
 <div class='flex items-center justify-center space-x-2 contact-item border p-3' data-controller="form--autocomplete">
   <%= field.label :contact, class: 'w-32' %>
-  <%= field.text_field :contact_id,
+  <%= field.text_field :contact,
                       class: 'px-2 py-1 border border-black w-96',
                       data: { action: "input->form--autocomplete#search", form__autocomplete_target: "input" } %>
   <ul class="autocomplete-results" data-form--autocomplete-target="results"></ul>
