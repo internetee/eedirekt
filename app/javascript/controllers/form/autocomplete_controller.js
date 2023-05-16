@@ -18,7 +18,7 @@ export default class extends Controller {
       .then((response) => response.json())
       .then((contacts) => {
         const html = contacts.map(contact => `
-          <li data-action="click->form--autocomplete#select" data-value="${contact.name}" data-id="${contact.id}>
+          <li data-action="click->form--autocomplete#select" data-value="${contact.name}" data-id="${contact.id}">
             ${contact.name} - ${contact.ident}
           </li>
         `).join('')

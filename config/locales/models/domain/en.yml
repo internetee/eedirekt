@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      domain:
+        min_domain_contacts: "You must have at least %{number} contacts." 
+        min_nameservers: "You must have at least %{number} nameservers." 

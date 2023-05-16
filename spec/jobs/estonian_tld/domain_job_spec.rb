@@ -82,7 +82,8 @@ RSpec.describe EstonianTld::DomainsJob, type: :job do
   end
 
   it 'does not perform synchronization if there are already domains in the database' do
-    domain.save && domain.reload
+    domain.name = 'example1.ee'
+    domain.save! && domain.reload
     expect do
       described_class.perform_now(@tld)
     end.not_to change(Domain, :count)

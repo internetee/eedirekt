@@ -1,44 +1,47 @@
 <h2 class='text-xl font-bold'><%= t('.general') %></h2>
 
 <div class='flex flex-col items-center space-y-2' data-controller="form--autocomplete" >
-  <%= form.fields_for(:user) do |field| %>
+  <%#= form.fields_for(:domain) do |field| %>
     <div class='flex space-x-2'>
-      <%= field.label :name, class: 'w-32' %>
-      <%= field.text_field :name, class: 'px-2 py-1 border border-black w-96' %>
+      <%= form.label :name, class: 'w-32' %>
+      <%= form.text_field :name,
+       class: 'px-2 py-1 border border-black w-96' %>
     </div>
 
     <div class='flex space-x-2'>
-      <%= field.label :registrant, class: 'w-32' %>
-      <%= field.text_field :registrant,
+      <%= form.label :registrant, class: 'w-32' %>
+      <%= form.text_field :registrant,
                           class: 'px-2 py-1 border border-black w-96',
                           data: { action: "input->form--autocomplete#search", form__autocomplete_target: "input"
                           } %>
       <ul class="autocomplete-results" data-form--autocomplete-target="results"></ul>
     </div>
 
+    <%= form.hidden_field :registrant_id, data: { form__autocomplete_target: "hiddenInput" } %>
+
     <div class='flex space-x-2'>
-      <%= field.label :period, class: 'w-32' %>
-      <%= field.text_field :period, class: 'px-2 py-1 border border-black w-96' %>
+      <%= form.label :period, class: 'w-32' %>
+      <%= form.select :period, options_for_select([['1 месяц', 1], ['3 месяца', 3], ['6 месяцев', 6], ['1 год', 12], ['2 года', 24]], selected: 1), class: 'px-2 py-1 border border-black w-96' %>
     </div>
 
     <div class='flex space-x-2'>
-      <%= field.label :reserved_pw, class: 'w-32' %>
-      <%= field.text_field :reserved_pw, class: 'px-2 py-1 border border-black w-96' %>
+      <%= form.label :reserved_pw, class: 'w-32' %>
+      <%= form.text_field :reserved_pw, class: 'px-2 py-1 border border-black w-96' %>
     </div>
-  <% end %>
+  <%# end %>
 </div>
 
 <h2 class='text-xl font-bold'><%= t('.contacts') %></h2>
 
 <div class="w-full" data-controller="form--add-element" data-form--add-element-child-index-value="new_contact">
-  <div class='flex flex-col items-center space-y-2' data-form--add-element-target="list">
+  <div class='flex flex-col items-center space-y-2 p-3' data-form--add-element-target="list">
     <%= form.fields_for :domain_contacts do |field| %>
-      <%= render "contact_fields", field: field, remove_button: true %>
+      <%= render "contact_fields", field: field, remove_button: false %>
     <% end %>
 
     <div id="new-contact-template" data-form--add-element-target="template" style="display:none;">
       <%= form.fields_for :domain_contacts, DomainContact.new, child_index: "new_contact" do |field| %>
-        <%= render "contact_fields", field: field, remove_button: false %>
+        <%= render "contact_fields", field: field, remove_button: true %>
       <% end %>
     </div>
   </div>
@@ -54,12 +57,12 @@
 <div class="w-full" data-controller="form--add-element" data-form--add-element-child-index-value="new_nameserver">
   <div class='flex flex-col justify-center items-center space-y-2' data-form--add-element-target="list">
     <%= form.fields_for :nameservers do |field| %>
-      <%= render "nameserver_fields", field: field, remove_button: true %>
+      <%= render "nameserver_fields", field: field, remove_button: false %>
     <% end %>
 
     <div id="new-contact-template" data-form--add-element-target="template" style="display:none;">
       <%= form.fields_for :nameservers, Nameserver.new, child_index: "new_nameserver" do |field| %>
-        <%= render "nameserver_fields", field: field, remove_button: false %>
+        <%= render "nameserver_fields", field: field, remove_button: true %>
       <% end %>
     </div>
   </div>
@@ -74,12 +77,12 @@
 <div class="w-full" data-controller="form--add-element" data-form--add-element-child-index-value="new_dnssec">
   <div class='flex flex-col justify-center items-center space-y-2' data-form--add-element-target="list">
     <%= form.fields_for :dnssec_keys do |field| %>
-      <%= render "dnssec_key_fields", field: field, remove_button: true %>
+      <%= render "dnssec_key_fields", field: field, remove_button: false %>
     <% end %>
 
     <div id="new-contact-template" data-form--add-element-target="template" style="display:none;">
       <%= form.fields_for :dnssec_keys, DnssecKey.new, child_index: "new_dnssec" do |field| %>
-        <%= render "dnssec_key_fields", field: field, remove_button: false %>
+        <%= render "dnssec_key_fields", field: field, remove_button: true %>
       <% end %>
     </div>
   </div>

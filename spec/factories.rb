@@ -53,6 +53,14 @@ FactoryBot.define do
     expire_at { Time.now + 1.year }
     information { {} }
     association :registrant, factory: :contact
+
+    after(:build) do |domain|
+      domain.domain_contacts << build(:admin_domain_contact, domain: domain)
+      domain.domain_contacts << build(:tech_domain_contact, domain: domain)
+      domain.nameservers << build(:nameserver, domain: domain)
+      domain.nameservers << build(:nameserver, domain: domain)
+      domain.dnssec_keys << build(:dnssec_key, domain: domain)
+    end
   end
 
   factory :domain_contact do
@@ -71,7 +79,7 @@ FactoryBot.define do
   factory :nameserver do
     hostname { 'ns1.example.com' }
     ipv4 { ['127.0.0.1'] }
-    ipv6 { [] }
+    ipv6 { ['2001:db8::1'] }
     domain
   end
 

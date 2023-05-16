@@ -1,12 +1,18 @@
       
-<div class='flex flex-col items-center justify-center space-x-2 contact-item' data-form--add-element-target="elementItem">
+<div class='flex flex-col items-center justify-center space-x-2 contact-item border p-3' data-form--add-element-target="elementItem">
   <%= field.label :flags, class: 'w-32' %>
-  <%= field.text_field :flags, class: 'px-2 py-1 border border-black w-96'%>
+  <%= field.select :flags, DnssecKey::FLAGS.map { |flag| [flag, flag] }, {}, class: 'px-2 py-1 border border-black w-96'%>
+
   <%= field.label :protocol, class: 'w-32' %>
-  <%= field.text_field :protocol, class: 'px-2 py-1 border border-black w-96'%>
+  <%= field.select :protocol, DnssecKey::PROTOCOLS.map { |protocol| [protocol, protocol] }, {}, class: 'px-2 py-1 border border-black w-96'%>
+
   <%= field.label :algorithm, class: 'w-32' %>
-  <%= field.text_field :algorithm, class: 'px-2 py-1 border border-black w-96'%>
+  <%= field.select :algorithm, DnssecKey::ALGORITHMS.map { |algorithm| [algorithm, algorithm] }, {}, class: 'px-2 py-1 border border-black w-96'%>
+
   <%= field.label :public_key, class: 'w-32' %>
   <%= field.text_field :public_key, class: 'px-2 py-1 border border-black w-96'%>
-  <a class='rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 cursor-pointer remove-button' data-action='click->form--add-element#removeElement' style="display:none;"><%= t('.remove') %></a>
+
+  <% if remove_button %>
+    <a class='rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 cursor-pointer remove-button' data-action="click->form--add-element#removeElement"><%= t('.remove') %></a>
+  <% end %>
 </div>

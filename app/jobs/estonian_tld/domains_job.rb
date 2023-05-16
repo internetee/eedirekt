@@ -60,7 +60,7 @@ class EstonianTld::DomainsJob < ApplicationJob
 
           domain = ::Domain.new(domain.to_h)
           domain.registrant_id = registrant.id
-          domain.save
+          domain.save(validate: false)
 
           domain_contacts.each do |contact|
             inner_contact = ::Contact.find_by(code: contact.code)

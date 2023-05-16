@@ -34,6 +34,7 @@ module Registrar
       if @contact.destroy
         redirect_to registrar_contacts_path, status: :see_other, notice: t('.success')
       else
+        Rails.logger.info @contact.errors.inspect
         flash[:alert] = @contact.errors.full_messages.join(', ')
         render 'dashboards/index', status: :unprocessable_entity
       end
