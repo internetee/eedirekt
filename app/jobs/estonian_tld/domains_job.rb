@@ -5,7 +5,7 @@ class EstonianTld::DomainsJob < ApplicationJob
 
   def perform(tld)
     # NB! Synchronization should be run only one time when tld is added to the system
-    return unless Domain.count.zero?
+    # return unless Domain.count.zero?
 
     url_params = {
       details: true,
@@ -39,7 +39,7 @@ class EstonianTld::DomainsJob < ApplicationJob
     end
 
     EstonianTld::InformAdminService.call({tld: Tld.first, message: 'All domains were synchronized!'})
-    ActionCable.server.broadcast "notifications:#{user_id}", message: 'All objects were synchronized!'
+    ActionCable.server.broadcast "notifications:", message: 'All objects were synchronized!'
   end
 
   def domain_creator(dirty_domains)

@@ -6,7 +6,7 @@ class EstonianTld::ContactsJob < ApplicationJob
   def perform(tld)
     @tld = tld
     # NB! Synchronization should be run only one time when tld is added to the system
-    return unless Contact.count.zero?
+    # return unless Contact.count.zero?
 
     url_params = {
       details: true,
