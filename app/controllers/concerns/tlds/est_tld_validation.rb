@@ -44,6 +44,10 @@ module Tlds::EstTldValidation
     xml = ex.login(clID: { value: @username }, pw: { value: @password })
     res = server.send_request(xml)
 
+    Rails.logger.info '-------------- validate_existance_in_server'
+    Rails.logger.info  Nokogiri::XML(res).css('result')
+    Rails.logger.info '--------------'
+
     if Nokogiri::XML(res).css('result').first['code'] != '1000'
       raise EppAuthorizationError, Nokogiri::XML(res).css('result').css('msg').text
     end

@@ -14,6 +14,11 @@ class Settings::EstTld::ValidationsController < Settings::BaseController
     key_valid = @key.present? && @key.content_type.in?(["application/x-x509-ca-cert"])
     valid_extension = crt_valid && key_valid
 
+    Rails.logger.info '-------------- Settings::EstTld::ValidationsController'
+    Rails.logger.info crt_valid
+    Rails.logger.info key_valid
+    Rails.logger.info '--------------'
+
     if valid_extension
       validate_existance_in_server
 

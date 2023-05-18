@@ -17,6 +17,11 @@ module Settings
       key_valid = @key.present? && @key.content_type.in?(["application/x-x509-ca-cert"])
       valid_extension = crt_valid && key_valid
 
+      Rails.logger.info '-------------- ConfigurationsControlle'
+      Rails.logger.info crt_valid
+      Rails.logger.info key_valid
+      Rails.logger.info '--------------'
+
       render 'settings/configurations/index', status: :unprocessable_entity and return unless valid_extension
 
       validate_existance_in_server
