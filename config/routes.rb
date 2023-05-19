@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resource :sessions, only: %i[new create]
+    resource :synchronizes, only: %i[create]
   end
 
   resource :sessions, only: %i[new]

@@ -39,7 +39,7 @@ class EstonianTld::DomainsJob < ApplicationJob
     end
 
     EstonianTld::InformAdminService.call({tld: Tld.first, message: 'All domains were synchronized!'})
-    ActionCable.server.broadcast "notifications:", message: 'All objects were synchronized!'
+    # ActionCable.server.broadcast "notifications:", message: 'All objects were synchronized!'
   end
 
   def domain_creator(dirty_domains)
