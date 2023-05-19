@@ -36,3 +36,5 @@ coverage
 
 /node_modules
 /config/application.yml
+/webclient.crt.pem
+/webclient.key.pem

@@ -40,8 +40,9 @@ module EstonianTld::Connector
   def ca_auth_params
     return if Rails.env.test?
 
-    client_cert = @tld.crt.download
-    client_key = @tld.key.download
+    client_cert = File.open(ENV['cert_path'])
+    client_key = File.open(ENV['key_path'])
+
     {
       client_cert: OpenSSL::X509::Certificate.new(client_cert),
       client_key: OpenSSL::PKey::RSA.new(client_key)

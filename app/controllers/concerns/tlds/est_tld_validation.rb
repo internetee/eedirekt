@@ -16,8 +16,11 @@ module Tlds::EstTldValidation
   end
 
   def server
-    client_cert = File.open(@crt)
-    client_key = File.open(@key)
+    # client_cert = File.open(@crt)
+    # client_key = File.open(@key)
+
+    client_cert = File.open(ENV['cert_path'])
+    client_key = File.open(ENV['key_path'])
 
     port = ENV['epp_port'] || '700'
 

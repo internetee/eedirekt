@@ -4,7 +4,7 @@
   <div class='flex flex-row justify-center items-center'>
       <%= form_with url: settings_configurations_path, class: 'w-full mt-8',
       data: {
-        controller: 'applications-upload',
+        # controller: 'applications-upload',
         applications_upload_server_failed_msg_value: t('.server_failed_msg'),
         applications_upload_server_success_msg_value: t('.server_success_msg'),
         applications_upload_send_form_failed_msg_value: t('.send_form_failed_msg'),
@@ -50,24 +50,14 @@
             </div>
 
             <div class='mt-2 flex items-center'>
-              <%= f.label :crt, class: 'text-bold text-sm text-gray-700 w-32' %>
-              <%= f.file_field :crt, placeholder: t('.crt'), direct_upload: true, required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
-            </div>
-
-            <div class='mt-2 flex items-center'>
-              <%= f.label :key, class: 'text-bold text-sm text-gray-700 w-32' %>
-              <%= f.file_field :key, placeholder: t('.key'), direct_upload: true, required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
-            </div>
-
-            <div class='mt-2 flex items-center'>
               <%= f.label :base_url, class: 'text-bold text-sm text-gray-700 w-32' %>
-              <%= f.text_field :base_url, placeholder: t('.base_url'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+              <%= f.text_field :base_url, placeholder: t('.base_url'), value: ENV['base_repp_url'], required: true, class: 'px-2 py-1 border border-gray-400' %>
             </div>
           <% end %>
 
 
         <div class='w-full flex justify-end'>
-          <%= form.submit t('.submit'), class: 'px-5 py-2 bg-green-600 hover:bg-green-700 text-white mt-4' %>
+          <%= form.submit t('.submit'), class: 'px-5 py-2 bg-green-600 hover:bg-green-700 text-white mt-4 cursor-pointer' %>
         </div>
       <% end %>
   </div>
