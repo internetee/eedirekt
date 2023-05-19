@@ -25,7 +25,7 @@ class EstonianTld::DomainsJob < ApplicationJob
 
     domain_creator(dirty_domains)
 
-    EstonianTld::InformAdminService.call({tld: Tld.first, message: 'Domains start synchronizing!'})
+    EstonianTld::InformAdminService.call({ tld: Tld.first, message: 'Domains start synchronizing!' })
 
     return if contact_count < STEP
 
