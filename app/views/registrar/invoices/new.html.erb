@@ -1,0 +1,13 @@
+<h1 class='text-xl font-bold'><%= t('.title') %></h1>
+
+<div class='flex flex-col items-center space-y-2'>
+    <h2 class='font-bold my-3'><%= t('.buyer') %></h2>
+
+    <%= form_with model: @invoice, url: registrar_invoices_path, class: 'flex flex-col mt-8 space-y-3 items-center' do |form| %>
+      <%= render 'form', form: form %>
+
+      <div class='text-center'>
+        <%= form.submit t('.create'), class: 'px-3 py-1 rounded-md text-white bg-indigo-400 hover:bg-indigo-500 cursor-pointer mt-6' %>
+      </div>
+    <% end %>
+</div>

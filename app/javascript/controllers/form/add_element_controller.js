@@ -9,8 +9,6 @@ export default class extends Controller {
   addElement(event) {
     event.preventDefault();
 
-    console.log(this.childIndexValue);
-
     const uniqueId = new Date().getTime();
     let newContactTemplate = this.templateTarget.innerHTML.replace(new RegExp(this.childIndexValue, 'g'), uniqueId);
     this.listTarget.insertAdjacentHTML("beforeend", newContactTemplate);
@@ -18,6 +16,14 @@ export default class extends Controller {
 
   removeElement(event) {
     event.preventDefault();
-    event.target.closest(".contact-item").remove();
+  
+    let invoiceItemElement = event.target.closest(".contact-item");
+  
+    let destroyField = invoiceItemElement.querySelector("input[name$='[_destroy]']");
+  
+    if (destroyField) {
+      destroyField.value = '1';
+      invoiceItemElement.style.display = 'none';
+    }
   }
 }

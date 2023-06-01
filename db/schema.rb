@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "status", ["issued", "paid", "canceled", "failed", "overdue"]
+  create_enum "status_enum", ["issued", "paid", "canceled", "failed", "overdue"]
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -107,6 +112,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
     t.index ["registrant_id"], name: "index_domains_on_registrant_id"
   end
 
+  create_table "invoice_items", force: :cascade do |t|
+    t.bigint "invoice_id", null: false
+    t.string "description", null: false
+    t.float "quantity", default: 0.0, null: false
+    t.float "unit_price", default: 0.0, null: false
+    t.float "total", default: 0.0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
+    t.string "number", null: false
+    t.string "description"
+    t.string "reference_number"
+    t.float "vat_rate"
+    t.jsonb "buyer_data", default: {}
+    t.bigint "buyer_id"
+    t.datetime "issue_date"
+    t.datetime "cancel_date"
+    t.datetime "due_date"
+    t.enum "status", default: "issued", null: false, enum_type: "status_enum"
+    t.float "total", default: 0.0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_invoices_on_buyer_id"
+  end
+
   create_table "nameservers", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "hostname"
@@ -126,6 +160,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "code", null: false
+    t.string "value"
+    t.string "group", null: false
+    t.string "format", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_settings_on_code", unique: true
   end
 
   create_table "super_users", force: :cascade do |t|
@@ -159,4 +203,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_132003) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "domains", "contacts", column: "registrant_id"
+  add_foreign_key "invoice_items", "invoices"
+  add_foreign_key "invoices", "contacts", column: "buyer_id"
 end

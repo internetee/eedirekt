@@ -1,0 +1,26 @@
+<%= t('.title') %>
+
+  <table class='border p-3 m-8'>
+    <thead class='border'>
+      <tr>
+        <th class='p-3'>Invoice number</th>
+        <th class='p-3'>Buyer name</th>
+        <th class='p-3'>Total</th>
+        <th class='p-3'>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @invoices.each do |i| %>
+        <tr>
+          <td class='p-3'><%= i.number %></td>
+          <td class='p-3'><%= i.buyer.name %></td>
+          <td class='p-3'><%= i.total %></td>
+          <td class='p-3 flex space-x-2'>
+            <%= link_to t('.edit'), edit_registrar_invoice_path(uuid: i.uuid), class: 'px-3 py-1 rounded-md bg-blue-400 hover:bg-blue-500 text-white' %>
+            <%= button_to t('.delete'), registrar_invoice_path(uuid: i.uuid), method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer",
+                form: { data: { turbo_confirm: t(".confirm_delete") } } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

@@ -1,0 +1,103 @@
+
+<div class='flex flex-col items-center space-y-2' data-controller="form--invoice-autocomplete" >
+
+  <%= form.hidden_field :buyer_id, data: { form__invoice_autocomplete_target: "hiddenInput" } %>
+
+  <div class='flex space-x-2'>
+    <%= form.label :ident, class: 'w-32' %>
+    <%= form.text_field :ident, class: 'px-2 py-1 border border-black w-96', data: { action: "input->form--invoice-autocomplete#search", form__invoice_autocomplete_target: "identInput" },
+                         value: @invoice&.buyer&.ident  %>
+
+    <ul class="invoice-autocomplete-results" data-form--invoice-autocomplete-target="results"></ul>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :name, class: 'w-32' %>
+    <%= form.text_field :name, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "nameInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :country_code, class: 'w-32' %>
+    <%= form.text_field :country_code, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "countryCodeInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :state, class: 'w-32' %>
+    <%= form.text_field :state, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "stateInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :street, class: 'w-32' %>
+    <%= form.text_field :street, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "streetInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :city, class: 'w-32' %>
+    <%= form.text_field :city, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "cityInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :zip, class: 'w-32' %>
+    <%= form.text_field :zip, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "zipInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :phone, class: 'w-32' %>
+    <%= form.text_field :phone, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "phoneInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :url, class: 'w-32' %>
+    <%= form.text_field :url, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "urlInput" } %>
+  </div>
+
+  <div class='flex space-x-2'>
+    <%= form.label :email, class: 'w-32' %>
+    <%= form.text_field :email, class: 'px-2 py-1 border border-black w-96', data: { form__invoice_autocomplete_target: "emailInput" } %>
+  </div>
+</div>
+
+<h2 class='font-bold my-3'><%= t('.general') %></h2>
+
+<div class='flex space-x-2'>
+  <%= form.label :description, class: 'w-32' %>
+  <%= form.text_area :description, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+
+<div class='flex space-x-2'>
+  <%= form.label :vat_rate, class: 'w-32' %>
+  <%= form.number_field :vat_rate, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+
+<div class='flex space-x-2'>
+  <%= form.label :due_date, class: 'w-32' %>
+  <%= form.datetime_field :due_date, class: 'px-2 py-1 border border-black w-96' %>
+</div>
+
+<hr class='my-3'>
+
+<div class="w-full" data-controller="form--add-element" data-form--add-element-child-index-value="new_invoice_item">
+  <div class='flex flex-col justify-center items-center space-y-2' data-form--add-element-target="list">
+    <% @invoice.invoice_items.each_with_index do |invoice_item, index| %>
+      <%= form.fields_for :invoice_items, invoice_item do |field| %>
+        <% if index.zero? %>
+          <%= render "invoice_item_fields", field: field, remove_button: false %>
+        <% else %>
+          <%= render "invoice_item_fields", field: field, remove_button: true %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+
+    <div id="new-contact-template" data-form--add-element-target="template" style="display:none;">
+      <%= form.fields_for :invoice_items, InvoiceItem.new, child_index: "new_invoice_item" do |field| %>
+        <%= render "invoice_item_fields", field: field, remove_button: true %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='text-right'>
+    <a class='rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 cursor-pointer' data-action='click->form--add-element#addElement'><%= t('.add_invoice_item') %></a>
+  </div>
+</div>
+

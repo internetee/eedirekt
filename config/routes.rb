@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resource :sessions, only: %i[new create]
+    resource :settings, only: %i[show update]
     resource :synchronizes, only: %i[create]
   end
 
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
 
   namespace :registrar do
     resources :poll_messages, only: %i[update]
+    resources :invoices, param: :uuid
     resources :contacts, param: :uuid do
       collection do
         get :search
