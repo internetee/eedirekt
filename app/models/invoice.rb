@@ -14,7 +14,7 @@ class Invoice < ApplicationRecord
   scope :overdue, -> { unpaid.non_cancelled.where('due_date < ?', Time.zone.today) }
 
   validates :status, :due_date, :invoice_items, presence: true
-  validates :number, uniqueness: true
+  validates :number, uniqueness: { message: :uniqueness }
 
   after_initialize do
     self.vat_rate = Setting.vat || 20.0 if vat_rate.nil?

@@ -92,4 +92,61 @@ FactoryBot.define do
   factory :app_session do
     association :sessionable, factory: :user
   end
+
+  factory :invoice do
+    uuid { SecureRandom.uuid }
+    number {  }
+    description { Faker::Lorem.sentence }
+    reference_number { Faker::Number.number(digits: 10) }
+    vat_rate { }
+
+    buyer_data {
+      {
+        name: Faker::Name.name,
+        ident: Faker::Number.number(digits: 10),
+        country_code: Faker::Address.country_code,
+        state: Faker::Address.state,
+        street: Faker::Address.street_address,
+        city: Faker::Address.city,
+        zip: Faker::Address.zip,
+        phone: Faker::PhoneNumber.phone_number,
+        url: Faker::Internet.url,
+        email: Faker::Internet.email,
+      }
+    }
+
+    association :buyer, factory: :contact
+
+    issue_date { DateTime.current }
+    cancel_date { DateTime.current + 10.days }
+    due_date { DateTime.current + 30.days }
+
+    status { 'issued' }
+
+    total { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
+
+    after(:build) do |invoice|
+      invoice.invoice_items << build(:invoice_item, invoice: invoice)
+    end
+
+    after(:create) do |invoice|
+      invoice.save!
+    end
+  end
+
+  factory :invoice_item do
+    association :invoice
+
+    description { Faker::Lorem.sentence }
+    quantity { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
+    unit_price { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
+  end
+
+  factory :setting do
+    sequence(:code) { |n| "code_#{n}" }
+    value { "Some value" }
+    group { "Some group" }
+    format { "Some format" }
+  end
+  
 end

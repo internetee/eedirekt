@@ -117,7 +117,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
     t.string "description", null: false
     t.float "quantity", default: 0.0, null: false
     t.float "unit_price", default: 0.0, null: false
-    t.float "total", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
@@ -125,7 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
 
   create_table "invoices", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
-    t.string "number", null: false
+    t.integer "number", null: false
     t.string "description"
     t.string "reference_number"
     t.float "vat_rate"

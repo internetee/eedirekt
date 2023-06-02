@@ -1,2 +1,195 @@
+---
 en:
-  hello: "Hello world"
+  epp_authorization_error: Epp authorization error
+  incorrect_details: Incorrect details
+  invoice_number_exceeded: Invoice number exceeded
+  min_domain_contacts: Min domain contacts
+  min_nameservers: Min nameservers
+  success: Success
+  admin:
+    sessions:
+      create:
+        success: Success
+      new:
+        password: Password
+        submit: Submit
+        title: Title
+        username: Username
+    settings:
+      show:
+        submit: Submit
+        title: Title
+      update:
+        success: Success
+    synchronizes:
+      create:
+        success: Success
+  choose_file: Choose file
+  concerns:
+    tlds:
+      est_tld_validation:
+        internal_error_json:
+          ssl_error: Ssl error
+        render_forbidden_error:
+          epp_forbidden: Epp forbidden
+  dashboards:
+    admin:
+      registrar: Registrar
+      run_synchronize: Run synchronize
+      settings: Settings
+    index:
+      logout: Logout
+      title: Title
+    registrar:
+      contacts: Contacts
+      domains: Domains
+      invoices: Invoices
+      new_contact: New contact
+      new_domain: New domain
+      new_invoice: New invoice
+  devise:
+    sessions:
+      signed_in: Signed in
+  hello: Hello world
+  login_required: Login required
+  new: New
+  registrant:
+    tara:
+      tara:
+        cancel:
+          cancelled: Cancelled
+  registrar:
+    contacts:
+      create:
+        success: Success
+      destroy:
+        success: Success
+      edit:
+        create: Create
+        title: Title
+      form:
+        address: Address
+        country_code: Country code
+        general: General
+        legal: Legal
+      index:
+        back: Back
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+      new:
+        create: Create
+        title: Title
+      update:
+        success: Success
+    domains:
+      contact_fields:
+        admin: Admin
+        remove: Remove
+        tech: Tech
+      create:
+        success: Success
+      destroy:
+        success: Success
+      dnssec_key_fields:
+        remove: Remove
+      edit:
+        create: Create
+        title: Title
+      form:
+        add_contact: Add contact
+        add_dnssec: Add dnssec
+        add_nameserver: Add nameserver
+        contacts: Contacts
+        dnskey: Dnskey
+        general: General
+        nameserver: Nameserver
+      index:
+        back: Back
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+      nameserver_fields:
+        remove: Remove
+      new:
+        create: Create
+        title: Title
+      update:
+        success: Success
+    invoices:
+      create:
+        success: Success
+      destroy:
+        success: Success
+      edit:
+        buyer: Buyer
+        title: Title
+        update: Update
+      form:
+        add_invoice_item: Add invoice item
+        general: General
+      index:
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+        title: Title
+      invoice_item_fields:
+        remove: Remove
+      new:
+        buyer: Buyer
+        create: Create
+        title: Title
+      update:
+        success: Success
+    poll_messages:
+      update:
+        failure: Failure
+        success: Success
+    sessions:
+      create:
+        success: Success
+      destroy:
+        success: Success
+      new:
+        login_with_eeid: Login with eeid
+        password: Password
+        submit: Submit
+        title: Title
+        username: Username
+    tara:
+      tara:
+        callback:
+          signed_in: Signed in
+        cancel:
+          cancelled: Cancelled
+  registrar_users:
+    new:
+      code: Code
+      name: Name
+      password: Password
+      password_confirmation: Password confirmation
+      submit: Submit
+      title: Title
+      username: Username
+  sessions:
+    destroy:
+      success: Success
+    new:
+      login_with_eeid: Login with eeid
+  settings:
+    configurations:
+      create:
+        signed_in: Signed in
+      index:
+        base_url: Base url
+        password: Password
+        send_form_failed_msg: Send form failed msg
+        server_failed_msg: Server failed msg
+        server_success_msg: Server success msg
+        submit: Submit
+        upload_error_msg: Upload error msg
+        username: Username
+    introduces:
+      index:
+        next: Next
+  to_registrar: To registrar

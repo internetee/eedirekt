@@ -4,7 +4,7 @@ class CreateInvoices < ActiveRecord::Migration[7.0]
 
     create_table :invoices do |t|
       t.uuid :uuid, default: 'gen_random_uuid()'
-      t.string :number, null: false
+      t.integer :number, null: false
       t.string :description, null: true
       t.string :reference_number, null: true
       t.float :vat_rate, null: true

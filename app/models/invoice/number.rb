@@ -2,7 +2,7 @@ module Invoice::Number
   extend ActiveSupport::Concern
 
   included do
-    before_save :number_generator
+    before_validation :number_generator
   end
 
   private
@@ -16,10 +16,11 @@ module Invoice::Number
     last_no = min_value - 1 if last_no.nil?
     number = last_no && last_no >= min_value ? last_no.to_i + 1 : min_value
 
-    if number <= max_value
+    if number < max_value
       self.number = number
     else
-      throw :abort, t('.invoice_number_exceeded')
+      self.errors.add(:base, I18n.t('.invoice_number_exceeded'))
+      raise ActiveRecord::RecordInvalid.new(self)
     end
   end
 end
