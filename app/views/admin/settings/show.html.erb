@@ -1,0 +1,23 @@
+<div class='container mx-auto h-screen flex flex-col items-center justify-center space-x-8'>
+  <h2 class='text-gray-900 text-2xl font-bold'>
+    <%= t('.title') %>
+  </h2>
+
+  <div class='flex items-center justify-center'>
+
+    <%= form_with url: admin_settings_path, method: :patch, class: 'w-full mt-8' do |form| %>
+
+      <% @invoice_group .each do |setting| %>
+        <div class='flex items-center space-y-2'>
+          <%= form.label setting.code, class: 'text-bold text-sm text-gray-700 w-36' %>
+          <%= form.text_field "[settings][#{setting.id}", placeholder: t(".#{setting.code}"), value: setting.value, class: 'px-2 py-1 border border-gray-400' %>
+          <%= form.hidden_field :id, value: "[settings][#{setting.id}" %>
+        </div>
+      <% end %>
+
+      <div class='w-full flex justify-end'>
+        <%= form.submit t('.submit'), class: 'px-5 py-2 bg-green-600 hover:bg-green-700 text-white mt-4' %>
+      </div>
+    <% end %>
+  </div>
+</div>

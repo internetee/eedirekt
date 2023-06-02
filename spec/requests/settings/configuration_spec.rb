@@ -50,30 +50,33 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
     end.to change { SuperUser.count }.by 0
   end
 
-  it 'could not create a super user if certificates are invalid' do
-    csr_file_path = "#{Rails.root}/spec/support/fixtures/certificates/csr_fake.pem"
-    mock_pdf_file_path = "#{Rails.root}/spec/support/fixtures/mock.pdf"
-    expect(SuperUser.count).to eq 0
+  # TODO:
+  # This feature is temporaruy disabled because no any decision about certificates
 
-    expect do
-      post settings_configurations_path, params: {
-        super_user: {
-          username: 'superuser',
-          email: 'superuser@example.com',
-          password: 'password',
-          password_confirmation: 'password'
-        },
-        tld: {
-          username: 'oleghasjanov',
-          password: '123456',
-          crt: fixture_file_upload(csr_file_path, 'application/x-x509-ca-cert'),
-          key: fixture_file_upload(mock_pdf_file_path, 'application/pdf')
-        }
-      }
-    end.to change { SuperUser.count }.by 0
+  # it 'could not create a super user if certificates are invalid' do
+  #   csr_file_path = "#{Rails.root}/spec/support/fixtures/certificates/csr_fake.pem"
+  #   mock_pdf_file_path = "#{Rails.root}/spec/support/fixtures/mock.pdf"
+  #   expect(SuperUser.count).to eq 0
 
-    expect(response.status).to eq 422
-  end
+  #   expect do
+  #     post settings_configurations_path, params: {
+  #       super_user: {
+  #         username: 'superuser',
+  #         email: 'superuser@example.com',
+  #         password: 'password',
+  #         password_confirmation: 'password'
+  #       },
+  #       tld: {
+  #         username: 'oleghasjanov',
+  #         password: '123456',
+  #         crt: fixture_file_upload(csr_file_path, 'application/x-x509-ca-cert'),
+  #         key: fixture_file_upload(mock_pdf_file_path, 'application/pdf')
+  #       }
+  #     }
+  #   end.to change { SuperUser.count }.by 0
+
+  #   expect(response.status).to eq 422
+  # end
 
   it 'should create a valid superuser with valid tld credentials' do
     xml_schema = <<-XML

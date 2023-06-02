@@ -16,6 +16,11 @@ class EstonianTld::ContactsJob < ApplicationJob
 
     dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
 
+    Rails.logger.info '--------------'
+    Rails.logger.info dirty_contacs
+    Rails.logger.info dirty_contacs.success
+    Rails.logger.info '--------------'
+
     unless dirty_contacs.success
       EstonianTld::InformAdminService.call({tld: , message: "Error fetching contacts: #{dirty_contacs.body['message']}"})
       return

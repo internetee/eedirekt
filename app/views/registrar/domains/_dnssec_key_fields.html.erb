@@ -2,6 +2,8 @@
   <%= field.label :flags, class: 'w-32' %>
   <%= field.select :flags, DnssecKey::FLAGS.map { |flag| [flag, flag] }, {}, class: 'px-2 py-1 border border-black w-96'%>
 
+  <%= field.hidden_field :_destroy %>
+
   <%= field.label :protocol, class: 'w-32' %>
   <%= field.select :protocol, DnssecKey::PROTOCOLS.map { |protocol| [protocol, protocol] }, {}, class: 'px-2 py-1 border border-black w-96'%>
 

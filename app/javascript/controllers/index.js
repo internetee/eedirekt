@@ -10,5 +10,8 @@ application.register("applications-upload", ApplicationsUploadController);
 import Form__AutocompleteController from "./form/autocomplete_controller";
 application.register("form--autocomplete", Form__AutocompleteController);
 
+import Form__InvoiceAutocompleteController from "./form/invoice_autocomplete_controller";
+application.register("form--invoice-autocomplete", Form__InvoiceAutocompleteController);
+
 import Form__AddElementController from "./form/add_element_controller";
 application.register("form--add-element", Form__AddElementController);

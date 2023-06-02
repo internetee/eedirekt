@@ -42,7 +42,9 @@ module Registrar
 
     def search
       @contacts = Contact.search(params[:query])
-      render json: @contacts.limit(5).map { |contact| { name: contact.name, ident: contact.ident, code: contact.code, id: contact.id } }
+      render json: @contacts.limit(5).map do |contact|
+         contact.to_json
+      end
     end
 
     private

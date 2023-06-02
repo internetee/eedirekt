@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe EstonianTld::ContactsJob, type: :job do
-  crt_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.crt.pem"
-  key_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.key.pem"
-
   let(:mock_contact_list) do
     OpenStruct.new(
       success: true,
@@ -39,8 +36,6 @@ RSpec.describe EstonianTld::ContactsJob, type: :job do
 
   before do
     @tld = Tld::Estonian.create(username: 'oleghasjanov', password: '123456', base_url: 'http://registry:3000')
-    @tld.crt.attach(fixture_file_upload(crt_file_path, 'application/x-x509-ca-cert'))
-    @tld.key.attach(fixture_file_upload(key_file_path, 'application/x-x509-ca-cert'))
 
     allow_any_instance_of(EstonianTld::ContactService).to receive(:contact_list).and_return(mock_contact_list)
   end
@@ -54,12 +49,16 @@ RSpec.describe EstonianTld::ContactsJob, type: :job do
     expect(Contact.find_by(email: 'jane@example.com')).to be_present
   end
 
-  it 'does not perform synchronization if there are already contacts in the database' do
-    Contact.create!(email: 'existing@example.com', name: 'Existing Contact')
-    expect do
-      described_class.perform_now(@tld)
-    end.not_to change(Contact, :count)
-  end
+  # TODO:
+  # Temporary disabled - not decided yet do this feature is needed or not
+
+  # it 'does not perform synchronization if there are already contacts in the database' do
+  #   Contact.create!(email: 'existing@example.com', name: 'Existing Contact')
+
+  #   expect do
+  #     described_class.perform_now(@tld)
+  #   end.not_to change(Contact, :count)
+  # end
 
   it 'handles errors when fetching the contact list' do
     error_response = OpenStruct.new(success: false, body: { code: 503, message: 'Error message', data: {} })

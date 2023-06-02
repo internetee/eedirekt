@@ -8,21 +8,21 @@ module Settings
     def index; end
 
     def create
-      @crt = tld_params[:crt]
-      @key = tld_params[:key]
+      # @crt = tld_params[:crt]
+      # @key = tld_params[:key]
       @username = tld_params[:username]
       @password = tld_params[:password]
 
-      crt_valid = @crt.present? && @crt.content_type.in?(["application/x-x509-ca-cert"])
-      key_valid = @key.present? && @key.content_type.in?(["application/x-x509-ca-cert"])
-      valid_extension = crt_valid && key_valid
+      # crt_valid = @crt.present? && @crt.content_type.in?(["application/x-x509-ca-cert"])
+      # key_valid = @key.present? && @key.content_type.in?(["application/x-x509-ca-cert"])
+      # valid_extension = crt_valid && key_valid
 
-      Rails.logger.info '-------------- ConfigurationsControlle'
-      Rails.logger.info crt_valid
-      Rails.logger.info key_valid
-      Rails.logger.info '--------------'
+      # Rails.logger.info '-------------- ConfigurationsControlle'
+      # Rails.logger.info crt_valid
+      # Rails.logger.info key_valid
+      # Rails.logger.info '--------------'
 
-      render 'settings/configurations/index', status: :unprocessable_entity and return unless valid_extension
+      # render 'settings/configurations/index', status: :unprocessable_entity and return unless valid_extension
 
       validate_existance_in_server
 

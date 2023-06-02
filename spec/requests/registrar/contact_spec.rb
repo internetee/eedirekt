@@ -32,9 +32,6 @@ RSpec.describe Registrar::ContactsController, type: :request do
 
   before(:each) do
     @tld = Tld::Estonian.create(username: 'oleghasjanov', password: '123456', base_url: 'http://registry:3000')
-    @tld.crt.attach(fixture_file_upload(crt_file_path, 'application/x-x509-ca-cert'))
-    @tld.key.attach(fixture_file_upload(key_file_path, 'application/x-x509-ca-cert'))
-
     @tld.reload && registrar.reload && super_user.reload
     registrar_login_basic_auth registrar
   end

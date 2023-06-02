@@ -7,6 +7,8 @@
 
   <%= field.hidden_field :contact_id, data: { form__autocomplete_target: "hiddenInput" } %>
 
+  <%= field.hidden_field :_destroy %>
+
   <div class='flex'>
     <label class="custom-radio mr-2">
       <%= field.radio_button :type, "AdminDomainContact", checked: true %>

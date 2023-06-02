@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    errors:
+      models:
+        invoice:
+          attributes:
+            number:
+              uniqueness: "Number has already been taken"
+              invoice_number_exceeded: "Invoice number exceeded"
