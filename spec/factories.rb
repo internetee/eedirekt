@@ -22,8 +22,6 @@ FactoryBot.define do
     base_url { 'http://registry:3000' }
     password { '123456' }
     type { 'Tld::Estonian' }
-    crt {}
-    key {}
   end
 
   factory :estonian_tld, class: 'Tld::Estonian' do
@@ -31,8 +29,6 @@ FactoryBot.define do
     base_url { 'http://registry:3000' }
     password { '123456' }
     type { 'Tld::Estonian' }
-    crt {}
-    key {}
   end
 
   factory :contact do

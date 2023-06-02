@@ -11,14 +11,11 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
   end
 
   it 'if user added files with invalid extensions should be return a Validation Error' do
-    csr_file_path = "#{Rails.root}/spec/support/fixtures/certificates/csr_fake.pem"
-    mock_pdf_file_path = "#{Rails.root}/spec/support/fixtures/mock.pdf"
+    allow_any_instance_of(Settings::EstTld::ValidationsController).to receive(:validate_existance_in_server).and_return(false)
 
     post settings_est_tld_validations_path, params: {
       username: 'John',
       password: 'Doe',
-      crt: fixture_file_upload(csr_file_path, 'application/x-x509-ca-cert'),
-      key: fixture_file_upload(mock_pdf_file_path, 'application/pdft')
     }
 
     expect(JSON.parse(response.body)['valid']).to eq false
@@ -42,32 +39,25 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
 
     allow_any_instance_of(Epp::Server).to receive(:send_request).and_return(xml_schema)
 
-    crt_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.crt.pem"
-    key_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.key.pem"
-
     post settings_est_tld_validations_path, params: {
       username: 'John',
-      password: 'Doe',
-      crt: fixture_file_upload(crt_file_path, 'application/x-x509-ca-cert'),
-      key: fixture_file_upload(key_file_path, 'application/x-x509-ca-cert')
+      password: 'Doe'
     }
 
     expect(JSON.parse(response.body)['error']).to eq 'EPP Authorization message: Authentication error; server closing connection (API user not found)'
   end
 
-  it 'if user added certificates what dismatch should be return a SSL Error' do
-    crt_file_path = "#{Rails.root}/spec/support/fixtures/certificates/cert_fake.pem"
-    key_file_path = "#{Rails.root}/spec/support/fixtures/certificates/key_fake.pem"
+  # TODO:
+  # This feature is temporary disabled because no any decision about certificates
 
-    post settings_est_tld_validations_path, params: {
-      username: 'John',
-      password: 'Doe',
-      crt: fixture_file_upload(crt_file_path, 'application/x-x509-ca-cert'),
-      key: fixture_file_upload(key_file_path, 'application/x-x509-ca-cert')
-    }
+  # it 'if user added certificates what dismatch should be return a SSL Error' do
+  #   post settings_est_tld_validations_path, params: {
+  #     username: 'John',
+  #     password: 'Doe',
+  #   }
 
-    expect(JSON.parse(response.body)['error']).to include 'SSL certificate error: SSL_connect returned'
-  end
+  #   expect(JSON.parse(response.body)['error']).to include 'SSL certificate error: SSL_connect returned'
+  # end
 
   it 'connection should be established' do
     xml_schema = <<-XML
@@ -87,14 +77,9 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
 
     allow_any_instance_of(Epp::Server).to receive(:send_request).and_return(xml_schema)
 
-    crt_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.crt.pem"
-    key_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.key.pem"
-
     post settings_est_tld_validations_path, params: {
       username: 'oleghasjanov',
       password: '123456',
-      crt: fixture_file_upload(crt_file_path, 'application/x-x509-ca-cert'),
-      key: fixture_file_upload(key_file_path, 'application/x-x509-ca-cert')
     }
 
     expect(JSON.parse(response.body)['valid']).to eq true

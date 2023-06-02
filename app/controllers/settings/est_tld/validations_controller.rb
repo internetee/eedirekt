@@ -19,12 +19,11 @@ class Settings::EstTld::ValidationsController < Settings::BaseController
     # Rails.logger.info key_valid
     # Rails.logger.info '--------------'
 
-    if valid_extension
-      validate_existance_in_server
+    if validate_existance_in_server
 
       render json: { valid: true }
     else
-      render json: { valid: valid_extension }
+      render json: { valid: false }
     end
   end
 end
