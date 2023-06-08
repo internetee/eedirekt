@@ -1,49 +1,47 @@
-<h2 class='text-xl font-bold'><%= t('.general') %></h2>
-<div class='flex items-center space-x-2'>
-  <%= form.label :country_code, t('.country_code'), class: 'w-32' %>
-  <%= form.country_select :country_code, { priority_countries: ["EE", "LV", "LT"]},  { class: 'px-2 py-2 border border-black w-96 bg-white' } %>
+<div class='w-96'>
+  <%= component 'form/country_select_input', form: form, attribute: :country_code, heroicon_name: 'globe-americas' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :ident, class: 'w-32' %>
-  <%= form.text_field :ident, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :ident, heroicon_name: 'identification', placeholder: '2323232323' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label 'Role', class: 'w-32' %>
-  <%= form.select :role, Contact.human_enum_options(:role), {}, { class: 'px-2 py-2 border border-black w-96 bg-white' } %>
+
+<div class='w-96'>
+  <%= component 'form/dropdown_input', form: form, attribute: :role, enum: Contact.human_enum_options(:role), heroicon_name: 'user-circle' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :name, class: 'w-32' %>
-  <%= form.text_field :name, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :name, heroicon_name: 'user', placeholder: 'John Doe' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :phone, class: 'w-32' %>
-  <%= form.text_field :phone, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :phone, heroicon_name: 'phone', placeholder: '+372 56722123' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :email, class: 'w-32' %>
-  <%= form.email_field :email, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/email_input', form: form, attribute: :email, heroicon_name: 'envelope', placeholder: 'johndoe@example.com' %>
 </div>
-<h2 class='text-xl font-bold'><%= t('.address') %></h2>
-<div class='flex items-center space-x-2'>
-  <%= form.label :address_country_code, t('.country_code'), class: 'w-32' %>
-  <%= form.country_select :address_country_code, { priority_countries: ["EE", "LV", "LT"]},  { class: 'px-2 py-2 border border-black w-96 bg-white' } %>
+
+<div class='w-96'>
+  <%= component 'form/country_select_input', form: form, attribute: :address_country_code, heroicon_name: 'globe-americas' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :state, class: 'w-32' %>
-  <%= form.text_field :state, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :state, heroicon_name: 'home-modern', placeholder: 'NY' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :city, class: 'w-32' %>
-  <%= form.text_field :city, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :city, heroicon_name: 'home-modern', placeholder: 'New York' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :zip, class: 'w-32' %>
-  <%= form.text_field :zip, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :zip, heroicon_name: 'home-modern', placeholder: '12345' %>
 </div>
-<div class='flex items-center space-x-2'>
-  <%= form.label :street, class: 'w-32' %>
-  <%= form.text_field :street, class: 'px-2 py-1 border border-black w-96' %>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :street, heroicon_name: 'home-modern', placeholder: 'Somewhere' %>
 </div>
+
 <h2 class='text-xl font-bold'><%= t('.legal') %></h2>
 <div class='flex items-center space-x-2'>
   <%= form.label :legal_document, class: 'file' do %>

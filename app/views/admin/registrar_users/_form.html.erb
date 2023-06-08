@@ -1,0 +1,34 @@
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :username, heroicon_name: 'user', placeholder: 'johndoe@example.com' %>
+</div>
+
+<div class='w-96'>
+  <%= component 'form/password_input', form: form, attribute: :password, heroicon_name: 'lock-closed' %>
+</div>
+
+<div class='w-96'>
+  <%= component 'form/password_input', form: form, attribute: :password_confrimation, heroicon_name: 'lock-closed' %>
+</div>
+
+<div class='h-12'></div>
+
+<div class="relative my-4">
+  <div class="absolute inset-0 flex items-center" aria-hidden="true">
+    <div class="w-full border-t border-gray-300"></div>
+  </div>
+  <div class="relative flex justify-center">
+    <span class="bg-white px-2 text-sm text-gray-500"><%= t('.for_eeid') %></span>
+  </div>
+</div>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :name, heroicon_name: 'user', placeholder: t('.name') %>
+</div>
+
+<div class='w-96'>
+  <%= component 'form/text_input', form: form, attribute: :code, heroicon_name: 'user', placeholder: t('.code') %>
+</div>
+
+<div class='w-full flex justify-center'>
+  <%= form.submit t('.submit'), class: 'mt-8 text-gray-600 inline-flex w-full justify-center rounded-md border border-[#A99F96] bg-white py-2 px-4 text-sm font-medium text-[#A99F96] shadow-sm hover:bg-[#A99F96] hover:text-white mt-2 cursor-pointer' %>
+</div>

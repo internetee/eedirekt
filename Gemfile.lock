@@ -171,6 +171,8 @@ GEM
       activesupport (>= 5.0)
     hashdiff (1.0.1)
     hashie (5.0.0)
+    heroicon (1.0.0)
+      rails (>= 5.2)
     highline (2.1.0)
     hpricot (0.8.6)
     httpclient (2.8.3)
@@ -390,6 +392,10 @@ GEM
       activemodel (>= 3.0.0)
       public_suffix
     vcr (6.1.0)
+    view_component (3.1.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -434,6 +440,7 @@ DEPENDENCIES
   faker
   faraday
   figaro
+  heroicon
   i18n-debug
   i18n-tasks (~> 1.0.12)
   jbuilder
@@ -460,6 +467,7 @@ DEPENDENCIES
   tzinfo-data
   uuidtools
   vcr
+  view_component
   web-console
   webdrivers
   webmock

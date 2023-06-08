@@ -1,8 +1,19 @@
-<div class='container mx-auto h-screen flex flex-row items-center justify-center space-x-8'>
-  <div>
-    <h2 class='text-gray-900 text-2xl font-bold'>For registrants</h2>
-      <%= link_to t('.login_with_eeid'), "https://eid.internet.ee/oidc/authorize?client_id=oidc-4bd9a610-62d2-4790-ac50-811e4b19a381-24&state=b27716fae29cd7643365743796e9fdfe", data: { turbo: false }, class: "text-black inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50 mt-6" %>
+<div class='container mx-auto h-screen flex flex-col items-center justify-center'>
+  <div class='mx-auto mb-12'>
+    <%= image_tag 'eis_logo_eng_rgb_vertical.png', class: 'w-72 object-fit' %>
   </div>
 
-  <%= link_to t('to_registrar'), new_registrar_sessions_path, class: 'text-indigo-500' %>
+  <div>
+    <h2 class='text-center text-gray-900 text-3xl font-bold mb-2'><%= t('.introduction_title') %></h2>
+    <h2 class='text-center text-gray-900'><%= t('.for_registrant_title') %></h2>
+
+    <%= link_to t('.login_with_eeid'),
+      "https://eid.internet.ee/oidc/authorize?client_id=oidc-4bd9a610-62d2-4790-ac50-811e4b19a381-24&state=b27716fae29cd7643365743796e9fdfe",
+      data: { turbo: false },
+      class: "text-gray-600 inline-flex w-full justify-center rounded-md border  bg-white py-2 px-4 text-sm font-medium  shadow-sm  hover:text-white mt-12" %>
+  </div>
+
+  <div class='mt-6 border-t pt-2'>
+    <%= link_to t('.for_registrar'), new_registrar_sessions_path, class: 'text-blue-400 hover:text-blue-500', layout: 'sessions' %>
+  </div>
 </div>  

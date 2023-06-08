@@ -1,5 +1,7 @@
 module Admin
   class SessionsController < ApplicationController
+    layout 'sessions'
+
     allow_unauthenticated only: %i[new create]
 
     def new; end

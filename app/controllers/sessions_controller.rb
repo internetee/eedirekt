@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  layout 'sessions'
+
   allow_unauthenticated only: %i[new]
 
   def new

@@ -1,5 +1,12 @@
 ---
 en:
+  dashboard: Dashboard
+  registrars: Registrars
+  settings_item: Settings
+  contacts: Contacts
+  domains: Domains
+  invoices: Invoices
+
   epp_authorization_error: Epp authorization error
   incorrect_details: Incorrect details
   invoice_number_exceeded: Invoice number exceeded

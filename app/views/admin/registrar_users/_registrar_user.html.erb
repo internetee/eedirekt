@@ -1,0 +1,21 @@
+<tr>
+  <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+    <%= registrar_user.name %>
+    <dl class="font-normal lg:hidden">
+      <dt class="sr-only"><%= registrar_user.name %></dt>
+      <dd class="mt-1 truncate text-gray-700"><%= registrar_user.code %></dd>
+      <dt class="sr-only sm:hidden"><%= registrar_user.username %></dt>
+      <dd class="mt-1 truncate text-gray-500 sm:hidden">Status</dd>
+    </dl>
+  </td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><%= registrar_user.code %></td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= registrar_user.username %></td>
+  <td class="px-3 py-4 text-sm text-gray-500">Status</td>
+  <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
+    <%= link_to t('.show'), admin_registrar_user_path(uuid: registrar_user.uuid), class: "px-3 py-1 rounded-md text-white bg-yellow-400 hover:bg-yellow-500 cursor-pointer" %>
+
+    <%= link_to t('.edit'), edit_admin_registrar_user_path(uuid: registrar_user.uuid), class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer" %>
+
+    <%= button_to t('.delete'), admin_registrar_user_path(uuid: registrar_user.uuid), method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer", form: { data: { turbo_confirm: t(".confirm_delete") } } %>
+  </td>
+</tr>

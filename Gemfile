@@ -31,6 +31,8 @@ gem 'uuidtools' # For unique IDs (used by the epp gem)
 gem 'i18n-tasks', '~> 1.0.12'
 gem 'pagy', '~> 6.0'
 gem 'country_select'
+gem 'heroicon'
+gem "view_component"
 
 # gem "kredis"
 # gem "image_processing", "~> 1.2"

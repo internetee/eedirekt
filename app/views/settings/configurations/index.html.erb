@@ -1,8 +1,16 @@
-<div class='container mx-auto h-screen flex flex-col items-center justify-center space-x-8'>
-  <h1 class='text-gray-900 text-2xl font-bold'>Welcome</h1>
+<div class='container mx-auto flex flex-col items-center justify-center space-x-8 border my-4 rounded-xl shadow-md p-8'>
+
+  <div class="mx-auto max-w-7xl py-4 px-4">
+    <div class="text-center">
+      <h1 class="text-lg font-semibold text-indigo-600">Welcome</h1>
+      <p class="mt-1 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">Take control of your team.</p>
+      <p class="mx-auto mt-5 max-w-xl text-xl text-gray-500">Start building for free, then add a site plan to go live. Account plans unlock additional features.</p>
+    </div>
+  </div>
+
 
   <div class='flex flex-row justify-center items-center'>
-      <%= form_with url: settings_configurations_path, class: 'w-full mt-8',
+      <%= form_with url: settings_configurations_path, class: 'w-full mt-8 space-y-3',
       data: {
         # controller: 'applications-upload',
         applications_upload_server_failed_msg_value: t('.server_failed_msg'),
@@ -11,54 +19,128 @@
         applications_upload_upload_error_msg_value: t('.upload_error_msg'),
         applications_upload_validation_url_value: settings_est_tld_validations_path,
       } do |form| %>
-        <h2 class='text-gray-900 text-xl font-bold mb-3 mt-6'>User admin credentials</h2>
+        <h2 class='text-gray-900 text-xl mb-3 mt-6 text-center'>User admin credentials</h2>
 
         <%= form.fields_for SuperUser.new do |f| %>
-          <div class='flex items-center'>
-            <%= f.label :username, class: 'text-bold text-sm text-gray-700 w-32' %>
-            <%= f.text_field :username, placeholder: t('.username'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+          <div class='w-72'>
+            <%= f.label :username, class: 'block text-sm font-medium text-gray-700' %>
+            <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <!-- Heroicon name: mini/envelope -->
+                <%= heroicon 'user', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+              </div>
+              <%= f.text_field :username, placeholder: 'john doe', class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+            </div>
           </div>
 
-          <div class='mt-2 flex items-center'>
-            <%= f.label :email, class: 'text-bold text-sm text-gray-700 w-32' %>
-            <%= f.text_field :email, placeholder: t('.username'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+          <div class='w-72'>
+            <%= f.label :email, class: 'block text-sm font-medium text-gray-700' %>
+            <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <!-- Heroicon name: mini/envelope -->
+                <%= heroicon 'user', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+              </div>
+              <%= f.text_field :email, placeholder: 'registrar@zone.ee', class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+            </div>
           </div>
 
-          <div class='mt-2 flex items-center'>
-            <%= f.label :password, class: 'text-bold text-sm text-gray-700 w-32' %>
-            <%= f.password_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+          <div class='w-72'>
+            <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
+            <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <!-- Heroicon name: mini/envelope -->
+                <%= heroicon 'lock-closed', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+              </div>
+              <%= f.password_field :password, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+            </div>
           </div>
 
-          <div class='mt-2 flex items-center'>
-            <%= f.label :password_confirmation, class: 'text-bold text-sm text-gray-700 w-32' %>
-            <%= f.password_field :password_confirmation, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400' %>
+
+        <div class='w-72'>
+          <%= f.label :password_confirmation, class: 'block text-sm font-medium text-gray-700' %>
+          <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <!-- Heroicon name: mini/envelope -->
+              <%= heroicon 'lock-closed', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+            </div>
+            <%= f.password_field :password_confirmation, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
           </div>
+        </div>
+
         <% end %>
 
-        <h2 class='text-gray-900 text-xl font-bold mb-3 mt-6'>Estonian TLD</h2>
+        <div class='h-8'></div>
+
+        <fieldset>
+          <legend class="sr-only">Server size</legend>
+          <div class="space-y-4">
+            <!--
+              Checked: "border-transparent", Not Checked: "border-gray-300"
+              Active: "border-indigo-500 ring-2 ring-indigo-500"
+            -->
+            <label class="relative block cursor-pointer rounded-lg border bg-white px-6 py-4 shadow-sm focus:outline-none sm:flex sm:justify-between border-indigo-500 ring-2 ring-indigo-500">
+              <input type="radio" name="server-size" value="Hobby" class="sr-only" aria-labelledby="server-size-0-label" aria-describedby="server-size-0-description-0 server-size-0-description-1">
+              <span class="flex items-center">
+                <span class="flex flex-col text-sm">
+                  <span id="server-size-0-label" class="font-medium text-gray-900">Estonian TLD</span>
+                  <span id="server-size-0-description-0" class="text-gray-500">
+                    <span class="block sm:inline">Estonian TLD</span>
+                  </span>
+                </span>
+              </span>
+              <!--
+                Active: "border", Not Active: "border-2"
+                Checked: "border-indigo-500", Not Checked: "border-transparent"
+              -->
+              <span class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class='h-8'></div>
+
+        <h2 class='text-gray-900 text-xl text-center'>Estonian TLD</h2>
           <%= form.fields_for Tld.new do |f| %>
             <span id='error-box'></span>
 
-            <div class='flex items-center'>
-              <%= f.label :username, class: 'text-bold text-sm text-gray-700 w-32' %>
-              <%= f.text_field :username, placeholder: t('.username'), required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+            <div class='w-72'>
+              <%= f.label :username, class: 'block text-sm font-medium text-gray-700' %>
+              <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <!-- Heroicon name: mini/envelope -->
+                  <%= heroicon 'user', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+                </div>
+                <%= f.text_field :username, placeholder: 'john doe', class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2', data: { action: "applications-upload#upload" } %>
+              </div>
             </div>
 
-            <div class='mt-2 flex items-center'>
-              <%= f.label :password, class: 'text-bold text-sm text-gray-700 w-32' %>
-              <%= f.password_field :password, placeholder: t('.password'), required: true, class: 'px-2 py-1 border border-gray-400', data: { action: "applications-upload#upload" } %>
+            <div class='w-72'>
+              <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
+              <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <!-- Heroicon name: mini/envelope -->
+                  <%= heroicon 'lock-closed', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+                </div>
+                <%= f.password_field :password, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2', data: { action: "applications-upload#upload" } %>
+              </div>
             </div>
 
-            <div class='mt-2 flex items-center'>
-              <%= f.label :base_url, class: 'text-bold text-sm text-gray-700 w-32' %>
-              <%= f.text_field :base_url, placeholder: t('.base_url'), value: ENV['base_repp_url'], required: true, class: 'px-2 py-1 border border-gray-400' %>
+            <div class='w-72'>
+              <%= f.label :base_url, class: 'block text-sm font-medium text-gray-700' %>
+              <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <!-- Heroicon name: mini/envelope -->
+                  <%= heroicon 'user', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+                </div>
+                <%= f.text_field :base_url, placeholder: t('.base_url'),  value: ENV['base_repp_url'], class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+              </div>
             </div>
           <% end %>
 
 
-        <div class='w-full flex justify-end'>
-          <%= form.submit t('.submit'), class: 'px-5 py-2 bg-green-600 hover:bg-green-700 text-white mt-4 cursor-pointer' %>
-        </div>
+          <div class='w-full flex justify-center'>
+            <%= form.submit t('.submit'), class: 'mt-8 text-gray-600 inline-flex w-full justify-center rounded-md border border-[#A99F96] bg-white py-2 px-4 text-sm font-medium text-[#A99F96] shadow-sm hover:bg-[#A99F96] hover:text-white mt-2 cursor-pointer' %>
+          </div>
       <% end %>
   </div>
 </div>
