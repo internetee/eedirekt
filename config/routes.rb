@@ -9,12 +9,11 @@ Rails.application.routes.draw do
     resource :sessions, only: %i[new create]
     resource :settings, only: %i[show update]
     resource :synchronizes, only: %i[create]
+    resources :registrar_users, param: :uuid
   end
 
   resource :sessions, only: %i[new]
   delete 'logout', to: 'sessions#destroy'
-
-  resources :registrar_users, param: :uuid
 
   namespace :settings do
     resources :configurations, only: %i[index create]

@@ -1,5 +1,7 @@
 module Registrar
   class SessionsController < ApplicationController
+    layout 'sessions'
+
     allow_unauthenticated only: %i[new create]
 
     def new
@@ -8,6 +10,7 @@ module Registrar
 
     def create
       registrar_user = RegistrarUser.find_by(username: params[:username])
+
       if registrar_user&.authenticate(params[:password])
         app_token = registrar_user.app_sessions.create
         log_in app_token

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :redirect_to_welcome_page
 
   rescue_from ActionController::Redirecting::UnsafeRedirectError do
-    redirect_to root_url
+    redirect_to root_url, layout: false
   end
 
   include Pagy::Backend

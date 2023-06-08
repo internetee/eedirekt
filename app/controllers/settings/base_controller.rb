@@ -5,7 +5,7 @@ module Settings
     private
 
     def redirect_to_admin_session
-      redirect_to new_admin_sessions_path, status: :see_other if SuperUser.count > 0
+      redirect_to new_admin_sessions_path, status: :see_other, layout: 'sessions' if SuperUser.count > 0
     end
   end
 end

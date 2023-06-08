@@ -4,3 +4,6 @@ en:
       submit: Login
       username: Username
       password: Password
+      for_registrant_title: For registrants
+      for_registrar: For registrars
+      introduction_title: Are you domain owner?

@@ -1,0 +1,22 @@
+<div class="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5 pb-4 h-screen"
+     style="min-width: 250px; width: 250px; max-width: 250px;">
+  <div class="flex flex-shrink-0 items-center justify-center space-y-5 px-4">
+    <%= image_tag 'eis_logo_eng_rgb_vertical.png', class: 'h-24 w-auto object-fit', alt: 'Eesti Interneti SA' %>
+
+  </div>
+  <div class="mt-5 flex flex-grow flex-col justify-between">
+
+    <nav class="flex-1 space-y-1 bg-white" aria-label="Sidebar">
+
+      <%= render Sidebar::Navbar::MenuItem::Component.with_collection(menu_items) %>
+
+      <%= tag.div class: 'mx-auto px-12' do %>
+        <%= component 'buttons/regular_button', text: t('.run_synchronize'), path: admin_synchronizes_path, method: :post, classes: 'border-[#62C96F] bg-[#9BE9A5] hover:bg-[#62C96F] text-white' %>
+      <% end if @current_user&.class&.name == 'SuperUser' %>
+    </nav>
+
+    <div class='w-full mx-auto px-12 mb-10 border-t pt-3'>
+      <%= component 'buttons/regular_button', text: t('.logout'), path: logout_path, method: :delete, classes: 'border-[#CA410B] text-[#CA410B] hover:bg-[#CA410B] hover:text-white' %>
+    </div>
+  </div>
+</div>

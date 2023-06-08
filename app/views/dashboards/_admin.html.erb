@@ -1,16 +1,3 @@
-<%= turbo_stream_from "dashboards_#{Tld.first.uuid}" %>
+<div id="admin_banner"></div>
 
-<div id="admin_banner">
-</div>
 
-<%= button_to t('.run_synchronize'), admin_synchronizes_path, class: "text-black rounded-md px-6 py-2 border border-grey-400 hover:text-white hover:bg-green-500 border border-black" %>
-
-<div class='space-y-3'>
-  <div>
-    <%= link_to t('.registrar'), registrar_users_path, class: 'text-indigo-500' %>
-  </div>
-
-  <div>
-    <%= link_to t('.settings'), admin_settings_path, class: 'text-indigo-500' %>
-  </div>
-</div>
