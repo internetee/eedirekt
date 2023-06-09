@@ -1,4 +1,8 @@
 class Domain < ApplicationRecord
+  PERIOD = [
+    ['1 month', 1], ['3 month', 3], ['6 month', 6], ['1 year', 12], ['2 year', 24]
+  ].freeze
+
   has_many :domain_contacts, dependent: :destroy
   has_many :contacts, through: :domain_contacts, source: :contact
 
@@ -28,8 +32,8 @@ class Domain < ApplicationRecord
   validates :domain_contacts, length: { minimum: Tld::Estonian::MIN_DOMAIN_CONTACT_COUNT,
                                         message: I18n.t('.min_domain_contacts',
                                                         number: Tld::Estonian::MIN_DOMAIN_CONTACT_COUNT) }
-  validates :nameservers, length: { minimum: Tld::Estonian::MIN_NAMESERVER_COUNT,
-                                    message: I18n.t('.min_nameservers', number: Tld::Estonian::MIN_NAMESERVER_COUNT) }
+  # validates :nameservers, length: { minimum: Tld::Estonian::MIN_NAMESERVER_COUNT,
+  #                                   message: I18n.t('.min_nameservers', number: Tld::Estonian::MIN_NAMESERVER_COUNT) }
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-\.]+\z/ }
 

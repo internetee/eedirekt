@@ -1,53 +1,70 @@
-<div class='w-96'>
-  <%= component 'form/country_select_input', form: form, attribute: :country_code, heroicon_name: 'globe-americas' %>
+<div class="relative my-4">
+  <%= component 'divider', label: t('.general_info') %>
+
+  <div class='flex flex-row justify-evenly items-center'>
+    <div class='flex flex-col space-y-4'>
+      <div class='w-96'>
+        <%= component 'form/country_select_input', form: form, attribute: :country_code, heroicon_name: 'globe-americas' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :ident, heroicon_name: 'identification', placeholder: '2323232323' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/dropdown_input', form: form, attribute: :role, enum: Contact.human_enum_options(:role), heroicon_name: 'user-circle' %>
+      </div>
+    </div>
+
+    <div class='flex flex-col space-y-4'>
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :name, heroicon_name: 'user', placeholder: 'John Doe' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :phone, heroicon_name: 'phone', placeholder: '+372 56722123' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/email_input', form: form, attribute: :email, heroicon_name: 'envelope', placeholder: 'johndoe@example.com' %>
+      </div>
+    </div>
+  </div>
+
+<div class='h-8'></div>
+
+<%= component 'divider', label: t('.address') %>
+
+<div class='flex flex-row justify-evenly items-center'>
+  <div class='flex flex-col space-y-4'>
+    <div class='w-96'>
+      <%= component 'form/country_select_input', form: form, attribute: :address_country_code, heroicon_name: 'globe-americas' %>
+    </div>
+
+    <div class='w-96'>
+      <%= component 'form/text_input', form: form, attribute: :state, heroicon_name: 'home-modern', placeholder: 'NY' %>
+    </div>
+
+    <div class='w-96'>
+      <%= component 'form/text_input', form: form, attribute: :city, heroicon_name: 'home-modern', placeholder: 'New York' %>
+    </div>
+  </div>
+
+  <div class='flex flex-col space-y-4'>
+    <div class='w-96'>
+      <%= component 'form/text_input', form: form, attribute: :zip, heroicon_name: 'home-modern', placeholder: '12345' %>
+    </div>
+
+    <div class='w-96'>
+      <%= component 'form/text_input', form: form, attribute: :street, heroicon_name: 'home-modern', placeholder: 'Somewhere' %>
+    </div>
+  </div>
+
 </div>
 
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :ident, heroicon_name: 'identification', placeholder: '2323232323' %>
-</div>
+<div class='h-8'></div>
 
-<div class='w-96'>
-  <%= component 'form/dropdown_input', form: form, attribute: :role, enum: Contact.human_enum_options(:role), heroicon_name: 'user-circle' %>
-</div>
+<%= component 'divider', label: t('.legal_doc') %>
 
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :name, heroicon_name: 'user', placeholder: 'John Doe' %>
-</div>
 
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :phone, heroicon_name: 'phone', placeholder: '+372 56722123' %>
-</div>
-
-<div class='w-96'>
-  <%= component 'form/email_input', form: form, attribute: :email, heroicon_name: 'envelope', placeholder: 'johndoe@example.com' %>
-</div>
-
-<div class='w-96'>
-  <%= component 'form/country_select_input', form: form, attribute: :address_country_code, heroicon_name: 'globe-americas' %>
-</div>
-
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :state, heroicon_name: 'home-modern', placeholder: 'NY' %>
-</div>
-
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :city, heroicon_name: 'home-modern', placeholder: 'New York' %>
-</div>
-
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :zip, heroicon_name: 'home-modern', placeholder: '12345' %>
-</div>
-
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :street, heroicon_name: 'home-modern', placeholder: 'Somewhere' %>
-</div>
-
-<h2 class='text-xl font-bold'><%= t('.legal') %></h2>
-<div class='flex items-center space-x-2'>
-  <%= form.label :legal_document, class: 'file' do %>
-    <%= form.file_field :legal_document, class: 'not_visible', accept: [] %>
-    <i class="fas fa-folder-open"></i>
-    <strong><%=t(:choose_file) %></strong>
-    <span>(max. 8MB)</span>
-  <% end %>
-</div>
+<%= component 'form/image_field', label: I18n.t('.legal_document'), attribute: :legal_document, form: form %>

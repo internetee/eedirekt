@@ -1,29 +1,29 @@
-<div class='flex items-center justify-center space-x-2 contact-item border p-3' data-controller="form--autocomplete">
-  <%= field.label :contact, class: 'w-32' %>
-  <%= field.text_field :contact,
-                      class: 'px-2 py-1 border border-black w-96',
-                      data: { action: "input->form--autocomplete#search", form__autocomplete_target: "input" } %>
-  <ul class="autocomplete-results" data-form--autocomplete-target="results"></ul>
+<div class='flex items-center space-x-2 space-y-3 contact-item' data-controller="form--autocomplete">
+  <div class='w-96'>
+    <%= component 'form/autocomplete_input', form: field, attribute: :contact, heroicon_name: 'user', placeholder: 'example.ee',
+      data_attributes: { action: "input->form--autocomplete#search", form__autocomplete_target: "input" },
+      value: field&.object&.contact %>
+  </div>
 
   <%= field.hidden_field :contact_id, data: { form__autocomplete_target: "hiddenInput" } %>
 
   <%= field.hidden_field :_destroy %>
 
-  <div class='flex'>
-    <label class="custom-radio mr-2">
-      <%= field.radio_button :type, "AdminDomainContact", checked: true %>
-      <span></span>
-    </label>
-    <%= field.label :domain_contact_type, t('.admin'), class: 'w-32 font-semibold mr-3' %>
+  <div class='flex items-baseline space-x-6'>
+    <div class="space-y-4 flex items-baseline space-x-4">
+      <div class="flex items-center">
+        <%= field.radio_button :type, "AdminDomainContact", checked: true, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+        <%= field.label :domain_contact_type, t('.admin'), class: 'ml-3 block text-sm font-medium text-gray-700' %>
+      </div>
 
-    <label class="custom-radio mr-2">
-      <%= field.radio_button :type, "TechDomainContact" %>
-      <span></span>
-    </label>
-    <%= field.label :domain_contact_type, t('.tech'), class: 'w-32 font-semibold mr-3' %>
+      <div class="flex items-center">
+        <%= field.radio_button :type, "TechDomainContact", class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+        <%= field.label :domain_contact_type, t('.tech'), class: 'ml-3 block text-sm font-medium text-gray-700' %>
+      </div>
+    </div>
+
+    <% if remove_button %>
+      <a class='cursor-pointer rounded-full p-1 bg-red-400 hover:bg-red-600' data-action="click->form--add-element#removeElement"><%= heroicon 'trash', variant: :solid, options: { class: 'h-5 w-5 text-white' } %></a>
+    <% end %>
   </div>
-
-  <% if remove_button %>
-    <a class='rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 cursor-pointer remove-button' data-action="click->form--add-element#removeElement"><%= t('.remove') %></a>
-  <% end %>
 </div>

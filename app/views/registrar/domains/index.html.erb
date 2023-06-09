@@ -1,20 +1,30 @@
-<div class='my-3 container mx-auto'>
-
-  <%= link_to t('.back'), root_path, class: 'text-indigo-500' %>
-
-  <div class="h-8"></div>
-
-  <% @domains.each do |domain| %>
-    <div class='flex justify-between items-center border border-b py-2 px-2'>
-      <div>
-        <h3><%= domain.name %></h3>
-      </div>
-      <div class='flex space-x-2'>
-        <%= link_to t('.edit'), edit_registrar_domain_path(uuid: domain.uuid), class: 'px-3 py-1 rounded-md text-white bg-indigo-400 hover:bg-indigo-500 cursor-pointer' %>
-        <%= button_to t('.delete'), registrar_domain_path(uuid: domain.uuid), id: 'destroy-card', method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer", form: { data: { turbo_confirm: t(".confirm_delete") } } %>
-      </div>
+<div class="container mx-auto  mt-12 px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-semibold text-gray-900"><%= t('.title') %></h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
     </div>
-  <% end %>
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+      <%= link_to t('add_domain'), new_registrar_domain_path, class: "inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto" %>
+    </div>
+  </div>
+  <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Domain Name</th>
+          <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Registrant name</th>
+          <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">Expire Date</th>
+          <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+            <span class="sr-only">Edit</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <%= render @domains %>
+      </tbody>
+    </table>
+  </div>
 
   <div class="flex justify-center">
     <% if @pagy.pages > 1 %>

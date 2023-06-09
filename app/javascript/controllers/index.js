@@ -15,3 +15,6 @@ application.register("form--invoice-autocomplete", Form__InvoiceAutocompleteCont
 
 import Form__AddElementController from "./form/add_element_controller";
 application.register("form--add-element", Form__AddElementController);
+
+import DropzoneController from "./dropzone_controller"
+application.register("dropzone", DropzoneController)
