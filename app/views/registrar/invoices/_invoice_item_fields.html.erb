@@ -1,28 +1,26 @@
-<div class='flex flex-col items-center justify-center space-x-2 contact-item border p-3'
-  data-form--add-element-target="elementItem">
-  <div class="flex space-x-3">
-    <div class='flex flex-col space-y-2'>
-      <%= field.label :unit_price, class: 'w-32' %>
-      <%= field.number_field :unit_price, class: 'px-2 py-1 border border-black w-96' %>
+<div class='space-x-2 contact-item p-3 border-b' data-form--add-element-target="elementItem">
+  <div class='flex items-center justify-evenly '>
+    <div class="flex flex-col space-y-3">
+      <div class='w-96'>
+        <%= component 'form/number_input', form: field, attribute: :unit_price, heroicon_name: 'user', placeholder: 10.0, value: field.object.nil? ? 0.0 : field.object.unit_price %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/number_input', form: field, attribute: :quantity, heroicon_name: 'user', placeholder: 1.0, value: field.object.nil? ? 1.0 : field.object.quantity, min: 1.0 %>
+      </div>
     </div>
 
-    <div class='flex flex-col space-y-2'>
-      <%= field.label :quantity, class: 'w-32' %>
-      <%= field.number_field :quantity, min: 1.0, value: 1.0, class: 'px-2 py-1 border border-black w-96' %>
+    <%= field.hidden_field :_destroy %>
+
+    <div class='w-96 mt-4'>
+      <%= component 'form/textarea_input', form: field, attribute: :description %>
     </div>
   </div>
 
-  <%= field.hidden_field :_destroy %>
-
-    <div class='flex space-x-2'>
-      <%= field.label :description, class: 'w-32' %>
-        <%= field.text_area :description, class: 'px-2 py-1 border border-black w-96' %>
-    </div>
-
-    <% if remove_button %>
-      <a class='rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 cursor-pointer remove-button'
-        data-action="click->form--add-element#removeElement">
-        <%= t('.remove') %>
-      </a>
-      <% end %>
+  <%= tag.div class: 'text-right' do %>
+    <a class='rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 cursor-pointer remove-button'
+      data-action="click->form--add-element#removeElement">
+      <%= t('.remove') %>
+    </a>
+  <% end if remove_button %>
 </div>

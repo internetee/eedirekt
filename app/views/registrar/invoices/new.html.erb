@@ -1,13 +1,41 @@
-<h1 class='text-xl font-bold'><%= t('.title') %></h1>
+<style>
+  .autocomplete-results {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ccc;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .autocomplete-results li {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .autocomplete-results li:hover {
+    background-color: #eee;
+  }
+</style>
 
-<div class='flex flex-col items-center space-y-2'>
-    <h2 class='font-bold my-3'><%= t('.buyer') %></h2>
 
-    <%= form_with model: @invoice, url: registrar_invoices_path, class: 'flex flex-col mt-8 space-y-3 items-center' do |form| %>
-      <%= render 'form', form: form %>
+<div class='flex flex-col w-full'>
+  <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">Applicant Information</h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
+    </div>
+  </div>
 
-      <div class='text-center'>
-        <%= form.submit t('.create'), class: 'px-3 py-1 rounded-md text-white bg-indigo-400 hover:bg-indigo-500 cursor-pointer mt-6' %>
-      </div>
-    <% end %>
-</div>
+  <div class='px-4 py-5 sm:px-6 container mx-auto rounded-md shadow-md border border-gray-300 mt-12'>
+      <%= form_with model: @invoice, url: registrar_invoices_path, class: 'w-full mt-8 space-y-3 flex justify-center flex-col' do |form| %>
+
+        <%= render 'form', form: form %>
+
+        <div class='flex justify-end'>
+          <%= form.submit t('.submit'), class: 'mt-8 text-gray-600 w-64 rounded-md border border-[#A99F96] bg-white py-2 px-4 text-sm font-medium text-[#A99F96] shadow-sm hover:bg-[#A99F96] hover:text-white mt-2 cursor-pointer' %>
+        </div>
+      <% end %>
+  </div>  
+</div>  

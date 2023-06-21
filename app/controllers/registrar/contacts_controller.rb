@@ -1,5 +1,7 @@
 module Registrar
   class ContactsController < ApplicationController
+    include Roles::RegistrarAbilitable
+
     before_action :load_contact, only: [:edit, :update, :destroy, :show]
 
     def index
@@ -9,6 +11,8 @@ module Registrar
     def new
       @contact = Contact.new
     end
+
+    def show; end
 
     def create
       @contact = Contact.new(contact_params)

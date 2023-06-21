@@ -8,10 +8,8 @@
   <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg p-8">
     <%= form_with url: admin_settings_path, method: :patch, class: 'w-full mt-8 space-y-4' do |form| %>
 
-    <% @invoice_group .each do |setting| %>
+    <% @invoice_group.each do |setting| %>
       <div class='flex items-center space-y-2'>
-        <%#= form.label setting.code, class: 'text-bold text-sm text-gray-700 w-36' %>
-        <%#= form.text_field "[settings][#{setting.id}", placeholder: t(".#{setting.code}"), value: setting.value, class: 'px-2 py-1 border border-gray-400' %>
 
         <div class='w-52'>
           <%= form.label setting.code, class: 'block text-sm font-bold text-gray-700' %>

@@ -1,5 +1,7 @@
 module Registrar
   class PollMessagesController < ApplicationController
+    include Roles::RegistrarAbilitable
+
     def update
       notification_id = params[:id]
       result = EstonianTld::PollMessageService.new(tld:).mark_as_read(notification_id)

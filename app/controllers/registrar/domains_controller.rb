@@ -1,5 +1,7 @@
 module Registrar
   class DomainsController < ApplicationController
+    include Roles::RegistrarAbilitable
+
     before_action :load_domain, only: %i[show edit update destroy]
 
     def index
@@ -28,6 +30,7 @@ module Registrar
         redirect_to root_path, status: :see_other, notice: t('.success')
       else
         Rails.logger.info @domain.errors.inspect
+        p @domain.errors.inspect
         flash[:alert] = @domain.errors.full_messages.join(', ')
         render :new, status: :unprocessable_entity
       end

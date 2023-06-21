@@ -1,5 +1,5 @@
 module Form
-  module TextInput
+  module DatetimeInput
     class Component < ApplicationViewComponent
       attr_reader :form, :attribute, :heroicon_name, :placeholder, :data_attributes
 

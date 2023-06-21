@@ -3,6 +3,21 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["input", "results", "hiddenInput"]
 
+  connect() {
+    this.handleClickOutside = this.handleClickOutside.bind(this)
+    document.addEventListener('click', this.handleClickOutside)
+  }
+  
+  disconnect() {
+    document.removeEventListener('click', this.handleClickOutside)
+  }
+  
+  handleClickOutside(event) {
+    if (!this.element.contains(event.target)) {
+      this.resultsTarget.style.display = 'none';
+    }
+  }
+
   search(event) {
     event.preventDefault()
     event.stopPropagation()
@@ -23,6 +38,7 @@ export default class extends Controller {
           </li>
         `).join('')
         this.resultsTarget.innerHTML = html
+        this.resultsTarget.style.display = contacts.length > 0 ? 'block' : 'none';
       })
   }
 
@@ -32,5 +48,6 @@ export default class extends Controller {
     this.inputTarget.value = value
     this.hiddenInputTarget.value = id
     this.resultsTarget.innerHTML = ""
+    this.resultsTarget.style.display = 'none';
   }
 }

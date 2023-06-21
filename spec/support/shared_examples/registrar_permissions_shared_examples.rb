@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.shared_examples 'admin_permissions' do |value:|
+RSpec.shared_examples 'registrar_permissions' do |value:|
   let(:expected_value) { instance_exec(&value) }
 
   let(:admin) { expected_value[:admin] }
@@ -11,21 +11,21 @@ RSpec.shared_examples 'admin_permissions' do |value:|
     admin.reload && registrar.reload
   end
 
-  it 'only admin can access to super user actions' do
+  it 'only registrar can access to registrar user actions' do
     options.each do |option|
-      registrar_login_basic_auth registrar
-
-      registrar.reload
-      send("#{option[:method]}", option[:path], params: option[:payload])
-
-      expect(response.status).to eq 403
-
-      logout
-
       admin_login admin
-
-      send("#{option[:method]}", option[:path], params: option[:payload])
       admin.reload
+      
+      send("#{option[:method]}", option[:path], params: option[:payload])
+      
+      expect(response.status).to eq 403
+      
+      logout
+      
+      registrar_login_basic_auth registrar
+      registrar.reload
+      
+      send("#{option[:method]}", option[:path], params: option[:payload])
 
       if (option[:method] == :get)
         expect(response.status).to eq 200

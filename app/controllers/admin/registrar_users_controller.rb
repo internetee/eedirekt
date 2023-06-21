@@ -35,6 +35,9 @@ module Admin
     end
 
     def destroy
+      p '----'
+      p current_user
+      p '-----'
       if @registrar_user.destroy
         redirect_to admin_registrar_users_path, status: :see_other, notice: { success: I18n.t('.success') }
       else

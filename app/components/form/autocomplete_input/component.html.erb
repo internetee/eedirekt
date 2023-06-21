@@ -1,3 +1,33 @@
+<style>
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+}
+
+.dropdown-menu li {
+  padding: .5rem 1rem;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f8f9fa;
+}
+</style>
+
 <%= @form.label @attribute, class: 'block text-sm font-medium text-gray-700' %>
 <div class="relative mt-1 rounded-md shadow-md border border-gray-300">
   <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -8,5 +38,5 @@
     class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2',
     data: @data_attributes, value: @value %>
 
-  <ul class="autocomplete-results" data-form--autocomplete-target="results"></ul>
+  <ul class="autocomplete-results dropdown-menu" data-form--autocomplete-target="results"></ul>
 </div>

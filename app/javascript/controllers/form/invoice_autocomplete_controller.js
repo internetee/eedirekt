@@ -4,6 +4,24 @@ export default class extends Controller {
   static targets = [ "identInput", "results", "hiddenInput", "nameInput", "countryCodeInput",
                      "stateInput", "streetInput", "cityInput", "zipInput", "phoneInput", "emailInput" ]
 
+  connect() {
+    console.log('Ты грузишься?');
+    console.log(this.resultsTarget);
+
+    this.handleClickOutside = this.handleClickOutside.bind(this)
+    document.addEventListener('click', this.handleClickOutside)
+  }
+  
+  disconnect() {
+    document.removeEventListener('click', this.handleClickOutside)
+  }
+  
+  handleClickOutside(event) {
+    if (!this.element.contains(event.target) || event.target.matches('.dropdown-menu-invoice li')) {
+      this.resultsTarget.style.display = 'none';
+    }
+  }
+
   search(event) {
     event.preventDefault()
     event.stopPropagation()
@@ -30,6 +48,8 @@ export default class extends Controller {
           </li>
         `).join('')
         this.resultsTarget.innerHTML = html
+        this.resultsTarget.style.display = contacts.length > 0 ? 'block' : 'none';
+        console.log('Display статус:', this.resultsTarget.style.display);
       })
   }
 
@@ -45,5 +65,7 @@ export default class extends Controller {
     this.phoneInputTarget.value = event.target.getAttribute("data-phone")
     this.emailInputTarget.value = event.target.getAttribute("data-email")
     this.resultsTarget.innerHTML = ""
+
+    this.resultsTarget.style.display = 'none';
   }
 }

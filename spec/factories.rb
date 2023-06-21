@@ -1,11 +1,13 @@
 FactoryBot.define do
   factory :super_user do
+    uuid { SecureRandom.uuid }
     username { Faker::Name.name.gsub(' ', '_').underscore }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
   end
 
   factory :registrar_user do
+    uuid { SecureRandom.uuid }
     name { Faker::Name.name }
     code { '30303039914' }
     username { Faker::Name.name.gsub(' ', '_').underscore }
@@ -32,6 +34,7 @@ FactoryBot.define do
   end
 
   factory :contact do
+    uuid { SecureRandom.uuid }
     name { Faker::Name.name }
     email { Faker::Internet.email }
     phone { Faker::PhoneNumber.cell_phone_in_e164 }
@@ -42,6 +45,7 @@ FactoryBot.define do
   end
 
   factory :domain do
+    uuid { SecureRandom.uuid }
     name { 'example.com' }
     statuses { ['ok'] }
     remote_created_at { Time.now }
@@ -143,10 +147,10 @@ FactoryBot.define do
   end
 
   factory :setting do
-    sequence(:code) { |n| "code_#{n}" }
-    value { "Some value" }
-    group { "Some group" }
-    format { "Some format" }
+    sequence(:code) { "invoice_number_min" }
+    value { "30" }
+    group { "invoice" }
+    format { "integer" }
   end
   
 end

@@ -1,9 +1,11 @@
 module Registrar
   class InvoicesController < ApplicationController
+    include Roles::RegistrarAbilitable
+
     before_action :load_invoice, only: %i[show edit update destroy]
 
     def index
-      @invoices = Invoice.all
+      @pagy, @invoices = pagy(Invoice.all.order(created_at: :desc), items: 15, link_extra: 'data-turbo-action="advance"')
     end
 
     def show; end
@@ -28,6 +30,7 @@ module Registrar
     def edit; end
 
     def update
+       p '---------'
       if @invoice.update(invoice_params)
         redirect_to registrar_invoices_path, status: :see_other, notice: t('.success')
       else
