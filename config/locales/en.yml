@@ -6,6 +6,7 @@ en:
   contacts: Contacts
   domains: Domains
   invoices: Invoices
+  poll_messages: Poll messages
 
   epp_authorization_error: Epp authorization error
   incorrect_details: Incorrect details

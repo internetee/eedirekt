@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   namespace :registrar do
-    resources :poll_messages, only: %i[update]
+    resources :poll_messages, only: %i[update index]
     resources :invoices, param: :uuid
     resources :contacts, param: :uuid do
       collection do

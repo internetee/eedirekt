@@ -46,6 +46,11 @@ module Sidebar
               name: I18n.t('invoices'),
               heroicon_name: 'banknotes' ,
             },
+            {
+              href: registrar_poll_messages_path,
+              name: I18n.t('poll_messages'),
+              heroicon_name: 'envelope-open' ,
+            },
           ]
         else
           []

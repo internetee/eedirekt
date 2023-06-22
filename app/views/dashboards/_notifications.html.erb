@@ -1,0 +1,38 @@
+<div>
+
+  <% if @all_notifications.present? %>
+    <h2 class='mt-8 font-bold underline underline-offset-4'><%= t('.notification_title') %></h2>
+
+    <div class="mt-6 flow-root">
+      <ul role="list" class="-my-5 divide-y divide-gray-200">
+
+        <% @all_notifications.each do |n| %>
+          <li class="py-5 border-b">
+            <div class="relative focus-within:ring-2 focus-within:ring-indigo-500">
+              <h3 class="text-sm font-semibold text-gray-800">
+                  Office closed on July 2nd
+              </h3>
+              <div class='flex justify-between space-x-2'>
+                <p class="mt-1 text-sm text-gray-600 line-clamp-2"><%= n.text %></p>
+
+                <%= button_to registrar_poll_message_path(n.id), method: :put do %>
+                  <%= heroicon 'check', variant: :solid, options: { class: 'h-6 w-6 text-green-400' } %>
+                <% end %>
+              </div>
+
+            </div>
+          </li>
+        <% end %>
+
+      </ul>
+    </div>
+
+    <div class="flex justify-center mt-10">
+      <%= link_to t('.view_all'), registrar_poll_messages_path, class: 'flex w-64 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50' %>
+    </div>
+  <% else %>
+    <div class='w-full flex justify-center p-12 border mt-12'>
+      <h2 class='font-bold text-[16px]'>No notifications</h2>
+    </div>
+  <% end %>
+</div>

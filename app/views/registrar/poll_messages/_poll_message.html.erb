@@ -1,0 +1,14 @@
+<tr>
+  <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+    <%= poll_message.text %>
+    <dl class="font-normal lg:hidden">
+      <dt class="sr-only"><%= poll_message.text%></dt>
+    </dl>
+  </td>
+
+  <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
+    <%= button_to registrar_poll_message_path(poll_message.id), method: :put do %>
+      <%= heroicon 'check', variant: :solid, options: { class: 'h-6 w-6 text-green-400' } %>
+    <% end %>
+  </td>
+</tr>
