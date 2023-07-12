@@ -13,6 +13,12 @@
       <%= tag.div class: 'mx-auto px-12' do %>
         <%= component 'buttons/regular_button', text: t('.run_synchronize'), path: admin_synchronizes_path, method: :post, classes: 'border-[#62C96F] bg-[#9BE9A5] hover:bg-[#62C96F] text-white' %>
       <% end if @current_user&.class&.name == 'SuperUser' %>
+
+      <%= tag.div class: 'mx-auto px-12' do %>
+        <%#= component 'buttons/regular_button', text: t('.restore_service'), path: admin_restore_services_path, method: :post, classes: 'border-red-500 bg-red-400 hover:bg-red-500 text-white' %>
+        <%= button_to t('.restore_service'), admin_restore_services_path, method: :post, class: "mt-8 inline-flex justify-center rounded-md border py-2 px-4 text-sm font-medium shadow-sm mt-2 cursor-pointer w-full border-red-500 bg-red-400 hover:bg-red-500 text-white", form: { data: { turbo_confirm: t(".confirm_drestore") } } %>
+
+      <% end if @current_user&.class&.name == 'SuperUser' && (Rails.env.development? || Rails.env.staging? || Rails.env.staging?) %>
     </nav>
 
     <div class='w-full mx-auto px-12 mb-10 border-t pt-3'>

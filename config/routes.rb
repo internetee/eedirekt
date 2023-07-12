@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resource :sessions, only: %i[new create]
     resource :settings, only: %i[show update]
     resource :synchronizes, only: %i[create]
+    resource :restore_services, only: %i[create]
+
     resources :registrar_users, param: :uuid
   end
 

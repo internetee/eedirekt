@@ -35,7 +35,7 @@ module Settings
 
         log_in @app_session
 
-        EstonianTld::ContactsJob.set(wait: 10.seconds).perform_later(Tld.first)
+        # EstonianTld::ContactsJob.set(wait: 10.seconds).perform_later(Tld.first)
         redirect_to root_path, notice: t('.signed_in'), status: :see_other
       else
         Rails.logger.warn @super_user.errors.full_messages
