@@ -64,7 +64,7 @@ class EstonianTld::ContactsJob < ApplicationJob
   end
 
   after_perform do |_job|
-    EstonianTld::DomainsJob.perform_later(@tld)
-    # EstonianTld::DomainsJob.perform_now(@tld)
+    # EstonianTld::DomainsJob.perform_later(@tld)
+    EstonianTld::DomainsJob.perform_now(@tld)
   end
 end
