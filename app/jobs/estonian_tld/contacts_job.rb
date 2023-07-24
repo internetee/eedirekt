@@ -1,8 +1,14 @@
+
+# rubocop:disable Style/ClassAndModuleChildren
+# rubocop:disable Style/Documentation
+
 class EstonianTld::ContactsJob < ApplicationJob
   queue_as :critical
 
   STEP = 200
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def perform(tld)
     @tld = tld
     # NB! Synchronization should be run only one time when tld is added to the system
@@ -58,7 +64,7 @@ class EstonianTld::ContactsJob < ApplicationJob
   end
 
   after_perform do |_job|
-    # EstonianTld::DomainsJob.perform_later(@tld)
-    EstonianTld::DomainsJob.perform_now(@tld)
+    EstonianTld::DomainsJob.perform_later(@tld)
+    # EstonianTld::DomainsJob.perform_now(@tld)
   end
 end

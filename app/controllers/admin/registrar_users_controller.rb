@@ -10,16 +10,23 @@ module Admin
 
     def show; end
 
-    def new; end
+    def new
+      @registrar_user = RegistrarUser.new
+    end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/PerceivedComplexity
     def create
       @registrar_user = RegistrarUser.new(registrar_user_params)
 
       if @registrar_user.save
         redirect_to admin_registrar_users_path, status: :see_other, notice: { success: I18n.t('.success') }
       else
-        render 'registrar_users/new', status: :unprocessable_entity,
-                                      notice: { alert: @registrar_user.errors.full_messages.join('; ') }
+
+        render :new, status: :unprocessable_entity,
+                     notice: { alert: @registrar_user&.errors&.full_messages&.join('; ') }
       end
     end
 
@@ -35,9 +42,6 @@ module Admin
     end
 
     def destroy
-      p '----'
-      p current_user
-      p '-----'
       if @registrar_user.destroy
         redirect_to admin_registrar_users_path, status: :see_other, notice: { success: I18n.t('.success') }
       else

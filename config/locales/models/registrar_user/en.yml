@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    errors:
+      models:
+        registrar_user:
+          attributes:
+            name:
+              blank: "Name can't be blank"
+  errors:
+    messages:
+      authentication_information_missing: 'Authentication information missing. Should be filled. At least one authorization method must be filled in.'

@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include ApplicationHelper
+
   layout 'sessions'
 
   allow_unauthenticated only: %i[new]
@@ -8,9 +10,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
-
     flash[:success] = t('.success')
-    redirect_to new_sessions_path, status: :see_other
+
+    if admin?
+      logout && redirect_to(new_sessions_path, status: :see_other)
+    elsif registrar?
+      logout && redirect_to(new_registrar_sessions_path, status: :see_other)
+    else
+      logout && redirect_to(new_sessions_path, status: :see_other)
+    end
   end
 end

@@ -1,8 +1,12 @@
+# rubocop:disable Style/ClassAndModuleChildren
+# rubocop:disable Style/Documentation
 class EstonianTld::DomainsJob < ApplicationJob
   queue_as :critical
 
   STEP = 200
 
+    # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def perform(tld)
     # NB! Synchronization should be run only one time when tld is added to the system
     # return unless Domain.count.zero?

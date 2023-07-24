@@ -1,20 +1,45 @@
 ---
 en:
-  dashboard: Dashboard
-  registrars: Registrars
-  settings_item: Settings
-  contacts: Contacts
-  domains: Domains
-  invoices: Invoices
-  poll_messages: Poll messages
-
-  epp_authorization_error: Epp authorization error
-  incorrect_details: Incorrect details
-  invoice_number_exceeded: Invoice number exceeded
-  min_domain_contacts: Min domain contacts
-  min_nameservers: Min nameservers
-  success: Success
+  '':
+    epp_authorization_error: Epp authorization error
+    incorrect_details: Incorrect details
+    invoice_number_exceeded: Invoice number exceeded
+    legal_document: Legal document
+    min_domain_contacts: Min domain contacts
+    success: Success
+  add_contact: Add contact
+  add_domain: Add domain
+  add_invoice: Add invoice
+  add_user: Add user
   admin:
+    registrar_users:
+      edit:
+        title: Title
+      form:
+        code: Code
+        for_eeid: For eeid
+        name: Name
+        submit: Submit
+      index:
+        title: Title
+      new:
+        title: Title
+      registrar_user:
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+        show: Show
+      show:
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+        identity_code: Identity code
+        name: Name
+        status: Status
+        username: Username
+    restore_services:
+      create:
+        success: Success
     sessions:
       create:
         success: Success
@@ -40,6 +65,8 @@ en:
           ssl_error: Ssl error
         render_forbidden_error:
           epp_forbidden: Epp forbidden
+  contacts: Contacts
+  dashboard: Dashboard
   dashboards:
     admin:
       registrar: Registrar
@@ -48,6 +75,9 @@ en:
     index:
       logout: Logout
       title: Title
+    notifications:
+      notification_title: Notification title
+      view_all: View all
     registrar:
       contacts: Contacts
       domains: Domains
@@ -58,9 +88,27 @@ en:
   devise:
     sessions:
       signed_in: Signed in
+  domains: Domains
+  epp_authorization_error: Epp authorization error
+  errors:
+    messages:
+      authentication_information_missing: Authentication information missing
+      passwords_do_not_match: Passwords do not match
+  form:
+    image_field:
+      component:
+        drag_and_drop: Drag and drop
+        extensions_and_file_size: Extensions and file size
+        upload_file: Upload file
   hello: Hello world
+  incorrect_details: Incorrect details
+  invoice_number_exceeded: Invoice number exceeded
+  invoices: Invoices
   login_required: Login required
+  min_domain_contacts: Min domain contacts
+  min_nameservers: Min nameservers
   new: New
+  poll_messages: Poll messages
   registrant:
     tara:
       tara:
@@ -68,26 +116,44 @@ en:
           cancelled: Cancelled
   registrar:
     contacts:
+      contact:
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+        show: Show
       create:
         success: Success
       destroy:
         success: Success
       edit:
         create: Create
+        submit: Submit
         title: Title
       form:
         address: Address
         country_code: Country code
         general: General
+        general_info: General info
         legal: Legal
+        legal_doc: Legal doc
       index:
         back: Back
         confirm_delete: Confirm delete
         delete: Delete
         edit: Edit
+        title: Title
       new:
         create: Create
+        submit: Submit
         title: Title
+      show:
+        confirm_delete: Confirm delete
+        delete: Delete
+        domains: Domains
+        edit: Edit
+        email: Email
+        identity_code: Identity code
+        name: Name
       update:
         success: Success
     domains:
@@ -101,8 +167,14 @@ en:
         success: Success
       dnssec_key_fields:
         remove: Remove
+      domain:
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+        show: Show
       edit:
         create: Create
+        submit: Submit
         title: Title
       form:
         add_contact: Add contact
@@ -117,11 +189,21 @@ en:
         confirm_delete: Confirm delete
         delete: Delete
         edit: Edit
+        title: Title
       nameserver_fields:
         remove: Remove
       new:
         create: Create
+        submit: Submit
         title: Title
+      show:
+        confirm_delete: Confirm delete
+        delete: Delete
+        domains: Domains
+        edit: Edit
+        expire_at: Expire at
+        name: Name
+        'registrant_name ': 'Registrant name '
       update:
         success: Success
     invoices:
@@ -131,25 +213,43 @@ en:
         success: Success
       edit:
         buyer: Buyer
+        submit: Submit
         title: Title
         update: Update
       form:
         add_invoice_item: Add invoice item
+        buyer_info: Buyer info
         general: General
+        invoice_items: Invoice items
       index:
         confirm_delete: Confirm delete
         delete: Delete
         edit: Edit
         title: Title
+      invoice:
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+        show: Show
       invoice_item_fields:
         remove: Remove
       new:
         buyer: Buyer
         create: Create
+        submit: Submit
         title: Title
+      show:
+        buyer_name: Buyer name
+        confirm_delete: Confirm delete
+        delete: Delete
+        edit: Edit
+        number: Number
+        total: Total
       update:
         success: Success
     poll_messages:
+      index:
+        title: Title
       update:
         failure: Failure
         success: Success
@@ -159,7 +259,9 @@ en:
       destroy:
         success: Success
       new:
+        for_registrant: For registrant
         login_with_eeid: Login with eeid
+        or: Or
         password: Password
         submit: Submit
         title: Title
@@ -179,10 +281,14 @@ en:
       submit: Submit
       title: Title
       username: Username
+  registrars: Registrars
   sessions:
     destroy:
       success: Success
     new:
+      for_registrant_title: For registrant title
+      for_registrar: For registrar
+      introduction_title: Introduction title
       login_with_eeid: Login with eeid
   settings:
     configurations:
@@ -199,5 +305,15 @@ en:
         username: Username
     introduces:
       index:
+        configure_your_service: Configure your service
         next: Next
+  settings_item: Settings
+  sidebar:
+    navbar:
+      component:
+        confirm_drestore: Confirm drestore
+        logout: Logout
+        restore_service: Restore service
+        run_synchronize: Run synchronize
+  success: Success
   to_registrar: To registrar

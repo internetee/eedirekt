@@ -1,3 +1,9 @@
+<% if @registrar_user && @registrar_user.errors[:base].present? %>
+  <div class="field_with_errors p-4 border border-red-500 rounded-md m-4 text-red-500 bg-red-200">
+    <%= @registrar_user.errors[:base].join(", ") %>
+  </div>
+<% end %>
+
 <div class='w-96'>
   <%= component 'form/text_input', form: form, attribute: :username, heroicon_name: 'user', placeholder: 'johndoe@example.com' %>
 </div>
@@ -7,7 +13,7 @@
 </div>
 
 <div class='w-96'>
-  <%= component 'form/password_input', form: form, attribute: :password_confrimation, heroicon_name: 'lock-closed' %>
+  <%= component 'form/password_input', form: form, attribute: :password_confirmation, heroicon_name: 'lock-closed' %>
 </div>
 
 <div class='h-12'></div>
@@ -19,10 +25,6 @@
   <div class="relative flex justify-center">
     <span class="bg-white px-2 text-sm text-gray-500"><%= t('.for_eeid') %></span>
   </div>
-</div>
-
-<div class='w-96'>
-  <%= component 'form/text_input', form: form, attribute: :name, heroicon_name: 'user', placeholder: t('.name') %>
 </div>
 
 <div class='w-96'>

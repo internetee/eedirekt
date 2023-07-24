@@ -6,7 +6,7 @@
   <div class='rounded-md shadow-md border border-gray-300 p-8'>
     <h2 class='text-center text-gray-900 text-3xl font-bold mb-4'><%= t('.title') %></h2>
 
-    <%= form_with url: admin_registrar_users_path, model: RegistrarUser.new, class: 'w-full mt-8 space-y-3 flex justify-center flex-col items-center' do |form| %>
+    <%= form_with url: admin_registrar_users_path, model: @registrar_user, class: 'w-full mt-8 space-y-3 flex justify-center flex-col items-center' do |form| %>
 
       <%= render 'form', form: form %>
     <% end %>

@@ -17,7 +17,7 @@ module EstonianTld
 
     def post_call
       broadcast_later "dashboards_#{tld.uuid}",
-                      'admin/streams/replaced',
+                      'dashboards/streams/admin_replaced',
                       locals: { message: }
     end
   end
