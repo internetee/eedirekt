@@ -1,4 +1,3 @@
-
 # rubocop:disable Style/ClassAndModuleChildren
 # rubocop:disable Style/Documentation
 
@@ -7,8 +6,8 @@ class EstonianTld::ContactsJob < ApplicationJob
 
   STEP = 200
 
-  # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def perform(tld)
     @tld = tld
     # NB! Synchronization should be run only one time when tld is added to the system
@@ -22,21 +21,15 @@ class EstonianTld::ContactsJob < ApplicationJob
 
     dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
 
-    Rails.logger.info '--------------'
-    Rails.logger.info dirty_contacs
-    Rails.logger.info dirty_contacs.success
-    Rails.logger.info '--------------'
-
     unless dirty_contacs.success
-      EstonianTld::InformAdminService.call({tld: , message: "Error fetching contacts: #{dirty_contacs.body['message']}"})
+      inform_admin_service(tld:, message: 'Contacts start synchronizing!')
+
       return
     end
 
     total_count = dirty_contacs.body['data']['count']
     contact_count = dirty_contacs['body']['data']['contacts'].count
     contact_creator(dirty_contacs)
-
-    EstonianTld::InformAdminService.call({tld: , message: 'Contacts start synchronizing!'})
 
     return if contact_count < STEP
 
@@ -45,22 +38,29 @@ class EstonianTld::ContactsJob < ApplicationJob
       dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
       contact_creator(dirty_contacs)
 
-      EstonianTld::InformAdminService.call({tld: , message: "Processed contacts #{url_params[:offset]} of #{total_count}"})
+      inform_admin_service(tld:, message: "Processed contacts #{url_params[:offset]} of #{total_count}")
+
       Rails.logger.info "Processed contacts #{url_params[:offset]} of #{total_count}"
     end
 
-    EstonianTld::InformAdminService.call({tld: , message: 'All contacts were synchronized!'})
+    inform_admin_service(tld:, message: 'All contacts were synchronized!')
   end
 
   def contact_creator(dirty_contacs)
     contacts = EstonianTld::ContactSerializer.call(dirty: dirty_contacs)
+    contacts_attributes = []
+
     contacts.each do |contact|
-      c = ::Contact.find_by(code: contact.code)
-      if c.nil?
-        c = ::Contact.create!(contact.to_h)
-        Rails.logger.info "Contact with code #{c.code} has been created!"
-      end
+      next if ::Contact.exists?(code: contact.code)
+
+      contacts_attributes << contact.to_h
     end
+
+    ::Contact.upsert_all(contacts_attributes) unless contacts_attributes.empty?
+  end
+
+  def inform_admin_service(tld:, message:)
+    EstonianTld::InformAdminService.call({ tld:, message: })
   end
 
   after_perform do |_job|
