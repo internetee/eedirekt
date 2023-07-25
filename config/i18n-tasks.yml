@@ -62,6 +62,7 @@ search:
     - app/helpers
     - app/mailers
     - app/views
+    - app/components
   ## Directories where method names which should not be part of a relative key resolution.
   # By default, if a relative translation is used inside a method, the name of the method will be considered part of the resolved key.
   # Directories listed here will not consider the name of the method part of the resolved key

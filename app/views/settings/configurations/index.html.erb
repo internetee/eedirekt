@@ -12,7 +12,7 @@
   <div class='flex flex-row justify-center items-center'>
       <%= form_with url: settings_configurations_path, class: 'w-full mt-8 space-y-3',
       data: {
-        # controller: 'applications-upload',
+        controller: 'applications-upload',
         applications_upload_server_failed_msg_value: t('.server_failed_msg'),
         applications_upload_server_success_msg_value: t('.server_success_msg'),
         applications_upload_send_form_failed_msg_value: t('.send_form_failed_msg'),
@@ -101,7 +101,7 @@
 
         <h2 class='text-gray-900 text-xl text-center'>Estonian TLD</h2>
           <%= form.fields_for Tld.new do |f| %>
-            <span id='error-box'></span>
+            <div id='error-box'></div>
 
             <div class='w-72'>
               <%= f.label :username, class: 'block text-sm font-medium text-gray-700' %>

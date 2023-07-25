@@ -6,8 +6,8 @@ class RestoreServiceToInitStateJob < ApplicationJob
 
     Tld.destroy_all
     SuperUser.destroy_all
-    Contact.destroy_all
     Domain.destroy_all
+    Contact.destroy_all
     Invoice.destroy_all
     User.destroy_all
   end

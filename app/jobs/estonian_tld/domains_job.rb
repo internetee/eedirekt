@@ -1,8 +1,12 @@
+# rubocop:disable Style/ClassAndModuleChildren
+# rubocop:disable Style/Documentation
 class EstonianTld::DomainsJob < ApplicationJob
   queue_as :critical
 
   STEP = 200
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def perform(tld)
     # NB! Synchronization should be run only one time when tld is added to the system
     # return unless Domain.count.zero?
@@ -42,6 +46,9 @@ class EstonianTld::DomainsJob < ApplicationJob
     # ActionCable.server.broadcast "notifications:", message: 'All objects were synchronized!'
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable convention:Metrics/BlockLength
+  # rubocop:disable Metrics/BlockLength
   def domain_creator(dirty_domains)
     dirty_domains.body['data']['domains'].each do |dirty|
       domain = EstonianTld::DomainSerializer.call(dirty:)
