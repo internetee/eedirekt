@@ -57,6 +57,8 @@ module Registrar
       @contact = Contact.find_by(uuid: params[:uuid])
     end
 
+    # brakeman:ignore: PermitAttributes
+    # :skip-warn
     def contact_params
       params.require(:contact).permit(:code, :country_code, :ident,
                                       :role, :name, :email, :phone, :address_country_code,

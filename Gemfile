@@ -47,6 +47,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
+  gem 'brakeman', require: false
+  gem 'bundle-audit', require: false
 end
 
 group :development do

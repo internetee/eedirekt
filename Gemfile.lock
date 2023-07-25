@@ -115,7 +115,13 @@ GEM
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    brakeman (6.0.0)
     builder (3.2.4)
+    bundle-audit (0.1.0)
+      bundler-audit
+    bundler-audit (0.9.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 1.0)
     cancancan (3.3.0)
     capybara (3.38.0)
       addressable
@@ -176,7 +182,7 @@ GEM
     highline (2.1.0)
     hpricot (0.8.6)
     httpclient (2.8.3)
-    i18n (1.12.0)
+    i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     i18n-debug (1.2.0)
       i18n (< 2)
@@ -207,9 +213,9 @@ GEM
       faraday (~> 2.0)
       faraday-follow_redirects
     libxml-ruby (4.0.0)
-    loofah (2.19.1)
+    loofah (2.21.3)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -219,7 +225,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    minitest (5.18.0)
+    minitest (5.18.1)
     msgpack (1.6.1)
     net-imap (0.3.4)
       date
@@ -231,7 +237,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.14.2-x86_64-linux)
+    nokogiri (1.15.3-x86_64-linux)
       racc (~> 1.4)
     omniauth (2.1.1)
       hashie (>= 3.4.6)
@@ -267,8 +273,8 @@ GEM
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
-    racc (1.6.2)
-    rack (2.2.6.4)
+    racc (1.7.1)
+    rack (2.2.7)
     rack-oauth2 (1.21.3)
       activesupport
       attr_required
@@ -293,11 +299,13 @@ GEM
       activesupport (= 7.0.4.3)
       bundler (>= 1.15.0)
       railties (= 7.0.4.3)
-    rails-dom-testing (2.0.3)
-      activesupport (>= 4.2.0)
+    rails-dom-testing (2.1.1)
+      activesupport (>= 5.0.0)
+      minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.5.0)
-      loofah (~> 2.19, >= 2.19.1)
+    rails-html-sanitizer (1.6.0)
+      loofah (~> 2.21)
+      nokogiri (~> 1.14)
     rails-i18n (7.0.6)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
@@ -428,6 +436,8 @@ DEPENDENCIES
   attr_encrypted
   bcrypt (~> 3.1.7)
   bootsnap
+  brakeman
+  bundle-audit
   cancancan
   capybara
   country_select
