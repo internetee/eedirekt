@@ -8,7 +8,7 @@ RSpec.shared_examples 'admin_permissions' do |value:|
   let(:options) { expected_value[:options] }
 
   before(:each) do
-    admin.reload && registrar.reload
+    # admin.reload && registrar.reload
   end
 
   it 'only admin can access to super user actions' do

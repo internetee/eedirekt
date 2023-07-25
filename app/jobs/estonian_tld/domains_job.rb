@@ -50,7 +50,7 @@ class EstonianTld::DomainsJob < ApplicationJob
   # rubocop:disable convention:Metrics/BlockLength
   # rubocop:disable Metrics/BlockLength
   def domain_creator(dirty_domains)
-    dirty_domains.body['data']['domains'].each do |dirty|
+    dirty_domains.body['data']['domains'].take(10).each do |dirty|
       domain = EstonianTld::DomainSerializer.call(dirty:)
       domain_registrant = EstonianTld::DomainRegistrantSerializer.call(dirty:)
       domain_contacts = EstonianTld::DomainContactSerializer.call(dirty:)
@@ -76,7 +76,7 @@ class EstonianTld::DomainsJob < ApplicationJob
 
           domain_nameservers.each do |nameserver|
             Nameserver.create!(
-              domain:, hostname: nameserver.hostname, ipv4: nameserver.ipv4, ipv6: nameserver.ipv6
+              domain:, hostname: nameserver.hostname, ipv4: nameserver.ipv4.present? ? nameserver.ipv4.join(',') : '', ipv6: nameserver.ipv6.present? ? nameserver.ipv6.join(',') : ''
             )
           end
 

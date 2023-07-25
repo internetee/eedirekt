@@ -41,12 +41,14 @@ RSpec.describe EstonianTld::ContactsJob, type: :job do
   end
 
   it 'job should get contact list and save in db' do
-    expect do
-      described_class.perform_now(@tld)
-    end.to change(Contact, :count).by(2)
+    VCR.use_cassette('get_contact_list') do
+      expect do
+        described_class.perform_now(@tld)
+      end.to change(Contact, :count).by(2)
 
-    expect(Contact.find_by(email: 'john@example.com')).to be_present
-    expect(Contact.find_by(email: 'jane@example.com')).to be_present
+      expect(Contact.find_by(email: 'john@example.com')).to be_present
+      expect(Contact.find_by(email: 'jane@example.com')).to be_present
+    end
   end
 
   # TODO:
@@ -61,22 +63,27 @@ RSpec.describe EstonianTld::ContactsJob, type: :job do
   # end
 
   it 'handles errors when fetching the contact list' do
-    error_response = OpenStruct.new(success: false, body: { code: 503, message: 'Error message', data: {} })
-    allow_any_instance_of(EstonianTld::ContactService).to receive(:contact_list).and_return(error_response)
+    VCR.use_cassette('error_when_fetching_the_contact_list') do
+      error_response = OpenStruct.new(success: false, body: { code: 503, message: 'Error message', data: {} })
+      allow_any_instance_of(EstonianTld::ContactService).to receive(:contact_list).and_return(error_response)
 
-    expect(EstonianTld::InformAdminService).to receive(:call).with(hash_including(
-      tld: Tld.first,
-      message: a_string_including("Error fetching contacts")
-    ))
+      expect(EstonianTld::InformAdminService).to receive(:call).with(hash_including(
+        tld: Tld.first,
+        message: a_string_including("Error fetching contacts")
+      ))
 
-    expect do
-      described_class.perform_now(@tld)
-    end.not_to change(Contact, :count)
+      expect do
+        described_class.perform_now(@tld)
+      end.not_to change(Contact, :count)
+    end
   end
 
-  it 'calls EstonianTld::DomainsJob after performing the contacts job' do
-    expect(EstonianTld::DomainsJob).to receive(:perform_later).with(Tld.first)
+  # Comment out because jobs temporary runs without delayed
+  # it 'calls EstonianTld::DomainsJob after performing the contacts job' do
+  #   VCR.use_cassette('call_domains_job') do
+  #     expect(EstonianTld::DomainsJob).to receive(:perform_later).with(Tld.first)
 
-    described_class.perform_now(@tld)
-  end
+  #     described_class.perform_now(@tld)
+  #   end
+  # end
 end

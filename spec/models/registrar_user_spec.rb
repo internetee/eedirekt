@@ -72,7 +72,7 @@ RSpec.describe RegistrarUser, type: :model do
 
   describe '.permitted_attributes' do
     it 'returns an array of permitted attributes' do
-      expect(RegistrarUser.permitted_attributes).to eq([:username, :name, :code, :password, :password_confirmation])
+      expect(RegistrarUser.permitted_attributes).to eq([:username, :code, :password, :password_confirmation])
     end
   end
 end

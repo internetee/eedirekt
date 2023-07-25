@@ -32,13 +32,13 @@ RSpec.describe EstonianTld::DomainsJob, type: :job do
               'nameservers' => [
                 {
                   'hostname' => 'ns1.example1.ee',
-                  'ipv4' => '192.0.2.1',
-                  'ipv6' => '2001:db8::1'
+                  'ipv4' => ['192.0.2.1'],
+                  'ipv6' => ['2001:db8::1']
                 },
                 {
                   'hostname' => 'ns2.example1.ee',
-                  'ipv4' => '192.0.2.2',
-                  'ipv6' => '2001:db8::2'
+                  'ipv4' => ['192.0.2.2'],
+                  'ipv6' => ['2001:db8::2']
                 }
               ],
               'dnssec_keys' => [
@@ -74,19 +74,23 @@ RSpec.describe EstonianTld::DomainsJob, type: :job do
   end
 
   it 'job should get domain list and save in db' do
-    expect do
-      described_class.perform_now(@tld)
-    end.to change(Domain, :count).by(1)
+    VCR.use_cassette('get_domain_list') do
+      expect do
+        described_class.perform_now(@tld)
+      end.to change(Domain, :count).by(1)
 
-    expect(Domain.find_by(name: 'example1.ee')).to be_present
+      expect(Domain.find_by(name: 'example1.ee')).to be_present
+    end
   end
 
   it 'does not perform synchronization if there are already domains in the database' do
-    domain.name = 'example1.ee'
-    domain.save! && domain.reload
-    expect do
-      described_class.perform_now(@tld)
-    end.not_to change(Domain, :count)
+    VCR.use_cassette('get_domain_list') do
+      domain.name = 'example1.ee'
+      domain.save! && domain.reload
+      expect do
+        described_class.perform_now(@tld)
+      end.not_to change(Domain, :count)
+    end
   end
 
   it 'handles errors when fetching the domain list' do

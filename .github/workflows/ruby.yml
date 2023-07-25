@@ -26,6 +26,13 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Wait for PostgreSQL to become ready
+        uses: actions/wait-for-it@v2
+        with:
+          host: localhost
+          port: ${{ job.services.postgres.ports[5432] }}
+          timeout: 60
       
       - name: config bundler
         run:  |
@@ -46,7 +53,6 @@ jobs:
           DISABLE_SPRING: 1
         run: |
           cp config/application.yml.example config/application.yml
-          cp config/database_ci.yml config/database.yml
           bundle exec rake db:create
           bundle exec rake db:migrate
           bundle exec rake db:schema:load
