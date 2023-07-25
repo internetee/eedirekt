@@ -26,6 +26,7 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
       </epp>
     XML
 
+    allow_any_instance_of(Epp::Server).to receive(:open_connection).and_return(xml_schema)
     allow_any_instance_of(Epp::Server).to receive(:send_request).and_return(xml_schema)
 
     crt_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.crt.pem"
@@ -94,6 +95,7 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
     </epp>
     XML
 
+    allow_any_instance_of(Epp::Server).to receive(:open_connection).and_return(xml_schema)
     allow_any_instance_of(Epp::Server).to receive(:send_request).and_return(xml_schema)
 
     crt_file_path = "#{Rails.root}/spec/support/fixtures/certificates/webclient.crt.pem"

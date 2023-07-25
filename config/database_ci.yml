@@ -1,0 +1,11 @@
+default: &default
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: password
+
+test:
+  <<: *default
+  database: eis_billing_system_test
