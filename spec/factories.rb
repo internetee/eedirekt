@@ -3,7 +3,8 @@ FactoryBot.define do
     uuid { SecureRandom.uuid }
     username { Faker::Name.name.gsub(' ', '_').underscore }
     email { Faker::Internet.email }
-    password { Faker::Internet.password }
+    password { '12345678' }
+    password_confirmation { '12345678' }
   end
 
   factory :registrar_user do
@@ -11,7 +12,8 @@ FactoryBot.define do
     name { Faker::Name.name }
     code { '30303039914' }
     username { Faker::Name.name.gsub(' ', '_').underscore }
-    password { Faker::Internet.password }
+    password { '12345678' }
+    password_confirmation { '12345678' }
   end
 
   factory :user do

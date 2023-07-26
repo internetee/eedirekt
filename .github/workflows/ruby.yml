@@ -1,0 +1,59 @@
+name: Github Testing
+on: [push]
+
+jobs:
+  test:
+    services:
+      postgres:
+        image: postgres:15
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_PASSWORD: password
+          POSTGRES_USERNAME: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04]
+        ruby: [ '3.2.0' ]
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      
+      - name: config bundler
+        run:  |
+          bundle config set without 'development staging production'
+          bundle config set deployment '[secure]'
+          bundle env
+          head -n1 $(which bundle)
+      
+      - name: Run Tests
+        env:
+          PG_DATABASE: postgres
+          PG_HOST: localhost
+          PG_USER: postgres
+          PG_PASSWORD: password
+          PG_PORT: ${{ job.services.postgres.ports[5432] }}
+          RAILS_ENV: test
+          COVERAGE: true
+          DISABLE_SPRING: 1
+        run: |
+          cp config/application.yml.example config/application.yml
+          cp config/database_ci.yml config/database.yml
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rake db:schema:load
+          bundle exec rake db:seed
+          bundle exec rails assets:precompile
+          bundle exec rspec spec
+
+      - name: Dependabot
+        if: ${{ github.event.label.name == 'dependencies' }}
+        run: bundle exec rails assets:precompile

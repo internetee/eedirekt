@@ -20,7 +20,7 @@ gem 'omniauth-tara', github: 'internetee/omniauth-tara'
 gem 'pg', '~> 1.1'
 gem 'propshaft'
 gem 'puma', '~> 5.0'
-gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
+gem 'rails', '~> 7.0.5', '>= 7.0.5.1'
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
 gem 'sidekiq', '<7'
@@ -47,6 +47,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
+  gem 'brakeman', require: false
+  gem 'bundle-audit', require: false
 end
 
 group :development do

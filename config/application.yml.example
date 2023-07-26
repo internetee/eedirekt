@@ -12,8 +12,8 @@ epp_port: '700'
 # repp_url: 'http://localhost:8080/repp/v1/'
 repp_url: 'http://registry:3000/repp/v1/'
 
-# cert_path: '/opt/ca/certs/webclient.crt.pem'
-# key_path: '/opt/ca/private/webclient.key.pem'
+cert_path: 'spec/support/fixtures/certificates/webclient.crt.pem'
+key_path: 'spec/support/fixtures/certificates/webclient.key.pem'
 # ca_key_password: 123456
 
 registrar_tara_identifier: ''

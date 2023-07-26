@@ -37,6 +37,7 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
     </epp>
     XML
 
+    allow_any_instance_of(Epp::Server).to receive(:open_connection).and_return(xml_schema)
     allow_any_instance_of(Epp::Server).to receive(:send_request).and_return(xml_schema)
 
     post settings_est_tld_validations_path, params: {
@@ -75,6 +76,7 @@ RSpec.describe 'Setttings::EstTld::Validations', type: :request do
     </epp>
     XML
 
+    allow_any_instance_of(Epp::Server).to receive(:open_connection).and_return(xml_schema)
     allow_any_instance_of(Epp::Server).to receive(:send_request).and_return(xml_schema)
 
     post settings_est_tld_validations_path, params: {

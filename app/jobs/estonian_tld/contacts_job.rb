@@ -10,6 +10,7 @@ class EstonianTld::ContactsJob < ApplicationJob
   # rubocop:disable Metrics/AbcSize
   def perform(tld)
     @tld = tld
+    @perform_callback = true
     # NB! Synchronization should be run only one time when tld is added to the system
     # return unless Contact.count.zero?
 
@@ -22,7 +23,8 @@ class EstonianTld::ContactsJob < ApplicationJob
     dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
 
     unless dirty_contacs.success
-      inform_admin_service(tld:, message: 'Contacts start synchronizing!')
+      inform_admin_service(tld:, message: 'Error fetching contacts')
+      @perform_callback = false
 
       return
     end
@@ -60,11 +62,15 @@ class EstonianTld::ContactsJob < ApplicationJob
   end
 
   def inform_admin_service(tld:, message:)
+    puts '---'
+    puts message
+    puts '---'
+
     EstonianTld::InformAdminService.call({ tld:, message: })
   end
 
   after_perform do |_job|
     # EstonianTld::DomainsJob.perform_later(@tld)
-    EstonianTld::DomainsJob.perform_now(@tld)
+    EstonianTld::DomainsJob.perform_now(@tld) if @perform_callback
   end
 end

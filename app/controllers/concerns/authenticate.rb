@@ -1,6 +1,8 @@
 module Authenticate
   extend ActiveSupport::Concern
 
+  VALID_SESSIONABLE_TYPES = ['SuperUser', 'User', 'RegistrarUser'].freeze
+
   included do
     before_action :authenticate
     before_action :need_to_login, unless: :logged_in?
@@ -61,6 +63,10 @@ module Authenticate
     return nil if cookie.nil?
 
     model = cookie[:sessionable_type]
+    unless VALID_SESSIONABLE_TYPES.include?(model)
+      raise "Invalid sessionable type"
+    end
+
     user = model.constantize.find(cookie[:sessionable_id])
     app_session = user&.authenticate_session_token(cookie[:app_session], cookie[:token])
 

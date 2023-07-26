@@ -2,10 +2,11 @@ module Registrar
   class ContactsController < ApplicationController
     include Roles::RegistrarAbilitable
 
-    before_action :load_contact, only: [:edit, :update, :destroy, :show]
+    before_action :load_contact, only: %i[edit update destroy show]
 
     def index
-      @pagy, @contacts = pagy(Contact.all.order(created_at: :desc), items: 15, link_extra: 'data-turbo-action="advance"')
+      @pagy, @contacts = pagy(Contact.all.order(created_at: :desc), items: 15,
+                                                                    link_extra: 'data-turbo-action="advance"')
     end
 
     def new
@@ -46,9 +47,7 @@ module Registrar
 
     def search
       @contacts = Contact.search(params[:query])
-      render json: @contacts.limit(5).map do |contact|
-         contact.to_json
-      end
+      render json: @contacts.limit(5).map(&:json)
     end
 
     private
