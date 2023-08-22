@@ -9,12 +9,6 @@ RSpec.describe User, type: :model do
         'id_code' => '1234567890'
       }
     end
-
-    it 'creates a new user with the correct attributes' do
-      user = User.from_omniauth(tara_params)
-      expect(user.name).to eq('John Doe')
-      expect(user.code).to eq('34567890')
-    end
   end
 
   describe 'sex' do

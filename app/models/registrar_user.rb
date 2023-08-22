@@ -12,14 +12,14 @@ class RegistrarUser < ApplicationRecord
   validate :password_match, if: :password_or_confirmation_present?
 
   def self.from_omniauth(tara_params)
-    full_name = "#{tara_params['given_name']} #{tara_params['family_name']}"
-    identity = tara_params['id_code'][2..]
+    full_name = "#{tara_params.dig('info', 'given_name')} #{tara_params.dig('info', 'family_name')}"
+    code = tara_params['uid'][2..]
 
-    user = RegistrarUser.find_by(code: identity)
+    user = RegistrarUser.find_by(code:)
     return if user.nil?
 
     user.name = full_name
-    user.code = identity
+    user.code = code
 
     user
   end
