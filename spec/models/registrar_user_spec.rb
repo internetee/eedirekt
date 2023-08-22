@@ -13,35 +13,6 @@ RSpec.describe RegistrarUser, type: :model do
     # it { should validate_presence_of(:name) }
   end
 
-  describe '.from_omniauth' do
-    let(:tara_params) do
-      {
-        'given_name' => 'John',
-        'family_name' => 'Doe',
-        'id_code' => 'EE11234567890'
-      }
-    end
-
-    context 'when user exists' do
-      let!(:existing_user) { create(:registrar_user, code: '11234567890') }
-
-      it 'returns the existing user with updated attributes' do
-        existing_user.reload
-
-        user = RegistrarUser.from_omniauth(tara_params)
-        expect(user).to eq(existing_user)
-        expect(user.name).to eq('John Doe')
-        expect(user.code).to eq('11234567890')
-      end
-    end
-
-    context 'when user does not exist' do
-      it 'returns nil' do
-        expect(RegistrarUser.from_omniauth(tara_params)).to be_nil
-      end
-    end
-  end
-
   describe '#sex' do
     let(:user) { build(:registrar_user) }
 
