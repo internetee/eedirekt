@@ -5,12 +5,12 @@ class User < ApplicationRecord
   enum gender: { male: 'male', female: 'female', unknown: 'unknown' }
 
   def self.from_omniauth(tara_params)
-    full_name = "#{tara_params['given_name']} #{tara_params['family_name']}"
-    identity = tara_params['id_code'][2..]
+    full_name = "#{tara_params.dig('info', 'given_name')} #{tara_params.dig('info', 'family_name')}"
+    code = tara_params['uid'][2..]
 
-    user = User.find_or_initialize_by(code: identity)
+    user = User.find_or_initialize_by(code:)
     user.name = full_name
-    user.code = identity
+    user.code = code
 
     user
   end

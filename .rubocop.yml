@@ -1,3 +1,6 @@
 AllCops:
   Exclude:
     - 'spec/**/*'
+    - 'config/**/*'
+Style/Documentation:
+  Enabled: false

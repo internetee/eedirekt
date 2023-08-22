@@ -21,10 +21,17 @@ Rails.application.routes.draw do
     resources :configurations, only: %i[index create]
     resources :introduces, only: %i[index]
 
-    # post "configurations/validate_file" => "configurations#validate_file"
     namespace :est_tld do
       resource :validations, only: %i[create]
     end
+  end
+
+  namespace :auth do
+    match '/tara/setup', via: %i[get post], to: 'tara#setup'
+    match '/tara/callback', via: %i[get post], to: 'tara#callback', as: :tara_callback
+    match '/tara/cancel', via: %i[get post delete], to: 'tara#cancel',
+                          as: :tara_cancel
+    get '/failure', to: 'tara#cancel'
   end
 
   namespace :registrar do
@@ -37,14 +44,5 @@ Rails.application.routes.draw do
     end
     resources :domains, param: :uuid
     resource :sessions, only: %i[new create destroy]
-    namespace :tara do
-      get '/callback', to: 'tara#callback'
-    end
-  end
-
-  namespace :registrant do
-    namespace :tara do
-      get '/callback', to: 'tara#callback'
-    end
   end
 end

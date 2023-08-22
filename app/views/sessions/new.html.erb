@@ -7,10 +7,7 @@
     <h2 class='text-center text-gray-900 text-3xl font-bold mb-2'><%= t('.introduction_title') %></h2>
     <h2 class='text-center text-gray-900'><%= t('.for_registrant_title') %></h2>
 
-    <%= link_to t('.login_with_eeid'),
-      "https://eid.internet.ee/oidc/authorize?client_id=oidc-4bd9a610-62d2-4790-ac50-811e4b19a381-24&state=b27716fae29cd7643365743796e9fdfe",
-      data: { turbo: false },
-      class: "text-gray-600 inline-flex w-full justify-center rounded-md border  bg-white py-2 px-4 text-sm font-medium  shadow-sm  hover:text-white mt-12" %>
+    <%= button_to t(:sign_in), "/auth/tara?env=registrant", data: { turbo: false }, class: "text-gray-600 inline-flex w-full justify-center rounded-md border  bg-white py-2 px-4 text-sm font-medium  shadow-sm  hover:text-white mt-12"%>
   </div>
 
   <div class='mt-6 border-t pt-2'>

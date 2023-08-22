@@ -7,45 +7,35 @@ module TaraAccessable
     before_action :check_for_persisting_code, only: [:callback]
   end
 
-  def access_token(code)
-    auth = Base64.strict_encode64 [
-      URI.encode_www_form_component(identifier),
-      URI.encode_www_form_component(secret)
-    ].join(':')
-    headers = { 'Content-Type' => 'application/x-www-form-urlencoded',
-                'Authorization' => "Basic #{auth}" }
-
-    response = connection.post(eeid_token_url) do |request|
-      request.headers = headers
-      request.body = { code: }
-    end
-
-    JSON.parse(response.body)
+  def tara_params_initiator
+    request.env['omniauth.params']['env']
   end
 
-  def userinfo(access_token)
-    params = {
-      access_token:,
-      client_id: identifier
+  # rubocop:disable Metrics/MethodLength
+  def options
+    {
+      name: 'tara',
+      scope: %w[openid idcard mid smartid],
+      state: SecureRandom.hex(10),
+      client_signing_alg: :RS256,
+      client_jwk_signing_key: ENV['tara_keys'],
+      send_scope_to_token_endpoint: false,
+      send_nonce: true,
+      issuer: ENV['tara_issuer'],
+      discovery: ENV['tara_discovery'],
+      client_options: {
+        scheme: ENV['tara_scheme'],
+        host: ENV['tara_host'],
+        port: ENV['tara_port'],
+        authorization_endpoint: ENV['tara_auth_endpoint'],
+        token_endpoint: ENV['tara_token_endpoint'],
+        userinfo_endpoint: nil, # Not implemented
+        jwks_uri: ENV['tara_jwks_uri'],
+        identifier: ENV['user_tara_identifier'],
+        secret: ENV['user_tara_secret'],
+        redirect_uri: "#{ENV['tara_base_redirect_url']}#{ENV['tara_redirect_path']}"
+      }
     }
-    response = connection.get("#{eeid_userinfo_url}?#{params.to_query}")
-    JSON.parse(response.body)
-  end
-
-  def connection
-    Faraday.new(eeid_host)
-  end
-
-  def eeid_host
-    'https://eeid.ee'
-  end
-
-  def eeid_token_url
-    '/oidc/token'
-  end
-
-  def eeid_userinfo_url
-    '/oidc/userinfo'
   end
 
   private

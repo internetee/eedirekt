@@ -30,18 +30,7 @@
       </div>
     </div>
 
-
-    <% if Rails.env.staging? %>
-      <%= link_to t('.login_with_eeid'), 
-        "https://eeid.ee/oidc/authorize?client_id=oidc-4bd9a610-62d2-4790-ac50-811e4b19a381-27&state=22ed0741d790018f4fcaaadb0b551f62",
-        data: { turbo: false },
-        class: "text-gray-600 inline-flex w-full justify-center rounded-md border border-[#DDA77B] bg-white py-2 px-4 text-sm font-medium text-[#DDA77B] shadow-sm hover:bg-[#DDA77B] hover:text-white mt-2 cursor-pointer" %>
-      <% else %>
-      <%= link_to t('.login_with_eeid'), 
-      "https://eid.internet.ee/oidc/authorize?client_id=oidc-4bd9a610-62d2-4790-ac50-811e4b19a381-25&state=1cf49d5579942df823cda40cf071983a",
-      data: { turbo: false },
-      class: "text-gray-600 inline-flex w-full justify-center rounded-md border border-[#DDA77B] bg-white py-2 px-4 text-sm font-medium text-[#DDA77B] shadow-sm hover:bg-[#DDA77B] hover:text-white mt-2 cursor-pointer" %>
-    <% end %>
+    <%= button_to t(:sign_in), "/auth/tara?env=registrar", data: { turbo: false }, class: "text-gray-600 inline-flex w-full justify-center rounded-md border  bg-white py-2 px-4 text-sm font-medium  shadow-sm  hover:text-white mt-12" %>
   </div>
 
   <div class='mt-6 border-t pt-2'>
