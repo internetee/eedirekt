@@ -11,6 +11,12 @@ module EstonianTld
     end
 
     def call
+      Rails.logger.info '---------'
+      Rails.logger.info dirty
+      Rails.logger.info '=========='
+      Rails.logger.info dirty.body
+      Rails.logger.info '---------'
+
       body = dirty.body['data']
       notification_struct = Struct.new(:id, :text, :attached_obj_type, :attached_obj_id)
 

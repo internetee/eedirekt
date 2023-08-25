@@ -10,11 +10,11 @@ module EstonianTld
     end
 
     def contact_list(url_params: {})
-      request(url: "#{@url}/contacts?#{url_params.to_query}", method: 'get', params: {}, headers: nil)
+      connect(url: "#{@url}/contacts?#{url_params.to_query}", method: 'get', params: {}, headers: nil)
     end
 
     def create_contact(payload: nil)
-      request(url: "#{@url}/contacts", method: 'post', params: { contact: payload.payload.compact_blank.as_json }, headers: nil)
+      connect(url: "#{@url}/contacts", method: 'post', params: { contact: payload.payload.compact_blank.as_json }, headers: nil)
     end
   end
 end

@@ -1,7 +1,7 @@
 module EstonianTld::Connector
   REPP_ENDPOINT = '/repp/v1'
 
-  def request(url:, method:, params: nil, headers: nil)
+  def connect(url:, method:, params: nil, headers: nil)
     request = faraday_request(url:, headers:)
     response = if %w[get].include? method
                  request.send(method, url, params)
@@ -50,7 +50,9 @@ module EstonianTld::Connector
   end
 
   def base_headers
-    { 'Authorization' => "Basic #{auth_token}" }
+    { 'Authorization' => "Basic #{auth_token}", 
+      'Request-IP' => Socket.ip_address_list.detect(&:ipv4_private?).ip_address
+    }
   end
 
   def auth_token

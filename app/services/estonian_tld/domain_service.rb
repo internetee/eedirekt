@@ -9,7 +9,7 @@ module EstonianTld
     end
 
     def domain_list(url_params: {})
-      request(url: "#{tld.base_url}#{REPP_ENDPOINT}/domains?#{url_params.to_query}", method: 'get', params: {}, headers: nil)
+      connect(url: "#{tld.base_url}#{REPP_ENDPOINT}/domains?#{url_params.to_query}", method: 'get', params: {}, headers: nil)
     end
   end
 end
