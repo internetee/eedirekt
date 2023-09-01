@@ -115,12 +115,18 @@ en:
         cancel:
           cancelled: Cancelled
   registrar:
+    renews:
+      show:
+        submit: Submit
+    transfers:
+      show:
+        submit: Submit
     contacts:
       contact:
         confirm_delete: Confirm delete
         delete: Delete
-        edit: Edit
-        show: Show
+        edit: Update
+        show: Info
       create:
         success: Success
       destroy:
@@ -140,7 +146,7 @@ en:
         back: Back
         confirm_delete: Confirm delete
         delete: Delete
-        edit: Edit
+        edit: Update
         title: Title
       new:
         create: Create
@@ -150,10 +156,13 @@ en:
         confirm_delete: Confirm delete
         delete: Delete
         domains: Domains
-        edit: Edit
+        edit: Update
         email: Email
+        object_code: Object code
         identity_code: Identity code
+        phone: Phone
         name: Name
+        statuses: Statuses
       update:
         success: Success
     domains:
@@ -170,8 +179,8 @@ en:
       domain:
         confirm_delete: Confirm delete
         delete: Delete
-        edit: Edit
-        show: Show
+        edit: Update
+        show: Info
       edit:
         create: Create
         submit: Submit
@@ -188,7 +197,7 @@ en:
         back: Back
         confirm_delete: Confirm delete
         delete: Delete
-        edit: Edit
+        edit: Update
         title: Title
       nameserver_fields:
         remove: Remove
@@ -200,10 +209,24 @@ en:
         confirm_delete: Confirm delete
         delete: Delete
         domains: Domains
-        edit: Edit
+        edit: Update
+        transfer_code: Transfer code
+        registered: Registered
+        valid_to: Valid to
+        created_at: Created at
+        updated_at: Updated at
         expire_at: Expire at
         name: Name
-        'registrant_name ': 'Registrant name '
+        contacts: Contacts
+        registrant_name: Registrant name
+        statuses: Statuses
+        domain_contacts: Domain contacts
+        nameservers: Nameservers
+        dnskey: DNS Key
+        no_nameservers: No nameservers
+        nameserver_create_html: "<a href=%{href} class='text-blue-400 href:text-blue-600'>Create</a>"
+        no_dnskey: No DNS Keys
+        dnskey_create_html: "<a href=%{href} class='text-blue-400 href:text-blue-600'>Create</a>"
       update:
         success: Success
     invoices:

@@ -15,9 +15,9 @@
 
     <%= form.hidden_field :registrant_id, data: { form__autocomplete_target: "hiddenInput" } %>
 
-    <div class='w-96'>
+    <%= tag.div class: 'w-96' do %>
       <%= component 'form/dropdown_input', form: form, attribute: :period, enum: options_for_select(Domain::PERIOD, selected: 1), heroicon_name: 'user-circle' %>
-    </div>
+    <% end if form.object.new_record? %>
 
     <div class='w-96'>
       <%= component 'form/text_input', form: form, attribute: :reserved_pw, heroicon_name: 'user', placeholder: 'example.ee' %>

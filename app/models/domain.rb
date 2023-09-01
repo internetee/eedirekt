@@ -13,6 +13,7 @@ class Domain < ApplicationRecord
   has_many :tech_contacts, through: :tech_domain_contacts, source: :contact
 
   store_accessor :information
+  attr_accessor :period
 
   accepts_nested_attributes_for :domain_contacts, allow_destroy: true
   accepts_nested_attributes_for :admin_domain_contacts,

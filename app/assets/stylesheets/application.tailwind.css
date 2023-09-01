@@ -1,4 +1,5 @@
 @import "pagy";
+@import "custom";
 
 @tailwind base;
 @tailwind components;

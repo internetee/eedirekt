@@ -7,7 +7,7 @@
       <ul role="list" class="-my-5 divide-y divide-gray-200">
 
         <% @all_notifications.each do |n| %>
-          <li class="py-5 border-b">
+          <li class="py-5 border-b" id="poll_message_<%= n.id %>">
             <div class="relative focus-within:ring-2 focus-within:ring-indigo-500">
               <h3 class="text-sm font-semibold text-gray-800">
                   Office closed on July 2nd
@@ -15,9 +15,9 @@
               <div class='flex justify-between space-x-2'>
                 <p class="mt-1 text-sm text-gray-600 line-clamp-2"><%= n.text %></p>
 
-                <%= button_to registrar_poll_message_path(n.id), method: :put do %>
-                  <%= heroicon 'check', variant: :solid, options: { class: 'h-6 w-6 text-green-400' } %>
-                <% end %>
+                <%#= button_to registrar_poll_message_path(n.id), method: :put do %>
+                  <%#= heroicon 'check', variant: :solid, options: { class: 'h-6 w-6 text-green-400' } %>
+                <%# end %>
               </div>
 
             </div>

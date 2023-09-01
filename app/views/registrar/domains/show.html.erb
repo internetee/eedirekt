@@ -1,4 +1,4 @@
-<div class='flex flex-col w-full'>
+<div class='flex flex-col w-full mb-6'>
   <div class="overflow-hidden bg-white shadow sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg font-medium leading-6 text-gray-900">Applicant Information</h3>
@@ -13,24 +13,118 @@
         <dd class="mt-1 text-sm text-gray-900"><%= @domain.name %></dd>
       </div>
       <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.transfer_code') %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @domain.information['transfer_code'] %></dd>
+      </div>
+      <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.registrant_name ') %></dt>
         <dd class="mt-1 text-sm text-gray-900"><%= @domain.registrant.name  %></dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.registered')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.valid_to')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
       </div>
       <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.expire_at')%></dt>
         <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
       </div>
       <div class="sm:col-span-1">
-        <dt class="text-sm font-medium text-gray-500"><%= t('.domains') %></dt>
-        <dd class="mt-1 text-sm text-gray-900">something</dd>
+        <dt class="text-sm font-medium text-gray-500"><%= t('.created_at')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
       </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.updated_at')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
+      </div>
+
       <div class="sm:col-span-2">
-        <dt class="text-sm font-medium text-gray-500">About</dt>
-        <dd class="mt-1 text-sm text-gray-900">Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.</dd>
+        <div class="mt-8 border-t border-gray-200 pt-8">
+          <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.statuses') %></h2>
+
+          <div class="prose prose-sm mt-4 text-gray-500">
+            <ul role="list" class='flex space-x-3'>
+              <% @domain.statuses.each do |status| %>
+                <li>
+                  <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                      <circle cx="4" cy="4" r="3" />
+                    </svg>
+                  <%= status %>
+                  </span>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="sm:col-span-2">
+      <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.domain_contacts') %></h2>
+        <%= component 'lists/basic_list', collection: @domain.contacts %>
+      </div>
+
+      <div class="sm:col-span-2">
+        <div class="mt-8 border-t border-gray-200 pt-8">
+          <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.nameservers') %></h2>
+
+          <div class="prose prose-sm mt-4 text-gray-500">
+
+            <% if @domain.nameservers.blank? %>
+              <div class='flex flex-col justify-content items-center p-10 full-w'>
+                <p class='font-3xl mb-3'><%= t('.no_nameservers') %></p>
+                <p><%= t('.nameserver_create_html', href: edit_registrar_domain_path(uuid: @domain.uuid)) %></p>
+              </div>
+            <% else %>
+              <ul role="list" class='flex space-x-3'>
+                <% @domain.nameservers.each do |nameserver| %>
+                  <li>
+                    <p><%= nameserver.hostname %></p>
+                    <p><%= nameserver.ipv4 %></p>
+                    <p><%= nameserver.ipv6 %></p>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="sm:col-span-2">
+        <div class="mt-8 border-t border-gray-200 pt-8">
+          <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.dnskey') %></h2>
+
+          <div class="prose prose-sm mt-4 text-gray-500">
+            <% if @domain.dnssec_keys.blank? %>
+              <div class='flex flex-col justify-content items-center p-10 full-w'>
+                <p class='font-3xl mb-3'><%= t('.no_dnskey') %></p>
+                <p><%= t('.dnskey_create_html', href: edit_registrar_domain_path(uuid: @domain.uuid)) %></p>
+              </div>
+            <% else %>
+              <ul role="list" class='flex space-x-3'>
+                <% @domain.dnssec_keys.each do |dns| %>
+                  <li>
+                    <p><%= dns.keys %></p>
+                    <p><%= dns.protocol %></p>
+                    <p><%= dns.algorithm %></p>
+                    <p><%= dns.public_key %></p>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        </div>
       </div>
     </dl>
 
-    <div class='flex items-center justify-end space-x-3'>
+    <hr>
+
+    <div class='flex items-center justify-end space-x-3 mt-8 mb-8'>
+      <%= link_to t('.renew'), registrar_renews_path(uuid: @domain.uuid), class: "px-3 py-1 rounded-md text-white bg-green-400 hover:bg-green-500 cursor-pointer" %>
+
       <%= link_to t('.edit'), edit_registrar_domain_path(uuid: @domain.uuid), class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer" %>
 
       <%= button_to t('.delete'), registrar_domain_path(uuid: @domain.uuid), method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer", form: { data: { turbo_confirm: t(".confirm_delete") } } %>

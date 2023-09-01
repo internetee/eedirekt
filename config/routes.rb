@@ -43,6 +43,8 @@ Rails.application.routes.draw do
       end
     end
     resources :domains, param: :uuid
+    resources :renews, param: :uuid, only: %i[show update]
     resource :sessions, only: %i[new create destroy]
+    resource :transfers, only: %i[show update]
   end
 end

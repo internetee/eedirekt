@@ -1,0 +1,7 @@
+<div class="overflow-hidden bg-white shadow sm:rounded-md">
+  <ul role="list" class="divide-y divide-gray-200">
+     <% @collection.each do |item| %>
+      <%= component 'lists/basic_list/list', item: item, item_url: recognize_item_path(item) %>
+     <% end %>
+  </ul>
+</div>

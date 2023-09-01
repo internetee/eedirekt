@@ -30,7 +30,6 @@ module Registrar
     def edit; end
 
     def update
-       p '---------'
       if @invoice.update(invoice_params)
         redirect_to registrar_invoices_path, status: :see_other, notice: t('.success')
       else

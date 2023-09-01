@@ -14,7 +14,7 @@
           </th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-gray-200 bg-white">
+      <tbody class="divide-y divide-gray-200 bg-white" id='poll_messages'>
         <% @poll_messages.each do |n| %>
           <%= render 'poll_message', poll_message: n %>
         <% end %>

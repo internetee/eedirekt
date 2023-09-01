@@ -2,16 +2,20 @@ module Sidebar
   module Navbar
     class Component < ApplicationViewComponent
       def initialize(current_user:)
+        super
+
         @current_user = current_user
       end
 
+      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def menu_items
         if @current_user&.class&.name == 'SuperUser'
           [
             {
               href: root_path,
               name: I18n.t('dashboard'),
-              heroicon_name: 'home' ,
+              heroicon_name: 'home'
             },
             {
               href: admin_registrar_users_path,
@@ -29,28 +33,28 @@ module Sidebar
             {
               href: root_path,
               name: I18n.t('dashboard'),
-              heroicon_name: 'home' ,
-            },
-            {
-              href: registrar_contacts_path,
-              name: I18n.t('contacts'),
-              heroicon_name: 'user' ,
+              heroicon_name: 'home'
             },
             {
               href: registrar_domains_path,
               name: I18n.t('domains'),
-              heroicon_name: 'globe-europe-africa' ,
+              heroicon_name: 'globe-europe-africa'
+            },
+            {
+              href: registrar_contacts_path,
+              name: I18n.t('contacts'),
+              heroicon_name: 'user'
             },
             {
               href: registrar_invoices_path,
               name: I18n.t('invoices'),
-              heroicon_name: 'banknotes' ,
+              heroicon_name: 'banknotes'
             },
             {
               href: registrar_poll_messages_path,
               name: I18n.t('poll_messages'),
-              heroicon_name: 'envelope-open' ,
-            },
+              heroicon_name: 'envelope-open'
+            }
           ]
         else
           []

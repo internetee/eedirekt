@@ -1,0 +1,12 @@
+.animated-fill {
+  background: linear-gradient(to right, #71F688 50%, transparent 0);
+  background-size: 200% 100%;
+  background-position: right;
+  animation: makeItfadeIn 0.3s 0s forwards;
+}
+
+@keyframes makeItfadeIn {
+  100% {
+    background-position: left;
+  }
+}

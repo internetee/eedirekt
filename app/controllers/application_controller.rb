@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :redirect_to_welcome_page
+  before_action :tld
 
   rescue_from ActionController::Redirecting::UnsafeRedirectError do
     redirect_to root_url, layout: false
@@ -7,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   include Pagy::Backend
   include Authenticate
+
+  def tld
+    @tld ||= Tld.first
+  end
 
   private
 

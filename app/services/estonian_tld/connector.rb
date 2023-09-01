@@ -1,6 +1,8 @@
 module EstonianTld::Connector
   REPP_ENDPOINT = '/repp/v1'
 
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def connect(url:, method:, params: nil, headers: nil)
     request = faraday_request(url:, headers:)
     response = if %w[get].include? method
@@ -21,6 +23,7 @@ module EstonianTld::Connector
     else
       raise Faraday::Error, 'Unsupported content type'
     end
+
     OpenStruct.new(body: body,
       success: success,
       type: response['content-type'])
