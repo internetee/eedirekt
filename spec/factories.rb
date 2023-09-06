@@ -44,6 +44,9 @@ FactoryBot.define do
     code { Faker::Code.asin }
     country_code { 'EE' }
     role { 'priv' }
+    information { {
+      "statuses"=>{"ok"=>"", "linked"=>""}
+    } }
   end
 
   factory :domain do

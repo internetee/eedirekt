@@ -10,7 +10,11 @@
             </dt>
 
             <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
-              <%= @balance[:amount] %> <%= @balance[:currency] %>
+              <% if @balance.present? %>
+                <%= @balance[:amount] %> <%= @balance[:currency] %>
+              <% else %>
+                <%= t('.connection_error') %>
+              <% end %>
             </dd>
           </div>
 
