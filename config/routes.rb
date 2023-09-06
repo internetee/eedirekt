@@ -35,7 +35,11 @@ Rails.application.routes.draw do
   end
 
   namespace :registrar do
-    resources :poll_messages, only: %i[update index]
+    resources :poll_messages, only: %i[update index] do
+      scope module: :poll_messages do
+        resource :dequeues, only: %i[update]
+      end
+    end
     resources :invoices, param: :uuid
     resources :contacts, param: :uuid do
       collection do

@@ -4,6 +4,8 @@ module Form
       attr_reader :form, :attribute, :enum, :heroicon_name
 
       def initialize(form:, attribute:, enum:, heroicon_name:, **options)
+        super
+
         @form = form
         @attribute = attribute
         @enum = enum

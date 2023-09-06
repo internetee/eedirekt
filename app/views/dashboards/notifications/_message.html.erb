@@ -1,0 +1,19 @@
+<div id='message-box' data-controller='behaviour--animation-end'>
+  <div>
+  <div class='my-6 flex justify-center'>
+    <%= button_to 'Dequeue', registrar_poll_message_dequeues_path(poll_message_id: notification.id), method: :patch, class: 'flex w-64 items-center justify-center rounded-md border border-blue-300 bg-white px-4 py-2 text-sm font-medium text-blue-700 shadow-sm hover:bg-blue-50' %>
+  </div>
+
+  <div class="mt-6 flow-root shadow-xl p-10 mx-auto w-1/2 border bg-blue-100">
+
+    <p><span class='font-bold'>Message #</span> <%= notification.id %></p>
+    <p><span class='font-bold'>Text</span> <%= notification.text %></p>
+    <p><span class='font-bold'>Queued at </span> <%= l notification.created_at.to_datetime %></p>
+
+  </div>
+
+  <div class="flex justify-center mt-10 mb-5">
+    <%= link_to t('.view_all'), registrar_poll_messages_path, class: 'flex w-64 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50' %>
+  </div>
+  </div>
+</div>

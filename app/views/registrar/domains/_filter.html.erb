@@ -1,0 +1,44 @@
+  <%= form_with url: registrar_domains_path, method: :get, 
+      data: { 
+        controller: 'behaviour--togglable behaviour--debounce', 
+        behaviour__togglable_props_class: 'hidden', behaviour__debounce_target: 'form',
+        turbo_action: 'advance', turbo_frame: 'domains', action: 'input->behaviour--debounce#search' 
+      } do |f| %>
+    <div class='mt-4 flex justify-between items-center'>
+      <%= component 'form/search_input', form: f, attr: :domain_name, placeholder: t('.search_by_domain_name'), label_name: t('.search_by_domain_name_label'), options: { parent_css: 'w-96' } %>
+
+      <div>
+        <a class='text-md text-indigo-500 underline cursor-pointer' data-action='behaviour--togglable#toggle'>Expand filter</a>
+      </div>
+    </div>
+
+    <div data-behaviour--togglable-target='content' class='hidden mt-6 grid grid-cols-4 gap-4 items-end'>
+      <div>
+        <%= component 'form/search_input', form: f, attr: :email, placeholder: t('.search_by_emails'), label_name: t('.search_by_email_label'), options: { parent_css: 'w-72' } %>
+      </div>
+
+      <div>
+        <%= component 'form/search_input', form: f, attr: :registrant_name, placeholder: t('.search_by_registrant_name'), label_name: t('.search_by_registrant_name_label'), options: { parent_css: 'w-72' } %>
+      </div>
+      <div>
+        <%= component 'form/search_input', form: f, attr: :contact_name, placeholder: t('.search_by_contact_name'), label_name: t('.search_by_contact_name_label'), options: { parent_css: 'w-72' } %>
+      </div>
+      <div>
+        <%= component 'form/search_input', form: f, attr: :nameserver_name, placeholder: t('.search_by_nameserver_name'), label_name: t('.search_by_nameserver_name_label'), options: { parent_css: 'w-72' } %>
+      </div>
+      <div class='w-72'>
+        <%= component 'form/date_input', form: f, attribute: :start_date, heroicon_name: 'user' %>
+      </div>
+      <div class='w-72'>
+        <%= component 'form/date_input', form: f, attribute: :end_date, heroicon_name: 'user' %>
+      </div>
+      <div class='flex flex-col justify-center'>
+        <div class='w-72'>
+          <%= component 'form/multiple_input', form: f, collection: Domain::STATUSES, attribute: :domain_status, placeholder: t('.domain_status'), classes: '' %>
+        </div>
+      </div>
+      <div class='flex flex-col justify-center'>
+        <%= link_to 'Clear', request.path, class: 'flex w-64 items-center justify-center rounded-md border border-orange-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-50' %>
+      </div>
+    </div>
+  <% end %>

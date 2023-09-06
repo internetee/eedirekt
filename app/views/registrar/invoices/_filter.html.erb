@@ -1,0 +1,47 @@
+<%= form_with url: registrar_invoices_path, method: :get, 
+  data: { 
+    controller: 'behaviour--togglable behaviour--debounce', 
+    behaviour__togglable_props_class: 'hidden', behaviour__debounce_target: 'form',
+    turbo_action: 'advance', turbo_frame: 'invoices', action: 'input->behaviour--debounce#search' 
+  } do |f| %>
+
+  <div class='mt-4 flex justify-between items-center'>
+    <%= component 'form/search_input', form: f, attr: :name, placeholder: t('.search_by_name'), label_name: t('.search_by_name_label'), options: { parent_css: 'w-96' } %>
+
+    <div>
+      <a class='text-md text-indigo-500 underline cursor-pointer' data-action='behaviour--togglable#toggle'>Expand filter</a>
+    </div>
+  </div>
+
+  <div data-behaviour--togglable-target='content' class='hidden mt-6 grid grid-cols-4 gap-4 items-end'>
+    <div class='flex flex-col justify-center'>
+      <div class='w-72'>
+        <%= component 'form/multiple_input', form: f, collection: Invoice.statuses.values, attribute: :invoice_status, placeholder: t('.contact_status'), classes: '' %>
+      </div>
+    </div>
+
+    <div>
+      <%= component 'form/search_input', form: f, attr: :reference_number, placeholder: t('.search_by_reference_number'), label_name: t('.search_by_reference_number_label'), options: { parent_css: 'w-72' } %>
+    </div>
+
+    <div>
+      <%= component 'form/search_input', form: f, attr: :buyer_name, placeholder: t('.search_by_buyer_name'), label_name: t('.search_by_buyer_name_label'), options: { parent_css: 'w-72' } %>
+    </div>
+
+    <div>
+      <%= component 'form/search_input', form: f, attr: :buyer_ident, placeholder: t('.search_by_buyer_ident'), label_name: t('.search_by_buyer_ident_label'), options: { parent_css: 'w-72' } %>
+    </div>
+
+    <div class='w-72'>
+      <%= component 'form/date_input', form: f, attribute: :issued_start_date, heroicon_name: 'user' %>
+    </div>
+
+    <div class='w-72'>
+      <%= component 'form/date_input', form: f, attribute: :issued_end_date, heroicon_name: 'user' %>
+    </div>
+
+    <div class='flex flex-col justify-center'>
+      <%= link_to 'Clear', request.path, class: 'flex w-64 items-center justify-center rounded-md border border-orange-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-50 self-baseline' %>
+    </div>
+  </div>
+<% end %>

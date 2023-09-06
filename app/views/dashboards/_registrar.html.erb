@@ -1,3 +1,40 @@
-<div class='container mx-auto space-y-4'>
+<div>
 
-<%= render 'dashboards/notifications' %>
+  <section class="bg-white">
+    <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <div class="mt-8 sm:mt-12">
+        <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
+            <dt class="order-last text-lg font-medium text-gray-500">
+              Balance
+            </dt>
+
+            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
+              <%= @balance[:amount] %> <%= @balance[:currency] %>
+            </dd>
+          </div>
+
+          <div class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
+            <dt class="order-last text-lg font-medium text-gray-500">
+              Domains
+            </dt>
+
+            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl"><%= @domains_count %></dd>
+          </div>
+
+          <div class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
+            <dt class="order-last text-lg font-medium text-gray-500">
+              Contacts
+            </dt>
+
+            <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl"><%= @contacts_count %></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+
+  <%= render 'dashboards/notifications' %>
+
+</div>

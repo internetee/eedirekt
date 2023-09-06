@@ -57,6 +57,10 @@ en:
     synchronizes:
       create:
         success: Success
+  auth:
+    tara:
+      callback:
+        signed_in: Signed in
   choose_file: Choose file
   concerns:
     tlds:
@@ -76,6 +80,8 @@ en:
       logout: Logout
       title: Title
     notifications:
+      message:
+        view_all: View all
       notification_title: Notification title
       view_all: View all
     registrar:
@@ -115,12 +121,6 @@ en:
         cancel:
           cancelled: Cancelled
   registrar:
-    renews:
-      show:
-        submit: Submit
-    transfers:
-      show:
-        submit: Submit
     contacts:
       contact:
         confirm_delete: Confirm delete
@@ -135,6 +135,16 @@ en:
         create: Create
         submit: Submit
         title: Title
+      filter:
+        contact_status: Contact status
+        search_by_code_label: Search by code label
+        search_by_codes: Search by codes
+        search_by_email_label: Search by email label
+        search_by_emails: Search by emails
+        search_by_ident_label: Search by ident label
+        search_by_idents: Search by idents
+        search_by_name: Search by name
+        search_by_name_label: Search by name label
       form:
         address: Address
         country_code: Country code
@@ -158,10 +168,10 @@ en:
         domains: Domains
         edit: Update
         email: Email
-        object_code: Object code
         identity_code: Identity code
-        phone: Phone
         name: Name
+        object_code: Object code
+        phone: Phone
         statuses: Statuses
       update:
         success: Success
@@ -180,11 +190,24 @@ en:
         confirm_delete: Confirm delete
         delete: Delete
         edit: Update
+        renew: Renew
         show: Info
       edit:
         create: Create
         submit: Submit
         title: Title
+      filter:
+        domain_status: Domain status
+        search_by_contact_name: Search by contact name
+        search_by_contact_name_label: Search by contact name label
+        search_by_domain_name: Search by domain name
+        search_by_domain_name_label: Search by domain name label
+        search_by_email_label: Search by email label
+        search_by_emails: Search by emails
+        search_by_nameserver_name: Search by nameserver name
+        search_by_nameserver_name_label: Search by nameserver name label
+        search_by_registrant_name: Search by registrant name
+        search_by_registrant_name_label: Search by registrant name label
       form:
         add_contact: Add contact
         add_dnssec: Add dnssec
@@ -197,8 +220,20 @@ en:
         back: Back
         confirm_delete: Confirm delete
         delete: Delete
+        domain_status: Domain status
         edit: Update
+        search_by_contact_name: Search by contact name
+        search_by_contact_name_label: Search by contact name label
+        search_by_domain_name: Search by domain name
+        search_by_domain_name_label: Search by domain name label
+        search_by_email_label: Search by email label
+        search_by_emails: Search by emails
+        search_by_nameserver_name: Search by nameserver name
+        search_by_nameserver_name_label: Search by nameserver name label
+        search_by_registrant_name: Search by registrant name
+        search_by_registrant_name_label: Search by registrant name label
         title: Title
+        transfer: Transfer
       nameserver_fields:
         remove: Remove
       new:
@@ -207,26 +242,28 @@ en:
         title: Title
       show:
         confirm_delete: Confirm delete
+        contacts: Contacts
+        created_at: Created at
         delete: Delete
+        dnskey: DNS Key
+        dnskey_create_html: "<a href=%{href} class='text-blue-400 href:text-blue-600'>Create</a>"
+        domain_contacts: Domain contacts
         domains: Domains
         edit: Update
-        transfer_code: Transfer code
-        registered: Registered
-        valid_to: Valid to
-        created_at: Created at
-        updated_at: Updated at
         expire_at: Expire at
         name: Name
-        contacts: Contacts
-        registrant_name: Registrant name
-        statuses: Statuses
-        domain_contacts: Domain contacts
-        nameservers: Nameservers
-        dnskey: DNS Key
-        no_nameservers: No nameservers
         nameserver_create_html: "<a href=%{href} class='text-blue-400 href:text-blue-600'>Create</a>"
+        nameservers: Nameservers
         no_dnskey: No DNS Keys
-        dnskey_create_html: "<a href=%{href} class='text-blue-400 href:text-blue-600'>Create</a>"
+        no_nameservers: No nameservers
+        registered: Registered
+        registrant_name: Registrant name
+        'registrant_name ': 'Registrant name '
+        renew: Renew
+        statuses: Statuses
+        transfer_code: Transfer code
+        updated_at: Updated at
+        valid_to: Valid to
       update:
         success: Success
     invoices:
@@ -239,6 +276,16 @@ en:
         submit: Submit
         title: Title
         update: Update
+      filter:
+        contact_status: Contact status
+        search_by_buyer_ident: Search by buyer ident
+        search_by_buyer_ident_label: Search by buyer ident label
+        search_by_buyer_name: Search by buyer name
+        search_by_buyer_name_label: Search by buyer name label
+        search_by_name: Search by name
+        search_by_name_label: Search by name label
+        search_by_reference_number: Search by reference number
+        search_by_reference_number_label: Search by reference number label
       form:
         add_invoice_item: Add invoice item
         buyer_info: Buyer info
@@ -271,10 +318,22 @@ en:
       update:
         success: Success
     poll_messages:
+      dequeues:
+        update:
+          failure: Failure
+          success: Success
       index:
         title: Title
       update:
         failure: Failure
+        success: Success
+    renews:
+      show:
+        description: Description
+        submit: Submit
+        title: Title
+        transfer: Transfer
+      update:
         success: Success
     sessions:
       create:
@@ -295,6 +354,14 @@ en:
           signed_in: Signed in
         cancel:
           cancelled: Cancelled
+    transfers:
+      show:
+        description: Description
+        submit: Submit
+        title: Title
+        transfer: Transfer
+      update:
+        success: Success
   registrar_users:
     new:
       code: Code
@@ -338,5 +405,7 @@ en:
         logout: Logout
         restore_service: Restore service
         run_synchronize: Run synchronize
+  sign_in: Sign in
+  sign_in_cancelled: Sign in cancelled
   success: Success
   to_registrar: To registrar

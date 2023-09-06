@@ -1,5 +1,4 @@
 # rubocop:disable Style/ClassAndModuleChildren
-# rubocop:disable Style/Documentation
 
 class EstonianTld::ContactsJob < ApplicationJob
   queue_as :critical
@@ -62,10 +61,6 @@ class EstonianTld::ContactsJob < ApplicationJob
   end
 
   def inform_admin_service(tld:, message:)
-    puts '---'
-    puts message
-    puts '---'
-
     EstonianTld::InformAdminService.call({ tld:, message: })
   end
 

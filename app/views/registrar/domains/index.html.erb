@@ -4,37 +4,39 @@
       <h1 class="text-xl font-semibold text-gray-900"><%= t('.title') %></h1>
       <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
     </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none space-x-4">
-      <%= link_to t('.transfer'), registrar_transfers_path, class: "inline-flex items-center justify-center rounded-md border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:w-auto" %>
-      <%= link_to t('add_domain'), new_registrar_domain_path, class: "inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto" %>
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none space-x-4 flex space-x-3">
+      <%= link_to t('.transfer'), registrar_transfers_path, class: "flex w-64 inline items-center justify-center rounded-md border border-orange-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-50" %>
+      <%= link_to t('add_domain'), new_registrar_domain_path, class: "flex w-64 inline items-center justify-center rounded-md border border-indigo-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-indigo-50" %>
     </div>
   </div>
 
-  <h2 class='font-bold font-2xl'>TODO: ADD FILTER AND SEARCH PANEL</h2>
+  <%= render 'filter' %>
 
-  <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
-    <table class="min-w-full divide-y divide-gray-300">
-      <thead class="bg-gray-50">
-        <tr>
-          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Domain Name</th>
-          <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Registrant name</th>
-          <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">Expire Date</th>
-          <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-            <span class="sr-only">Edit</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200 bg-white">
-        <%= render @domains %>
-      </tbody>
-    </table>
-  </div>
+  <%= turbo_frame_tag 'domains' do %>
+    <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Domain Name</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Registrant name</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">Expire Date</th>
+            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+              <span class="sr-only">Edit</span>
+            </th>
+          </tr>
+        </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+                <%= render @domains %>
+          </tbody>
+      </table>
+    </div>
 
-  <div class="flex justify-center">
-    <% if @pagy.pages > 1 %>
-      <div class="footer flex text-center mt-4">
-        <%== pagy_nav(@pagy)%>
-      </div>
-    <% end %>
-  </div>
+    <div class="flex justify-center">
+      <% if @pagy.pages > 1 %>
+        <div class="footer flex text-center mt-4">
+          <%== pagy_nav(@pagy)%>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

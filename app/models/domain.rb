@@ -1,4 +1,7 @@
 class Domain < ApplicationRecord
+  include Domain::Searchable
+  include Domain::Statuses
+
   PERIOD = [
     ['1 month', 1], ['3 month', 3], ['6 month', 6], ['1 year', 12], ['2 year', 24]
   ].freeze

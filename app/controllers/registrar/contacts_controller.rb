@@ -5,8 +5,7 @@ module Registrar
     before_action :load_contact, only: %i[edit update destroy show]
 
     def index
-      @pagy, @contacts = pagy(Contact.all.order(created_at: :desc), items: 15,
-                                                                    link_extra: 'data-turbo-action="advance"')
+      @pagy, @contacts = pagy(Contact.search_filter(params), items: 15, link_extra: 'data-turbo-action="advance"')
     end
 
     def new
