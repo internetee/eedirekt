@@ -4,13 +4,22 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["form"]
 
-  search(event) {
-    event.preventDefault();
+  initialize() {
+    this.timeout = null;
+    this.initialLoad = true;
+  }
 
-    clearTimeout(this.timeout)
+
+  search(event) {
+    if (this.initialLoad) {
+      this.initialLoad = false;
+      return;
+    }
+
+    clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
-      this.formTarget.requestSubmit()
-    }, 300)
+      this.formTarget.requestSubmit();
+    }, 500);
   }
 
   disconnect() {
