@@ -12,9 +12,9 @@
   <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= contact.email %></td>
   <td class="px-3 py-4 text-sm text-gray-500"><%= contact.domains.pluck(:name).join(', ') %></td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
-    <%= link_to t('.show'), registrar_contact_path(uuid: contact.uuid), class: "px-3 py-1 rounded-md text-white bg-yellow-400 hover:bg-yellow-500 cursor-pointer" %>
+    <%= link_to t('.show'), registrar_contact_path(uuid: contact.uuid), class: "px-3 py-1 rounded-md text-white bg-yellow-400 hover:bg-yellow-500 cursor-pointer", target: '_top' %>
 
-    <%= link_to t('.edit'), edit_registrar_contact_path(uuid: contact.uuid), class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer" %>
+    <%= link_to t('.edit'), edit_registrar_contact_path(uuid: contact.uuid), class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer", target: '_top' %>
 
     <%= button_to t('.delete'), registrar_contact_path(uuid: contact.uuid), method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer", form: { data: { turbo_confirm: t(".confirm_delete") } } %>
   </td>

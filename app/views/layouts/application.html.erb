@@ -20,7 +20,9 @@
   <body style="font-family: 'Roboto', sans-serif;">
     <div class="flex">
 
-      <%= render "layouts/flash" %>
+      <div class="fixed z-50 right-0 mr-8 top-0 mt-[80px]" id="flash">
+        <%= render "layouts/flash" %>
+      </div>
 
       <%= component 'sidebar/navbar', current_user: current_user %>
       <%= yield %>

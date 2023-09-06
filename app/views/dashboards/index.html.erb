@@ -1,9 +1,9 @@
 
 
 <div class="p-12 w-full">
-    <h1 class='text-3xl font-bold text-center'><%= t('.title') %></h1>
+    <h1 class='text-3xl font-bold text-center'><%= "#{t('.title')}, #{@username}" %></h1>
 
-    <div class='container mx-auto' data-controller='notifications'>
+    <div class='container mx-auto'>
 
       <% if admin? %>
         <%= turbo_stream_from "dashboards_#{@tld.uuid}" %>

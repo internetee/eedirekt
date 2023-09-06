@@ -16,5 +16,17 @@ application.register("form--invoice-autocomplete", Form__InvoiceAutocompleteCont
 import Form__AddElementController from "./form/add_element_controller";
 application.register("form--add-element", Form__AddElementController);
 
+import Form__MultiSelectController from "./form/multi_select_controller";
+application.register("form--multi-select", Form__MultiSelectController);
+
+import Behaviour__RemoveableController from "./behaviour/removeable_controller";
+application.register("behaviour--removeable", Behaviour__RemoveableController);
+
+import Behaviour__Togglable_Controller from "./behaviour/togglable_controller";
+application.register("behaviour--togglable", Behaviour__Togglable_Controller);
+
+import Behaviour__DebounceController from "./behaviour/debounce_controller";
+application.register("behaviour--debounce", Behaviour__DebounceController);
+
 import DropzoneController from "./dropzone_controller"
 application.register("dropzone", DropzoneController)

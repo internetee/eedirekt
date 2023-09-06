@@ -5,7 +5,7 @@ module Registrar
     before_action :load_domain, only: %i[show edit update destroy]
 
     def index
-      @pagy, @domains = pagy(Domain.all.order(created_at: :desc), items: 15, link_extra: 'data-turbo-action="advance"')
+      @pagy, @domains = pagy(Domain.search(params), items: 15, link_extra: 'data-turbo-action="advance"')
     end
 
     def new
@@ -30,7 +30,6 @@ module Registrar
         redirect_to root_path, status: :see_other, notice: t('.success')
       else
         Rails.logger.info @domain.errors.inspect
-        p @domain.errors.inspect
         flash[:alert] = @domain.errors.full_messages.join(', ')
         render :new, status: :unprocessable_entity
       end

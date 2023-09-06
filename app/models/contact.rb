@@ -2,6 +2,8 @@ class Contact < ApplicationRecord
   include EstTld::Roles
   include EstTld::Country
   include EstTld::LegalDoc
+  include EstTld::Statuses
+  include Contact::Searchable
 
   has_many :domain_contacts
   has_many :domains, through: :domain_contacts

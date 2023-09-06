@@ -1,16 +1,15 @@
 <%# locals: () -%>
-<div class="fixed z-50 right-0 mr-4 top-0 mt-[80px]" id="flash">
-  <div class="flex justify-center">
-    <% if flash[:notice] %>
-      <div data-controller='removeable' data-removeable-delay-value="2" data-turbo-temporary class="max-w-sm bg-white opacity-95 border-t-4 border-greenish rounded-b text-black px-4 py-3 shadow-md" role="alert">
-        <p class="text-small"><%= flash[:notice] %></p>
-      </div>
-    <% end %>
+<div class="flex justify-center">
+  <% if flash[:notice] %>
+    <div data-controller='behaviour--removeable' data-behaviour__removeable-delay-value="2" data-turbo-temporary class="max-w-sm opacity-95 border-t-4 border-green-600 rounded-b px-10 py-4 shadow-md bg-green-400" role="alert">
+      <p class="text-small text-white"><%= flash[:notice] %></p>
+    </div>
+  <% end %>
 
-    <% if flash[:alert] %> 
-      <div data-controller='removeable' data-removeable-delay-value="2" data-turbo-temporary class="max-w-sm bg-white opacity-95 border-t-4 border-red-800 text-red-800 rounded-b px-4 py-3 shadow-md" role="alert">
-        <p class="text-small"><%= flash[:alert] %></p>
-      </div>
-    <% end %>
-  </div>
+  <% if flash[:alert] %> 
+    <div data-controller='behaviour--removeable' data-behaviour__removeable-delay-value="2" data-turbo-temporary class="max-w-sm opacity-95 border-t-4 border-red-600 rounded-b px-10 py-4 shadow-md bg-red-400" role="alert">
+      <p class="text-small text-white"><%= flash[:alert] %></p>
+    </div>
+  <% end %>
 </div>
+

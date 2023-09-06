@@ -1,4 +1,4 @@
-module Domain::Renew
+module Domain::Renewable
   extend ActiveSupport::Concern
 
   def renew(period_in_months:)

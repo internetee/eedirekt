@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .animated-fill {
   background: linear-gradient(to right, #71F688 50%, transparent 0);
   background-size: 200% 100%;
@@ -9,4 +13,22 @@
   100% {
     background-position: left;
   }
+}
+
+#message-box {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(120%, 0);
+  }
+}
+
+.message-box-animate-out {
+  animation: moveRight 0.3s 0s forwards;
 }

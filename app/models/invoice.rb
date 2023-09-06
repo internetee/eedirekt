@@ -1,6 +1,7 @@
 class Invoice < ApplicationRecord
   include Invoice::Buyer
   include Invoice::Number
+  include Invoice::Searchable
 
   belongs_to :buyer, class_name: 'Contact', foreign_key: :buyer_id
 

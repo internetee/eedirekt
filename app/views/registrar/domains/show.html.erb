@@ -107,7 +107,7 @@
               <ul role="list" class='flex space-x-3'>
                 <% @domain.dnssec_keys.each do |dns| %>
                   <li>
-                    <p><%= dns.keys %></p>
+                    <p><%= dns.flags %></p>
                     <p><%= dns.protocol %></p>
                     <p><%= dns.algorithm %></p>
                     <p><%= dns.public_key %></p>
