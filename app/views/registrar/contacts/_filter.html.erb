@@ -12,7 +12,7 @@
       <a class='text-md text-indigo-500 underline cursor-pointer' data-action='behaviour--togglable#toggle'>Expand filter</a>
     </div>
   </div>
-  <div data-behaviour--togglable-target='content' class='hidden mt-6 grid grid-cols-4 gap-4 items-end'>
+  <div data-behaviour--togglable-target='content' class='hidden mt-6 grid 2xl:grid-cols-4 xl:grid-cols-3 gap-4 items-end'>
     <div>
       <%= component 'form/search_input', form: f, attr: :code, placeholder: t('.search_by_codes'), label_name: t('.search_by_code_label'), options: { parent_css: 'w-72' } %>
     </div>
@@ -26,7 +26,7 @@
       <%= component 'form/dropdown_input', form: f, attribute: :ident_type, enum: Contact.human_enum_options(:role), heroicon_name: 'user-circle' %>
     </div>
     <div class='w-72'>
-      <%= component 'form/country_select_input', form: f, attribute: :ident_country, heroicon_name: 'globe-americas' %>
+      <%= component 'form/country_select_input', form: f, attribute: :ident_country, heroicon_name: 'globe-alt' %>
     </div>
     <div class='w-72'>
       <%= component 'form/date_input', form: f, attribute: :updated_start_date, heroicon_name: 'user' %>

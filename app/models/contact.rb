@@ -14,7 +14,7 @@ class Contact < ApplicationRecord
                  :registrar
 
   def self.search(query)
-    where("name ILIKE ? OR ident ILIKE ?", "%#{query}%", "%#{query}%")
+    where("name ILIKE ? OR code ILIKE ?", "%#{query}%", "%#{query}%")
   end
 
   def zip
@@ -71,6 +71,10 @@ class Contact < ApplicationRecord
 
   def registrar_website=(value)
     self.registrar = (registrar || {}).merge('website' => value)
+  end
+
+  def postal_address
+    "#{street}, #{city}, #{state}, #{zip}, #{address_country_code}"
   end
 
   def to_s

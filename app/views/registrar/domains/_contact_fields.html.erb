@@ -1,4 +1,4 @@
-<div class='flex items-center space-x-2 space-y-3 contact-item' data-controller="form--autocomplete">
+<div class='flex items-center space-x-2 space-y-3 contact-item' data-controller="form--autocomplete" data-form--autocomplete-search-url-value="<%= search_registrar_contacts_path %>">
   <div class='w-96'>
     <%= component 'form/autocomplete_input', form: field, attribute: :contact, heroicon_name: 'user', placeholder: 'example.ee',
       data_attributes: { action: "input->form--autocomplete#search", form__autocomplete_target: "input" },

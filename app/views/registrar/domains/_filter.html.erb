@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div data-behaviour--togglable-target='content' class='hidden mt-6 grid grid-cols-4 gap-4 items-end'>
+    <div data-behaviour--togglable-target='content' class='hidden mt-6 grid 2xl:grid-cols-4 xl:grid-cols-3 gap-4 items-end'>
       <div>
         <%= component 'form/search_input', form: f, attr: :email, placeholder: t('.search_by_emails'), label_name: t('.search_by_email_label'), options: { parent_css: 'w-72' } %>
       </div>
@@ -27,10 +27,10 @@
         <%= component 'form/search_input', form: f, attr: :nameserver_name, placeholder: t('.search_by_nameserver_name'), label_name: t('.search_by_nameserver_name_label'), options: { parent_css: 'w-72' } %>
       </div>
       <div class='w-72'>
-        <%= component 'form/date_input', form: f, attribute: :start_date, heroicon_name: 'user' %>
+        <%= component 'form/date_input', form: f, attribute: :start_date, label_name: t('.created_at_from'), heroicon_name: 'user' %>
       </div>
       <div class='w-72'>
-        <%= component 'form/date_input', form: f, attribute: :end_date, heroicon_name: 'user' %>
+        <%= component 'form/date_input', form: f, attribute: :end_date, label_name: t('.created_at_to'), heroicon_name: 'user' %>
       </div>
       <div class='flex flex-col justify-center'>
         <div class='w-72'>

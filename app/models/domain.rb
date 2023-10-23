@@ -1,6 +1,7 @@
 class Domain < ApplicationRecord
   include Domain::Searchable
   include Domain::Statuses
+  include Domain::Renewable
 
   PERIOD = [
     ['1 month', 1], ['3 month', 3], ['6 month', 6], ['1 year', 12], ['2 year', 24]
@@ -29,7 +30,7 @@ class Domain < ApplicationRecord
                                               reject_if: proc { |attrs| attrs[:hostname].blank? }
 
   has_many :dnssec_keys, dependent: :destroy
-  accepts_nested_attributes_for :dnssec_keys, allow_destroy: true
+  accepts_nested_attributes_for :dnssec_keys, allow_destroy: true, reject_if: :all_blank
 
   belongs_to :registrant, class_name: 'Contact', foreign_key: :registrant_id
 

@@ -4,7 +4,7 @@
       <h1 class="text-xl font-semibold text-gray-900"><%= t('.title') %></h1>
       <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
     </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none space-x-4 flex space-x-3">
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none flex space-x-3">
       <%= link_to t('.transfer'), registrar_transfers_path, class: "flex w-64 inline items-center justify-center rounded-md border border-orange-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-50" %>
       <%= link_to t('add_domain'), new_registrar_domain_path, class: "flex w-64 inline items-center justify-center rounded-md border border-indigo-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-indigo-50" %>
     </div>

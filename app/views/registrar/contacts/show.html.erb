@@ -28,6 +28,10 @@
         <dt class="text-sm font-medium text-gray-500"><%= t('.phone')%></dt>
         <dd class="mt-1 text-sm text-gray-900"><%= @contact.phone %></dd>
       </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.postal_address')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @contact.postal_address %></dd>
+      </div>
       <div class="sm:col-span-2">
         <div class="mt-8 border-t border-gray-200 pt-8">
           <h2 class="text-sm font-medium text-gray-900"><%= t('.statuses') %></h2>
@@ -58,7 +62,7 @@
 
     <div>
       <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.domains') %></h2>
-        <%= component 'lists/basic_list', collection: @contact.domains %>
+        <%= component 'lists/basic_list', collection: @contact.domains.uniq %>
     </div>
   </div>
 </div>

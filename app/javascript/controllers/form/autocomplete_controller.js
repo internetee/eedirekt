@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["input", "results", "hiddenInput"]
+  static values = { searchUrl: String }
 
   connect() {
     this.handleClickOutside = this.handleClickOutside.bind(this)
@@ -29,12 +30,19 @@ export default class extends Controller {
       return
     }
 
-    fetch(`/registrar/contacts/search?query=${query}`)
-      .then((response) => response.json())
+    console.log(this.searchUrlValue);
+
+    fetch(`${this.searchUrlValue}?query=${query}`)
+      .then((response) => { 
+        console.log(response);
+
+        return response.json()})
       .then((contacts) => {
+        console.log(contacts);
+
         const html = contacts.map(contact => `
           <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.id}">
-            ${contact.name} - ${contact.ident}
+            ${contact.name} - ${contact.code}
           </li>
         `).join('')
         this.resultsTarget.innerHTML = html

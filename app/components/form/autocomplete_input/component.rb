@@ -4,6 +4,8 @@ module Form
       attr_reader :form, :attribute, :heroicon_name, :placeholder, :data_attributes, :value
 
       def initialize(form:, attribute:, heroicon_name:, placeholder: nil, **options)
+        super
+
         @form = form
         @attribute = attribute
         @heroicon_name = heroicon_name

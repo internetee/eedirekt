@@ -21,24 +21,20 @@
         <dd class="mt-1 text-sm text-gray-900"><%= @domain.registrant.name  %></dd>
       </div>
       <div class="sm:col-span-1">
-        <dt class="text-sm font-medium text-gray-500"><%= t('.registered')%></dt>
-        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
+        <dt class="text-sm font-medium text-gray-500"><%= t('.registered_at')%></dt>
+        <dd class="mt-1 text-sm text-gray-900">NEED TODO! <%#= @domain.expire_at %></dd>
       </div>
       <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.valid_to')%></dt>
         <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
       </div>
       <div class="sm:col-span-1">
-        <dt class="text-sm font-medium text-gray-500"><%= t('.expire_at')%></dt>
-        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
-      </div>
-      <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.created_at')%></dt>
-        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900"><%= @domain.created_at %></dd>
       </div>
       <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.updated_at')%></dt>
-        <dd class="mt-1 text-sm text-gray-900"><%= @domain.expire_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900"><%= @domain.updated_at %></dd>
       </div>
 
       <div class="sm:col-span-2">
@@ -64,7 +60,7 @@
       
       <div class="sm:col-span-2">
       <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.domain_contacts') %></h2>
-        <%= component 'lists/basic_list', collection: @domain.contacts %>
+        <%= component 'lists/basic_list', collection: @domain.contacts.uniq %>
       </div>
 
       <div class="sm:col-span-2">
@@ -76,7 +72,6 @@
             <% if @domain.nameservers.blank? %>
               <div class='flex flex-col justify-content items-center p-10 full-w'>
                 <p class='font-3xl mb-3'><%= t('.no_nameservers') %></p>
-                <p><%= t('.nameserver_create_html', href: edit_registrar_domain_path(uuid: @domain.uuid)) %></p>
               </div>
             <% else %>
               <ul role="list" class='flex space-x-3'>
@@ -101,7 +96,6 @@
             <% if @domain.dnssec_keys.blank? %>
               <div class='flex flex-col justify-content items-center p-10 full-w'>
                 <p class='font-3xl mb-3'><%= t('.no_dnskey') %></p>
-                <p><%= t('.dnskey_create_html', href: edit_registrar_domain_path(uuid: @domain.uuid)) %></p>
               </div>
             <% else %>
               <ul role="list" class='flex space-x-3'>

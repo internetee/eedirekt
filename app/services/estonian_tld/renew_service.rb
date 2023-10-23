@@ -20,7 +20,7 @@ module EstonianTld
     def renew_params(payload)
       {
         renews: {
-          period_unit: 'months',
+          period_unit: 'm',
           period: payload[:period].to_i,
           exp_date: payload[:expire_at]
         }

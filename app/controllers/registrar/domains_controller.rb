@@ -5,7 +5,7 @@ module Registrar
     before_action :load_domain, only: %i[show edit update destroy]
 
     def index
-      @pagy, @domains = pagy(Domain.search(params), items: 15, link_extra: 'data-turbo-action="advance"')
+      @pagy, @domains = pagy(Domain.search(params).distinct, items: 15, link_extra: 'data-turbo-action="advance"')
     end
 
     def new
@@ -13,8 +13,8 @@ module Registrar
       Tld::Estonian::MIN_NAMESERVER_COUNT.times do
         @domain.nameservers.build
       end
-      Tld::Estonian::MIN_DOMAIN_CONTACT_COUNT.times do
-        @domain.domain_contacts.build
+      Tld::Estonian::MIN_DOMAIN_CONTACT_COUNT.times do |i|
+        i % 2 == 0 ? @domain.domain_contacts.build(type: 'AdminDomainContact') : @domain.domain_contacts.build(type: 'TechDomainContact')
       end
 
       @domain.dnssec_keys.build
@@ -27,7 +27,7 @@ module Registrar
       @domain.expire_at = calculate_expiry(period)
 
       if @domain.save
-        redirect_to root_path, status: :see_other, notice: t('.success')
+        redirect_to registrar_domains_path, status: :see_other, notice: t('.success')
       else
         Rails.logger.info @domain.errors.inspect
         flash[:alert] = @domain.errors.full_messages.join(', ')

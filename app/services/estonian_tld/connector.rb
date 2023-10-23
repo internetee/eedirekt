@@ -24,12 +24,9 @@ module EstonianTld::Connector
       raise Faraday::Error, 'Unsupported content type'
     end
 
-    OpenStruct.new(body: body,
-      success: success,
-      type: response['content-type'])
+    OpenStruct.new(body: body, success: success, type: response['content-type'])
   rescue Faraday::Error => e
-    OpenStruct.new(body: { code: 503, message: e.message,
-      data: {} }, success: false)
+    OpenStruct.new(body: { code: 503, message: e.message, data: {} }, success: false)
   end
 
   def faraday_request(url:, headers: {})

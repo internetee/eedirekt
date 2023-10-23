@@ -12,11 +12,11 @@ module Registrar
       @domain = Domain.find_by_uuid(params[:uuid])
 
       result = EstonianTld::RenewService.new(tld: Tld.first).transfer(
-        payload: transfer_params, domain_name: @domain.name
+        payload: renew_params, domain_name: @domain.name
       )
 
       if result.success
-        @domain.renew(period_in_months: transfer_params[:period].to_i)
+        @domain.renew(period_in_months: renew_params[:period].to_i)
         redirect_to registrar_domains_path, notice: t('.success'), status: :see_other
       else
         Rails.logger.info "Error: #{result.body['message']}"
@@ -28,7 +28,7 @@ module Registrar
 
     private
 
-    def transfer_params
+    def renew_params
       params.require(:domain).permit(:name, :period, :expire_at)
     end
   end

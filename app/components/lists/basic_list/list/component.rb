@@ -12,7 +12,7 @@ module Lists
         end
 
         def build_link
-          tag.a item.name, href: item_url, class: 'truncate text-sm font-medium text-indigo-600'
+          tag.a "#{item.name} #{object_code}", href: item_url, class: 'truncate text-sm font-medium text-indigo-600'
         end
 
         def status
@@ -40,6 +40,17 @@ module Lists
             ('Updated at ' + tag.time(item.updated_at, datetime: item.updated_at)).html_safe
           when 'domain'
             ('Expire at ' + tag.time(item.expire_at, datetime: item.expire_at)).html_safe
+          end
+        end
+
+        def object_code
+          case item.class.name.underscore
+          when 'contact'
+            "#{(item&.code).to_s.upcase}"
+          when 'domain'
+            roles = item.domain_contacts.select { |dc| dc.contact.uuid == params[:uuid] }.pluck(:type).join(', ')
+
+            "[#{roles}]"
           end
         end
       end
