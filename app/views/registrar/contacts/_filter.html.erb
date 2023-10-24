@@ -1,8 +1,9 @@
 <%= form_with url: registrar_contacts_path, method: :get, 
   data: { 
-    controller: 'behaviour--togglable behaviour--debounce', 
+    controller: 'behaviour--togglable behaviour--debounce filter--clear-form', 
     behaviour__togglable_props_class: 'hidden', behaviour__debounce_target: 'form',
-    turbo_action: 'advance', turbo_frame: 'contacts', action: 'input->behaviour--debounce#search' 
+    filter__clear_form_target: 'form', turbo_action: 'advance',
+    turbo_frame: 'contacts', action: 'input->behaviour--debounce#search' 
   } do |f| %>
 
   <div class='mt-4 flex justify-between items-center'>
@@ -46,7 +47,9 @@
       </div>
     </div>
     <div class='flex flex-col justify-center'>
-      <%= link_to 'Clear', request.path, class: 'flex w-64 items-center justify-center rounded-md border border-orange-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-50 self-baseline' %>
+      <%= link_to 'Clear', '#', 
+          class: 'flex w-64 items-center justify-center rounded-md border border-orange-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-50 self-baseline',
+          data: { action: 'filter--clear-form#clearForm' } %>
     </div>
   </div>
 <% end %>

@@ -8,10 +8,13 @@ class Contact < ApplicationRecord
   has_many :domain_contacts
   has_many :domains, through: :domain_contacts
 
+  enum state: { draft: 0, active: 1 }
+
   store_accessor :information,
                  :address,
                  :statuses,
-                 :registrar
+                 :registrar,
+                 :metadata
 
   def self.search(query)
     where("name ILIKE ? OR code ILIKE ?", "%#{query}%", "%#{query}%")
@@ -33,12 +36,12 @@ class Contact < ApplicationRecord
     self.address = (address || {}).merge('city' => value)
   end
 
-  def state
+  def state_address
     address['state'] if address
   end
 
-  def state=(value)
-    self.address = (address || {}).merge('state' => value)
+  def state_address=(value)
+    self.state_address = (state_address || {}).merge('state' => value)
   end
 
   def street
@@ -75,6 +78,14 @@ class Contact < ApplicationRecord
 
   def postal_address
     "#{street}, #{city}, #{state}, #{zip}, #{address_country_code}"
+  end
+
+  def registry_created_at
+    metadata['registry_created_at'] if metadata
+  end
+
+  def registry_updated_at
+    metadata['registry_updated_at'] if metadata
   end
 
   def to_s

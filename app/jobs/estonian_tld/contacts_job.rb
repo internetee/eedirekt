@@ -19,25 +19,25 @@ class EstonianTld::ContactsJob < ApplicationJob
       offset: 0
     }
 
-    dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
+    dirty_contacts = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
 
-    unless dirty_contacs.success
+    unless dirty_contacts.success
       inform_admin_service(tld:, message: 'Error fetching contacts')
       @perform_callback = false
 
       return
     end
 
-    total_count = dirty_contacs.body['data']['count']
-    contact_count = dirty_contacs['body']['data']['contacts'].count
-    contact_creator(dirty_contacs)
+    total_count = dirty_contacts.body['data']['count']
+    contact_count = dirty_contacts['body']['data']['contacts'].count
+    contact_creator(dirty_contacts)
 
     return if contact_count < STEP
 
     (STEP..total_count + STEP - 1).step(STEP) do |offset|
       url_params[:offset] = offset
-      dirty_contacs = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
-      contact_creator(dirty_contacs)
+      dirty_contacts = EstonianTld::ContactService.new(tld:).contact_list(url_params:)
+      contact_creator(dirty_contacts)
 
       inform_admin_service(tld:, message: "Processed contacts #{url_params[:offset]} of #{total_count}")
 
@@ -47,12 +47,18 @@ class EstonianTld::ContactsJob < ApplicationJob
     inform_admin_service(tld:, message: 'All contacts were synchronized!')
   end
 
-  def contact_creator(dirty_contacs)
-    contacts = EstonianTld::ContactSerializer.call(dirty: dirty_contacs)
+  def contact_creator(dirty_contacts)
+    contacts = EstonianTld::ContactSerializer.call(dirty: dirty_contacts)
+
     contacts_attributes = []
 
     contacts.each do |contact|
-      next if ::Contact.exists?(code: contact.code)
+      if ::Contact.exists?(code: contact.code)
+        c = ::Contact.find_by(code: contact.code)
+        c.update(contact.to_h)
+
+        next
+      end
 
       contacts_attributes << contact.to_h
     end

@@ -28,5 +28,8 @@ application.register("behaviour--togglable", Behaviour__Togglable_Controller);
 import Behaviour__DebounceController from "./behaviour/debounce_controller";
 application.register("behaviour--debounce", Behaviour__DebounceController);
 
+import Filter__ClearFormController from "./filter/clear_form_controller";
+application.register("filter--clear-form", Filter__ClearFormController);
+
 import DropzoneController from "./dropzone_controller"
 application.register("dropzone", DropzoneController)

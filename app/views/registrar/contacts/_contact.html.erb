@@ -10,6 +10,9 @@
   </td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><%= contact.code %></td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= contact.email %></td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+    <span class="py-1 px-4 rounded-3xl text-white <%= contact.active? ? 'bg-green-500' : 'bg-gray-500' %>"><%= contact.state %></span>
+  </td>
   <td class="px-3 py-4 text-sm text-gray-500"><%= contact.domains.pluck(:name).join(', ') %></td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
     <%= link_to t('.show'), registrar_contact_path(uuid: contact.uuid), class: "px-3 py-1 rounded-md text-white bg-yellow-400 hover:bg-yellow-500 cursor-pointer", target: '_top' %>

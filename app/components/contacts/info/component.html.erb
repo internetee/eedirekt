@@ -1,0 +1,77 @@
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.name') %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @contact.name %></dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.object_code') %></dt>
+        <% if @contact.code.present? %>
+          <dd class="mt-1 text-sm text-gray-900"><%= @contact.code %></dd>
+        <% else %>
+          <dd class="mt-1 text-sm text-red-500"><%= t('.no_code_need_synchronize') %></dd>
+        <% end %>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.identity_code') %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @contact.ident %></dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.email')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @contact.email %></dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.phone')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @contact.phone %></dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.registry_created_at')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= l(@contact.registry_created_at.to_datetime) %></dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.registry_updated_at')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= l(@contact.registry_updated_at.to_datetime) %></dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.state')%></dt>
+        <dd class="mt-1">
+          <span class="py-1 px-4 rounded-3xl text-white <%= @contact.active? ? 'bg-green-500' : 'bg-gray-500' %>"><%= @contact.state %></span>
+        </dd>
+      </div>
+
+      <% if show_address? %>
+        <div class="sm:col-span-1">
+          <dt class="text-sm font-medium text-gray-500"><%= t('.postal_address')%></dt>
+          <dd class="mt-1 text-sm text-gray-900"><%= @contact.postal_address %></dd>
+        </div>
+      <% end %>
+      
+      <div class="sm:col-span-2">
+        <div class="mt-8 border-t border-gray-200 pt-8">
+          <h2 class="text-sm font-medium text-gray-900"><%= t('.statuses') %></h2>
+
+        <% if @contact.statuses.present? %>
+          <div class="prose prose-sm mt-4 text-gray-500">
+            <ul role="list" class='flex space-x-3'>
+              <% @contact.statuses.each do |status| %>
+                <li>
+                  <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                      <circle cx="4" cy="4" r="3" />
+                    </svg>
+                  <%= status.join %>
+                  </span>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% else %>
+          <div class="prose prose-sm mt-4 text-red-500">
+            <p><%= t('.no_statuses_need_synchronize') %></p>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </dl>

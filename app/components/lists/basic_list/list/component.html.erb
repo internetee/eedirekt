@@ -42,46 +42,7 @@
   <div class='hidden' data-behaviour--togglable-target='content'>
     <% if item.class.name.underscore == 'contact' %>
     <div class="px-4 py-5 sm:px-6 container mx-auto mt-12">
-      <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-        <div class="sm:col-span-1">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.contact_name') %></dt>
-          <dd class="mt-1 text-sm text-gray-900"><%= item.name %></dd>
-        </div>
-        <div class="sm:col-span-1">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.contact_code') %></dt>
-          <dd class="mt-1 text-sm text-gray-900"><%= item.code %></dd>
-        </div>
-        <div class="sm:col-span-1">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.contact_ident ') %></dt>
-          <dd class="mt-1 text-sm text-gray-900"><%= item.ident %></dd>
-        </div>
-        <div class="sm:col-span-1">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.contact_email')%></dt>
-          <dd class="mt-1 text-sm text-gray-900"><%= item.email %></dd>
-        </div>
-        <div class="sm:col-span-1">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.contact_phone')%></dt>
-          <dd class="mt-1 text-sm text-gray-900"><%= item.phone %></dd>
-        </div>
-        <div class="sm:col-span-2">
-            <h2 class="text-sm font-medium text-gray-900"><%= t('.statuses') %></h2>
-
-            <div class="prose prose-sm mt-4 text-gray-500">
-              <ul role="list" class='flex space-x-3'>
-                <% item.statuses.each do |status| %>
-                  <li>
-                    <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
-                      <svg class="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                        <circle cx="4" cy="4" r="3" />
-                      </svg>
-                    <%= status.join %>
-                    </span>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-        </div>
-      </dl>
+      <%= component 'contacts/info', contact: item %>
     </div>
     <% end %>
   </div>
