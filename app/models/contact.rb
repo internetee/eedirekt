@@ -5,6 +5,8 @@ class Contact < ApplicationRecord
   include EstTld::Statuses
   include Contact::Searchable
 
+  attr_accessor :phone_code
+
   has_many :domain_contacts
   has_many :domains, through: :domain_contacts
 
@@ -16,8 +18,28 @@ class Contact < ApplicationRecord
                  :registrar,
                  :metadata
 
+  validates :ident, uniqueness: { scope: :alpha_two_country_code }, allow_blank: true
+  validate :identity_code_must_be_valid_for_estonia, if: proc { |user|
+    user.country_code.present? && user.country_code == 'EE'
+  }
+
+  validates :phone, presence: true, numericality: { only_integer: true }
+  validates :phone_code, presence: true, numericality: { only_integer: true }
+  before_save :combine_phone_and_phone_code
+  after_find :split_phone_into_code_and_number
+
+  validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: I18n.t('.invalid_email_format') }
+  validates :name, presence: true
+  validates :role, inclusion: { in: Contact.roles }
+
   def self.search(query)
-    where("name ILIKE ? OR code ILIKE ?", "%#{query}%", "%#{query}%")
+    where('name ILIKE ? OR code ILIKE ?', "%#{query}%", "%#{query}%")
+  end
+
+  def identity_code_must_be_valid_for_estonia
+    return if EstonianTld::IdentityCode::Estonia.new(country_code, ident).valid?
+
+    errors.add(:ident, I18n.t(:is_invalid))
   end
 
   def zip
@@ -53,7 +75,7 @@ class Contact < ApplicationRecord
   end
 
   def address_country_code
-    address["country_code"] if address
+    address['country_code'] if address
   end
 
   def address_country_code=(value)
@@ -90,5 +112,17 @@ class Contact < ApplicationRecord
 
   def to_s
     "#{name} - #{code}"
+  end
+
+  private
+
+  def combine_phone_and_phone_code
+    self.phone = "+#{phone_code}#{Phonelib.parse(phone).national(false)}"
+  end
+
+  def split_phone_into_code_and_number
+    parsed_phone = Phonelib.parse(phone)
+    self.phone_code = parsed_phone.country_code
+    self.phone = parsed_phone.national(false)
   end
 end

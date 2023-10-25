@@ -16,22 +16,35 @@
         <dd class="mt-1 text-sm text-gray-900"><%= @contact.ident %></dd>
       </div>
       <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.country_code') %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @contact.country_code.present? ? @contact.country_code : t('.no_country_code') %></dd>
+      </div>
+      <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.email')%></dt>
         <dd class="mt-1 text-sm text-gray-900"><%= @contact.email %></dd>
       </div>
       <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.phone')%></dt>
-        <dd class="mt-1 text-sm text-gray-900"><%= @contact.phone %></dd>
+        <dd class="mt-1 text-sm text-gray-900">+<%= @contact.phone_code %> <%= @contact.phone %></dd>
       </div>
 
       <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.registry_created_at')%></dt>
-        <dd class="mt-1 text-sm text-gray-900"><%= l(@contact.registry_created_at.to_datetime) %></dd>
+
+        <% if @contact.registry_created_at.present? %>
+          <dd class="mt-1 text-sm text-gray-900"><%= l(@contact.registry_created_at.to_datetime) %></dd>
+        <% else %>
+          <dd class="mt-1 text-sm text-red-500"><%= t('.need_synchronize') %></dd>
+        <% end %>
       </div>
 
       <div class="sm:col-span-1">
         <dt class="text-sm font-medium text-gray-500"><%= t('.registry_updated_at')%></dt>
-        <dd class="mt-1 text-sm text-gray-900"><%= l(@contact.registry_updated_at.to_datetime) %></dd>
+        <% if @contact.registry_updated_at.present? %>
+          <dd class="mt-1 text-sm text-gray-900"><%= l(@contact.registry_updated_at.to_datetime) %></dd>
+        <% else %>
+          <dd class="mt-1 text-sm text-red-500"><%= t('.need_synchronize') %></dd>
+        <% end %>
       </div>
 
       <div class="sm:col-span-1">

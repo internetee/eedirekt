@@ -1,0 +1,6 @@
+<%= @form.label @phone_attribute, class: 'block text-sm font-medium text-gray-700' %>
+<div class="mt-1 flex space-x-2">
+  <span class='w-16 border rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 flex justify-center items-center bg-gray-200'>+</span>
+  <%= @form.phone_field @code_attribute, placeholder: @code_placeholder, class: 'w-16 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2', data: @code_data_attributes %>
+  <%= @form.phone_field @phone_attribute, placeholder: @phone_placeholder, class: 'w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2', data: @phone_data_attributes %>
+</div>

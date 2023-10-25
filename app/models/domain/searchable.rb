@@ -6,6 +6,7 @@ module Domain::Searchable
     scope :by_email, lambda { |email|
                        joins(:contacts).where('contacts.email ILIKE ?', "%#{email}%") if email.present?
                      }
+    scope :by_ident_state, ->(state) { where(state: state) if state.present? }
     scope :by_registrant_name, lambda { |name|
                                  joins(:registrant).where('contacts.name ILIKE ?', "%#{name}%") if name.present?
                                }
@@ -35,6 +36,7 @@ module Domain::Searchable
         .by_registrant_name(params[:registrant_name])
         .by_contact_name(params[:contact_name])
         .by_nameserver_name(params[:nameserver_name])
+        .by_ident_state(params[:state])
         # .by_date_range(params[:start_date], params[:end_date])
         .with_starts_at(params[:start_date])
         .with_ends_at(params[:end_date])

@@ -27,6 +27,9 @@
       <%= component 'form/dropdown_input', form: f, attribute: :ident_type, enum: Contact.human_enum_options(:role), heroicon_name: 'user-circle' %>
     </div>
     <div class='w-72'>
+      <%= component 'form/dropdown_input', form: f, attribute: :state, enum: Contact.human_enum_options(:state), heroicon_name: 'user-circle' %>
+    </div>
+    <div class='w-72'>
       <%= component 'form/country_select_input', form: f, attribute: :ident_country, heroicon_name: 'globe-alt' %>
     </div>
     <div class='w-72'>

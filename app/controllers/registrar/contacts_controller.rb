@@ -21,7 +21,7 @@ module Registrar
         redirect_to registrar_contacts_path, status: :see_other, notice: t('.success')
       else
         flash[:alert] = @contact.errors.full_messages.join(', ')
-        render 'dashboards/index', status: :unprocessable_entity
+        render 'registrar/contacts/new', status: :unprocessable_entity
       end
     end
 
@@ -30,7 +30,7 @@ module Registrar
         redirect_to registrar_contacts_path, status: :see_other, notice: t('.success')
       else
         flash[:alert] = @contact.errors.full_messages.join(', ')
-        render 'dashboards/index', status: :unprocessable_entity
+        render 'registrar/contacts/edit', status: :unprocessable_entity
       end
     end
 
@@ -40,7 +40,7 @@ module Registrar
       else
         Rails.logger.info @contact.errors.inspect
         flash[:alert] = @contact.errors.full_messages.join(', ')
-        render 'dashboards/index', status: :unprocessable_entity
+        render 'registrar/contacts/index', status: :unprocessable_entity
       end
     end
 
@@ -57,7 +57,7 @@ module Registrar
     end
 
     def contact_params
-      params.require(:contact).permit(:code, :country_code, :ident,
+      params.require(:contact).permit(:code, :country_code, :ident, :phone_code,
                                       :role, :name, :email, :phone, :address_country_code,
                                       :city, :street, :state, :zip, :legal_document)
     end
