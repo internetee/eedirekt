@@ -11,15 +11,16 @@ RSpec.describe Registrar::ContactsController, type: :request do
     {
       code: 'example_code',
       country_code: 'EE',
-      ident: 'example_ident',
+      ident: '60001019939',
       role: 'priv',
       name: 'example_name',
       email: 'example@example.com',
-      phone: 'example_phone',
+      phone: '123456789',
+      phone_code: '372',
       address_country_code: 'EE',
       city: 'example_city',
       street: 'example_street',
-      state: 'example_state',
+      state_address: 'example_state',
       zip: 'example_zip',
       # legal_document: "example_legal_document"
     }

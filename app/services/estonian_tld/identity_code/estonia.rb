@@ -9,10 +9,6 @@ module EstonianTld
       end
 
       def valid?
-        puts '===='
-        puts 'checker'
-        puts '===='
-
         valid_length? && valid_century? && valid_birth_date? && valid_check_digit?
       end
 

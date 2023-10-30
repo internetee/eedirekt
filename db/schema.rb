@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_124831) do
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "status", ["issued", "paid", "canceled", "failed", "overdue"]
   create_enum "status_enum", ["issued", "paid", "canceled", "failed", "overdue"]
 
   create_table "active_storage_attachments", force: :cascade do |t|

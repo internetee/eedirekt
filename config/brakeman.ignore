@@ -22,8 +22,31 @@
         915
       ],
       "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "ddab7e7c59813b34d4bb69f9abc859bce1e99caacabccf554613fd5740f58ca2",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/registrar/contacts_controller.rb",
+      "line": 61,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:contact).permit(:code, :country_code, :ident, :phone_code, :role, :name, :email, :phone, :address_country_code, :city, :street, :state, :zip, :legal_document)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Registrar::ContactsController",
+        "method": "contact_params"
+      },
+      "user_input": ":role",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
     }
   ],
-  "updated": "2023-07-25 13:37:02 +0300",
+  "updated": "2023-10-25 11:42:50 +0000",
   "brakeman_version": "6.0.0"
 }

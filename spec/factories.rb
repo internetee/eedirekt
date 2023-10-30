@@ -39,7 +39,8 @@ FactoryBot.define do
     uuid { SecureRandom.uuid }
     name { Faker::Name.name }
     email { Faker::Internet.email }
-    phone { Faker::PhoneNumber.cell_phone_in_e164 }
+    phone_code { '372' }
+    phone { '56718833' }
     ident { '30303039914' }
     code { Faker::Code.asin }
     country_code { 'EE' }

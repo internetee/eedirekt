@@ -18,7 +18,7 @@ class Contact < ApplicationRecord
                  :registrar,
                  :metadata
 
-  validates :ident, uniqueness: { scope: :alpha_two_country_code }, allow_blank: true
+  validates :ident, uniqueness: { scope: :country_code }, allow_blank: true
   validate :identity_code_must_be_valid_for_estonia, if: proc { |user|
     user.country_code.present? && user.country_code == 'EE'
   }
@@ -59,11 +59,11 @@ class Contact < ApplicationRecord
   end
 
   def state_address
-    address['state'] if address
+    address['state_address'] if address
   end
 
   def state_address=(value)
-    self.state_address = (state_address || {}).merge('state' => value)
+    self.address = (address || {}).merge('state_address' => value)
   end
 
   def street
@@ -99,7 +99,7 @@ class Contact < ApplicationRecord
   end
 
   def postal_address
-    "#{street}, #{city}, #{state}, #{zip}, #{address_country_code}"
+    "#{street}, #{city}, #{state_address}, #{zip}, #{address_country_code}"
   end
 
   def registry_created_at
