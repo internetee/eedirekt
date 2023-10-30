@@ -1,0 +1,50 @@
+<div class="sm:col-span-2">
+  <div class="mt-8 border-t border-gray-200 pt-8">
+    <% if status_notes.present? %>
+      <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.status_notes') %></h2>
+
+      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mt-8">
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Status</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Note</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <% status_notes.each do |k, v| %>
+              <tr>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                  <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                    <svg class="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                      <circle cx="4" cy="4" r="3" />
+                    </svg>
+                  <%= k %>
+                  </span>
+                </td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= v %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+        <h2 class="text-sm font-medium text-gray-500 mb-2"><%= t('.statuses') %></h2>
+
+        <div class="prose prose-sm mt-4 text-gray-500">
+          <ul role="list" class='flex space-x-3'>
+            <% statuses.each do |status| %>
+              <li>
+                <span class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                  <svg class="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                    <circle cx="4" cy="4" r="3" />
+                  </svg>
+                <%= status %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+  </div>
+</div>

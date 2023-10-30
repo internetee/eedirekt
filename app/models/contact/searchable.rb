@@ -6,6 +6,7 @@ module Contact::Searchable
     scope :by_code, ->(code) { where('contacts.code ILIKE ?', "%#{code}%") if code.present? }
     scope :by_ident, ->(ident) { where('contacts.ident ILIKE ?', "%#{ident}%") if ident.present? }
     scope :by_ident_type, ->(ident_type) { where(role: ident_type) if ident_type.present? }
+    scope :by_ident_state, ->(state) { where(state:) if state.present? }
     scope :by_ident_country, lambda { |ident_country|
                                where('contacts.country_code ILIKE ?', "%#{ident_country}%") if ident_country.present?
                              }
@@ -26,7 +27,15 @@ module Contact::Searchable
     scope :with_created_ends_at, lambda { |ends_at|
                                    where('contacts.created_at <= ?', ends_at.to_date.end_of_day) if ends_at.present?
                                  }
-    scope :by_status, ->(status) { where("information -> 'statuses' ->> ? IS NOT NULL", status) if status.present? }
+    scope :by_status, lambda { |status|
+      return unless status.present?
+
+      if status.include? 'not_linked'
+        return where.not("information -> 'statuses' ->> ? IS NOT NULL", 'linked').where("information -> 'statuses' ->> ? IS NULL", status)
+      end
+
+      where("information -> 'statuses' ->> ? IS NOT NULL", status)
+    }
   end
 
   # rubocop:disable Metrics
@@ -39,6 +48,7 @@ module Contact::Searchable
         .by_code(params[:code])
         .by_ident(params[:ident])
         .by_ident_type(params[:ident_type])
+        .by_ident_state(params[:state])
         .by_ident_country(params[:ident_country])
         .by_email(params[:email])
         .with_updated_starts_at(params[:updated_start_date])

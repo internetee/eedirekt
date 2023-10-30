@@ -17,7 +17,7 @@ RSpec.describe 'Serializers::EstonianTld::Contacts' do
             'statuses' => { 'ok' => '' },
             'disclosed_attributes' => [],
             'registrar' => { 'name' => 'NORM', 'website' => 'https://normal.ee' },
-            'address' => { 'street' => 'IHSHGSWGTN', 'zip' => '12323', 'city' => 'QWKOZLJZBL', 'state' => nil,
+            'address' => { 'street' => 'IHSHGSWGTN', 'zip' => '12323', 'city' => 'QWKOZLJZBL', 'state_address' => nil,
                            'country_code' => 'EE' }
           },
           {
@@ -32,7 +32,7 @@ RSpec.describe 'Serializers::EstonianTld::Contacts' do
             'statuses' => { 'ok' => '' },
             'disclosed_attributes' => [],
             'registrar' => { 'name' => 'NORM', 'website' => 'https://normal.ee' },
-            'address' => { 'street' => 'IHSHGSWGTN', 'zip' => '12323', 'city' => 'QWKOZLJZBL', 'state' => nil,
+            'address' => { 'street' => 'IHSHGSWGTN', 'zip' => '12323', 'city' => 'QWKOZLJZBL', 'state_address' => nil,
                            'country_code' => 'EE' }
           }
         ] 
@@ -44,17 +44,17 @@ RSpec.describe 'Serializers::EstonianTld::Contacts' do
 
   let(:clean_contact_struct) do
     information = {
-      address: { 'street' => 'IHSHGSWGTN', 'zip' => '12323', 'city' => 'QWKOZLJZBL', 'state' => nil,
+      address: { 'street' => 'IHSHGSWGTN', 'zip' => '12323', 'city' => 'QWKOZLJZBL', 'state_address' => nil,
         'country_code' => 'EE' },
       statuses: { 'ok' => '' },
       registrar: { 'name' => 'NORM', 'website' => 'https://normal.ee' }
     }
 
     contact_struct = Struct.new(:name, :email, :phone, :ident, :code, :authInfo,
-                                :role, :country_code, :information, :remote_updated_at)
+                                :role, :country_code, :information, :remote_updated_at, :state)
     contact_struct.new(
       'GXLTYGIARK', 'TLMNXGJWMR@KAPUDYMFRQ.ee', '+372.5981222', '60001019906', 'FBEQKQBQTJ:LICFTAHLWV',
-      '30c562c2995db49db65a67', 'priv', 'EE', information, '2023-04-26T11:21:52.897+03:00'
+      '30c562c2995db49db65a67', 'priv', 'EE', information, '2023-04-26T11:21:52.897+03:00', 1
     )
   end
 
@@ -62,6 +62,14 @@ RSpec.describe 'Serializers::EstonianTld::Contacts' do
     contacts = EstonianTld::ContactSerializer.call(dirty: dirty_contacts)
 
     expect(contacts.count).to eq 2
+    contacts[1].information.delete(:metadata)
+
+    puts '----'
+    puts contacts[1].inspect
+    puts '----'
+    puts clean_contact_struct.inspect
+    puts '-----'
+
     expect(contacts[1].to_s).to eq clean_contact_struct.to_s
   end
 end

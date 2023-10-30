@@ -33,7 +33,11 @@
     <%= button_to t(:sign_in), "/auth/tara?env=registrar", data: { turbo: false }, class: "text-gray-600 inline-flex w-full justify-center rounded-md border  bg-white py-2 px-4 text-sm font-medium  shadow-sm  hover:text-white mt-12" %>
   </div>
 
-  <div class='mt-6 border-t pt-2'>
+  <div class='mt-6 pt-2'>
     <%= link_to t('.for_registrant'), new_sessions_path, class: 'text-blue-400 hover:text-blue-500', layout: 'sessions' %>
+  </div>
+
+  <div class='mt-6 pt-2'>
+    <%= link_to t('.for_superuser'), new_admin_sessions_path, class: 'text-blue-400 hover:text-blue-500', layout: 'sessions' %>
   </div>
 </div>

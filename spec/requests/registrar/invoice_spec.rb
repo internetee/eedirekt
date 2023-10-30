@@ -8,7 +8,7 @@ RSpec.describe Registrar::InvoicesController, type: :request do
   let(:tld) { create(:tld) }
   let(:invoice) { create(:invoice) }
 
-  let(:contact) { create(:contact) }
+  let(:contact) { create(:contact, ident: '60001019939') }
 
   let(:valid_params) do
     {

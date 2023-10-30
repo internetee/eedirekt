@@ -4,6 +4,7 @@ module Admin
 
     def show
       @invoice_group = Setting.with_group('invoice')
+      @contact_group = Setting.with_group('contacts')
     end
 
     def update

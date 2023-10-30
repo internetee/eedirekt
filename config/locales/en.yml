@@ -3,10 +3,12 @@ en:
   '':
     epp_authorization_error: Epp authorization error
     incorrect_details: Incorrect details
+    invalid_email_format: Invalid email format
     invoice_number_exceeded: Invoice number exceeded
     legal_document: Legal document
     min_domain_contacts: Min domain contacts
     success: Success
+  contact: Contacts
   add_contact: Add contact
   add_domain: Add domain
   add_invoice: Add invoice
@@ -44,6 +46,8 @@ en:
       create:
         success: Success
       new:
+        for_registrant: For registrant
+        for_registrar: For registrar
         password: Password
         submit: Submit
         title: Title
@@ -62,6 +66,11 @@ en:
       callback:
         signed_in: Signed in
   choose_file: Choose file
+  common:
+    statuses_info:
+      component:
+        status_notes: Status notes
+        statuses: Statuses
   concerns:
     tlds:
       est_tld_validation:
@@ -69,7 +78,24 @@ en:
           ssl_error: Ssl error
         render_forbidden_error:
           epp_forbidden: Epp forbidden
-  contacts: Contacts
+  contacts:
+    info:
+      component:
+        country_code: Country code
+        email: Email
+        identity_code: Identity code
+        name: Name
+        need_synchronize: Need synchronize
+        no_code_need_synchronize: No code need synchronize
+        no_country_code: No country code
+        no_statuses_need_synchronize: No statuses need synchronize
+        object_code: Object code
+        phone: Phone
+        postal_address: Postal address
+        registry_created_at: Registry created at
+        registry_updated_at: Registry updated at
+        state: State
+        statuses: Statuses
   dashboard: Dashboard
   dashboards:
     admin:
@@ -85,6 +111,8 @@ en:
       notification_title: Notification title
       view_all: View all
     registrar:
+      balance: Balance
+      connection_error: Connection error
       contacts: Contacts
       domains: Domains
       invoices: Invoices
@@ -101,6 +129,9 @@ en:
       authentication_information_missing: Authentication information missing
       passwords_do_not_match: Passwords do not match
   form:
+    country_select_input:
+      component:
+        select_country: Select country
     image_field:
       component:
         drag_and_drop: Drag and drop
@@ -110,6 +141,7 @@ en:
   incorrect_details: Incorrect details
   invoice_number_exceeded: Invoice number exceeded
   invoices: Invoices
+  is_invalid: Is invalid
   login_required: Login required
   min_domain_contacts: Min domain contacts
   min_nameservers: Min nameservers
@@ -197,6 +229,8 @@ en:
         submit: Submit
         title: Title
       filter:
+        created_at_from: Created at from
+        created_at_to: Created at to
         domain_status: Domain status
         search_by_contact_name: Search by contact name
         search_by_contact_name_label: Search by contact name label
@@ -254,12 +288,15 @@ en:
         name: Name
         nameserver_create_html: "<a href=%{href} class='text-blue-400 href:text-blue-600'>Create</a>"
         nameservers: Nameservers
+        need_to_synchronize: Need to synchronize
         no_dnskey: No DNS Keys
         no_nameservers: No nameservers
         registered: Registered
+        registered_at: Registered at
         registrant_name: Registrant name
         'registrant_name ': 'Registrant name '
         renew: Renew
+        state: State
         statuses: Statuses
         transfer_code: Transfer code
         updated_at: Updated at
@@ -330,6 +367,8 @@ en:
     renews:
       show:
         description: Description
+        expire_date: Expire date
+        renew: Renew
         submit: Submit
         title: Title
         transfer: Transfer
@@ -342,6 +381,7 @@ en:
         success: Success
       new:
         for_registrant: For registrant
+        for_superuser: For superuser
         login_with_eeid: Login with eeid
         or: Or
         password: Password
@@ -378,6 +418,7 @@ en:
     new:
       for_registrant_title: For registrant title
       for_registrar: For registrar
+      for_superuser: For superuser
       introduction_title: Introduction title
       login_with_eeid: Login with eeid
   settings:

@@ -5,7 +5,7 @@ RSpec.describe Registrar::DomainsController, type: :request do
   let(:super_user) { create(:super_user) }
 
   let(:tld) { create(:tld) }
-  let(:registrant) { create(:contact) }
+  let(:registrant) { create(:contact, ident: '60001019961') }
   let(:domain) { create(:domain, registrant: registrant)}
 
   let(:valid_params) do
@@ -17,11 +17,11 @@ RSpec.describe Registrar::DomainsController, type: :request do
         reserved_pw: 'password',
         domain_contacts_attributes: [
           {
-            contact_id: create(:contact).id,
+            contact_id: create(:contact, ident: '60001019939').id,
             type: 'AdminDomainContact'
           },
           {
-            contact_id: create(:contact).id,
+            contact_id: create(:contact, ident: '60001019950').id,
             type: 'TechDomainContact'
           }
         ],
@@ -58,11 +58,11 @@ RSpec.describe Registrar::DomainsController, type: :request do
         reserved_pw: 'password',
         domain_contacts_attributes: [
           {
-            contact_id: create(:contact).id,
+            contact_id: create(:contact, ident: '60001019939').id,
             type: 'AdminDomainContact'
           },
           {
-            contact_id: create(:contact).id,
+            contact_id: create(:contact, ident: '60001019950').id,
             type: 'TechDomainContact'
           }
         ],

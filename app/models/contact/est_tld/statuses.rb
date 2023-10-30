@@ -17,6 +17,7 @@ module Contact::EstTld::Statuses
   # services to determine existing object associations.
   # "linked" status MAY be combined with any status.
   LINKED = 'linked'.freeze
+  NOT_LINKED = 'not_linked'.freeze
 
   # This is the normal status value for an object that has no pending
   # operations or prohibitions. This value is set and removed by the
@@ -70,7 +71,7 @@ module Contact::EstTld::Statuses
     CLIENT_TRANSFER_PROHIBITED,
     SERVER_TRANSFER_PROHIBITED, CLIENT_UPDATE_PROHIBITED, SERVER_UPDATE_PROHIBITED,
     OK, PENDING_CREATE, PENDING_DELETE, PENDING_TRANSFER,
-    PENDING_UPDATE, LINKED
+    PENDING_UPDATE, LINKED, NOT_LINKED
   ].freeze
 
   CLIENT_STATUSES = [

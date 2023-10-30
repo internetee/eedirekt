@@ -42,7 +42,7 @@ module Sidebar
             },
             {
               href: registrar_contacts_path,
-              name: I18n.t('contacts'),
+              name: I18n.t('contact'),
               heroicon_name: 'user'
             },
             {

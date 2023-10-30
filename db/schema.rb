@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_124831) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "status", ["issued", "paid", "canceled", "failed", "overdue"]
   create_enum "status_enum", ["issued", "paid", "canceled", "failed", "overdue"]
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -73,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
     t.datetime "remote_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 0
   end
 
   create_table "dnssec_keys", force: :cascade do |t|
@@ -109,6 +109,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
     t.bigint "registrant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state", default: 0
     t.index ["registrant_id"], name: "index_domains_on_registrant_id"
   end
 
@@ -168,6 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_084201) do
     t.string "format", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
     t.index ["code"], name: "index_settings_on_code", unique: true
   end
 

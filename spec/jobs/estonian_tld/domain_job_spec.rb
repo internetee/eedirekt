@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EstonianTld::DomainsJob, type: :job do
   let(:contact1) { create(:contact) }
-  let(:contact2) { create(:contact) }
+  let(:contact2) { create(:contact, ident: '60001019906') }
   let(:domain) { build(:domain) }
 
   let(:mock_domain_list) do

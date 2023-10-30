@@ -8,6 +8,9 @@
     </dl>
   </td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><%= domain.registrant.name %></td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+    <span class="py-1 px-4 rounded-3xl text-white <%= domain.active? ? 'bg-green-500' : 'bg-gray-500' %>"><%= domain.state %></span>
+  </td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= domain.expire_at %></td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
     <%= link_to t('.renew'), registrar_renews_path(uuid: domain.uuid), class: "px-3 py-1 rounded-md text-white bg-green-400 hover:bg-green-500 cursor-pointer", target: '_top' %>

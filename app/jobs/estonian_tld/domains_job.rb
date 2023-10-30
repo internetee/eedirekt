@@ -36,6 +36,7 @@ class EstonianTld::DomainsJob < ApplicationJob
     (STEP..total_count + STEP - 1).step(STEP) do |offset|
       url_params[:offset] = offset
       dirty_domains = EstonianTld::DomainService.new(tld:).domain_list(url_params:)
+
       domain_creator(dirty_domains)
 
       EstonianTld::InformAdminService.call({tld: Tld.first, message: "Processed domains #{url_params[:offset]} of #{total_count}"})
@@ -58,7 +59,11 @@ class EstonianTld::DomainsJob < ApplicationJob
       domain_dnskeys = EstonianTld::DomainDnskeySerializer.call(dirty:)
 
       d = ::Domain.find_by(name: domain.name)
-      next if d.present?
+      if d.present?
+        d.update(domain.to_h)
+
+        next
+      end
 
       ActiveRecord::Base.transaction do
         begin

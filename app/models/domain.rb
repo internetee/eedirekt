@@ -7,6 +7,8 @@ class Domain < ApplicationRecord
     ['1 month', 1], ['3 month', 3], ['6 month', 6], ['1 year', 12], ['2 year', 24]
   ].freeze
 
+  enum state: { draft: 0, active: 1 }
+
   has_many :domain_contacts, dependent: :destroy
   has_many :contacts, through: :domain_contacts, source: :contact
 
@@ -16,7 +18,7 @@ class Domain < ApplicationRecord
   has_many :admin_contacts, through: :admin_domain_contacts, source: :contact
   has_many :tech_contacts, through: :tech_domain_contacts, source: :contact
 
-  store_accessor :information
+  store_accessor :information, :status_notes, :metadata
   attr_accessor :period
 
   accepts_nested_attributes_for :domain_contacts, allow_destroy: true
@@ -48,5 +50,13 @@ class Domain < ApplicationRecord
 
   def reserved_pw=(value)
     self.information = (information || {}).merge('reserved_pw' => value)
+  end
+
+  def registry_created_at
+    metadata['registry_created_at'] if metadata
+  end
+
+  def registry_updated_at
+    metadata['registry_updated_at'] if metadata
   end
 end

@@ -3,12 +3,14 @@ require 'rails_helper'
 RSpec.describe Contact, type: :model do
   describe 'validations' do
     it 'should be valid with valid country_code and address_country_code' do
-      contact = Contact.new(country_code: 'US', address_country_code: 'US')
+      contact = Contact.new(country_code: 'US', address_country_code: 'US', phone_code: '372', phone: '1234567890',
+                            email: Faker::Internet.email, name: Faker::Name.name, role: 'priv')
       expect(contact).to be_valid
     end
 
     it 'should be valid with null country_code and address_country_code' do
-      contact = Contact.new(country_code: nil, address_country_code: nil)
+      contact = Contact.new(country_code: nil, address_country_code: nil, phone_code: '372', phone: '1234567890',
+                            email: Faker::Internet.email, name: Faker::Name.name, role: 'priv')
       expect(contact).to be_valid
     end
 
@@ -33,7 +35,7 @@ RSpec.describe Contact, type: :model do
   describe 'address and registrar methods' do
     let(:contact) do
       Contact.new(
-        address: { 'zip' => '12345', 'city' => 'New York', 'state' => 'NY', 'street' => '123 Main St',
+        address: { 'zip' => '12345', 'city' => 'New York', 'state_address' => 'NY', 'street' => '123 Main St',
                    'country_code' => 'US' },
         registrar: { 'name' => 'Example Registrar', 'website' => 'https://www.example.com' }
       )
@@ -52,9 +54,9 @@ RSpec.describe Contact, type: :model do
     end
 
     it 'should handle state getter and setter' do
-      expect(contact.state).to eq('NY')
-      contact.state = 'CA'
-      expect(contact.state).to eq('CA')
+      expect(contact.state_address).to eq('NY')
+      contact.state_address = 'CA'
+      expect(contact.state_address).to eq('CA')
     end
 
     it 'should handle street getter and setter' do
