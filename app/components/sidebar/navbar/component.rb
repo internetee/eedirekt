@@ -57,7 +57,11 @@ module Sidebar
             }
           ]
         else
-          []
+          [{
+            href: registrant_domains_path,
+            name: I18n.t('domains'),
+            heroicon_name: 'globe-europe-africa'
+          },]
         end
       end
     end

@@ -1,0 +1,29 @@
+<div class='flex items-center space-x-2 space-y-3 contact-item' data-controller="form--autocomplete" data-form--autocomplete-search-url-value="<%= search_registrar_contacts_path %>">
+  <div class='w-96'>
+    <%= component 'form/autocomplete_input', form: field, attribute: :contact, heroicon_name: 'user', placeholder: 'example.ee',
+      data_attributes: { action: "input->form--autocomplete#search", form__autocomplete_target: "input" },
+      value: field&.object&.contact %>
+  </div>
+
+  <%= field.hidden_field :contact_id, data: { form__autocomplete_target: "hiddenInput" } %>
+
+  <%= field.hidden_field :_destroy %>
+
+  <div class='flex items-baseline space-x-6'>
+    <div class="space-y-4 flex items-baseline space-x-4">
+      <div class="flex items-center">
+        <%= field.radio_button :type, "AdminDomainContact", checked: true, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+        <%= field.label :domain_contact_type, t('.admin'), class: 'ml-3 block text-sm font-medium text-gray-700' %>
+      </div>
+
+      <div class="flex items-center">
+        <%= field.radio_button :type, "TechDomainContact", class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" %>
+        <%= field.label :domain_contact_type, t('.tech'), class: 'ml-3 block text-sm font-medium text-gray-700' %>
+      </div>
+    </div>
+
+    <% if remove_button %>
+      <a class='cursor-pointer rounded-full p-1 bg-red-400 hover:bg-red-600' data-action="click->form--add-element#removeElement"><%= heroicon 'trash', variant: :solid, options: { class: 'h-5 w-5 text-white' } %></a>
+    <% end %>
+  </div>
+</div>

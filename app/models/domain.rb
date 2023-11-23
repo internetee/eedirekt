@@ -44,6 +44,10 @@ class Domain < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-\.]+\z/ }
 
+  def self.build_from_registrar(registrar)
+    new
+  end
+
   def reserved_pw
     information['reserved_pw'] if information
   end

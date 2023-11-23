@@ -13,7 +13,12 @@ module EstonianTld
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
     def call
-      notification = EstonianTld::NotificationSerializer.call(body: [dirty.body['data']['notification']]).first
+      notification = if dirty.body['data']['notification'].blank?
+                       []
+                     else
+                       EstonianTld::NotificationSerializer.call(body: [dirty.body['data']['notification']]).first
+                     end
+
       notifications_count = dirty.body['data']['notifications_count']
       username = dirty.body['data']['username']
       balance = EstonianTld::BalanceSerializer.call(body: dirty.body['data']['balance'])

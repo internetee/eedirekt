@@ -45,7 +45,15 @@ module Registrar
     end
 
     def search
+      puts '----'
+      puts params[:query]
+      puts '-----'
+
       @contacts = Contact.search(params[:query])
+
+      puts '==== contacts'
+      puts @contacts.inspect
+      puts '====='
 
       render json: @contacts.limit(5).map(&:as_json)
     end

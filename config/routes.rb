@@ -51,4 +51,8 @@ Rails.application.routes.draw do
     resource :sessions, only: %i[new create destroy]
     resource :transfers, only: %i[show update]
   end
+
+  namespace :registrant do
+    resources :domains, param: :uuid
+  end
 end
