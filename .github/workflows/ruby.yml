@@ -44,6 +44,7 @@ jobs:
           RAILS_ENV: test
           COVERAGE: true
           DISABLE_SPRING: 1
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
           cp config/application.yml.example config/application.yml
           cp config/database_ci.yml config/database.yml
@@ -57,3 +58,4 @@ jobs:
       - name: Dependabot
         if: ${{ github.event.label.name == 'dependencies' }}
         run: bundle exec rails assets:precompile
+
