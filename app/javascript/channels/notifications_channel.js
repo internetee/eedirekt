@@ -10,8 +10,6 @@ consumer.subscriptions.create("NotificationsChannel", {
   },
 
   received(data) {
-    // Отобразите оповещение на странице
-    // Например, добавьте сообщение в список оповещений
     const notificationsList = document.querySelector('#notifications');
     const listItem = document.createElement('li');
     listItem.innerText = data.message;

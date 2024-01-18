@@ -14,7 +14,7 @@ module EstonianTld
     end
 
     def create_contact(payload: nil)
-      connect(url: "#{@url}/contacts", method: 'post', params: { contact: payload.payload.compact_blank.as_json }, headers: nil)
+      connect(url: "#{@url}/contacts", method: 'post', params: { contact: payload.compact_blank.as_json }, headers: nil)
     end
   end
 end

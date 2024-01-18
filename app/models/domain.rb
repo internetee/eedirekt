@@ -44,9 +44,15 @@ class Domain < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-\.]+\z/ }
 
-  def self.build_from_registrar(registrar)
-    new
-  end
+  # def self.build_from_registrar(_payload: {})
+  #   new(
+      
+  #   )
+  # end
+
+  # def self.initiate_technical_contact
+  #   Contact.find_by_code(Setting.code_of_technical_contact)
+  # end
 
   def reserved_pw
     information['reserved_pw'] if information
@@ -62,5 +68,22 @@ class Domain < ApplicationRecord
 
   def registry_updated_at
     metadata['registry_updated_at'] if metadata
+  end
+
+  def to_h
+    {
+      id: id,
+      uuid: uuid,
+      name: name,
+      statuses: statuses,
+      remote_created_at: remote_created_at,
+      remote_updated_at: remote_updated_at,
+      expire_at: expire_at,
+      information: information,
+      registrant_id: registrant_id,
+      created_at: created_at,
+      updated_at: updated_at,
+      state: state
+    }
   end
 end

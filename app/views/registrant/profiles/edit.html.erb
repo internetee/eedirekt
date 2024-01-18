@@ -6,10 +6,8 @@
     </div>
   </div>
 
-  <h1 class='text-black text-2xl'>Information: Need to complete profile before user can create domain</h1>
-
   <div class='px-4 py-5 sm:px-6 container mx-auto rounded-md shadow-md border border-gray-300 mt-12'>
-      <%= form_with model: @domain, url: registrant_domains_path, class: 'w-full mt-8 space-y-3 flex justify-center flex-col' do |form| %>
+      <%= form_with model: current_user, url: registrant_profiles_path, method: :put, class: 'w-full mt-8 space-y-3 flex justify-center flex-col' do |form| %>
 
         <%= render 'form', form: form %>
 
@@ -17,8 +15,5 @@
           <%= form.submit t('.submit'), class: 'mt-8 text-gray-600 w-64 rounded-md border border-[#A99F96] bg-white py-2 px-4 text-sm font-medium text-[#A99F96] shadow-sm hover:bg-[#A99F96] hover:text-white mt-2 cursor-pointer' %>
         </div>
       <% end %>
-
-      <div id="payment_method">
-      </div>
-  </div>
+  </div>  
 </div>  

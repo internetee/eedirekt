@@ -5,3 +5,7 @@ en:
         roles:
           priv: "Private"
           org: "Organization"
+      user:
+        roles:
+          priv: "Private"
+          org: "Organization"

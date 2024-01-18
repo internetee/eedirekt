@@ -12,7 +12,7 @@ module Registrant
 
     def call
       @user = User.from_omniauth(tara_params)
-      @user.save if @user.has_changes_to_save?
+      @user.save! if @user.has_changes_to_save?
 
       registrant_create_app_session
     end
@@ -20,11 +20,7 @@ module Registrant
     private
 
     def registrant_create_app_session
-      @user.app_sessions.create
-    end
-
-    def registrar_create_app_session
-      @registrar.app_sessions.create
+      @user.app_sessions.create!
     end
   end
 end

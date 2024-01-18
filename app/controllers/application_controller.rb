@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     @tld ||= Tld.first
   end
 
+  def current_api_adapter
+    EstonianReppAdapter.new
+  end
+
   private
 
   def redirect_to_welcome_page

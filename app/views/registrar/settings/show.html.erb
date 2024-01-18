@@ -1,0 +1,67 @@
+<div class="container mx-auto mt-12 px-4 sm:px-6 lg:px-8" data-controller='form--add-input' data-form--add-input-parent-deletable-class='deletable'>
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-semibold text-gray-900"><%= t('.title') %></h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
+    </div>
+  </div>
+  <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg p-8">
+    <%= form_with url: registrar_settings_path, method: :patch, class: 'w-full mt-8 space-y-4' do |form| %>
+
+      <% @registrar_group.each do |setting| %>
+        <div class='flex flex-col items-center space-y-2'>
+          <%= form.label setting.code, class: 'block text-sm font-bold text-gray-700' %>
+
+          <% if setting.format == 'array' %>
+            <div data-form--add-input-target='container'>
+              <% setting.retrieve.each do |value| %>
+                <div class="relative mt-1 rounded-md shadow-md border border-gray-300 w-96">
+                  <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <%= heroicon 'cog', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+                  </div>
+                  <%= form.text_field "[settings][#{setting.id}][]", placeholder: t(".#{setting.code}"), value: value, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class='flex mt-3'>
+              <button type='button' class='bg-violet-500 px-4 py-2 rounded text-white' data-action='form--add-input#addContact'><%= t('.add_elemnt') %></button>
+            </div>
+
+            <template data-form--add-input-target='template' >
+              <div class="relative mt-1 rounded-md w-96 deletable">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <%= heroicon 'cog', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+                </div>
+                <div class='flex items-center space-x-3'>
+                  <%= form.text_field "[settings][#{setting.id}][]", placeholder: t(".#{setting.code}"), class: 'block shadow-md w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+                  <%= tag.a class: 'font-bold text-red-500 cursor-pointer mr-6', data: { action: 'form--add-input#remove' } do %>X<% end %>
+                </div>
+              </div>
+            </template>
+          <% elsif setting.format == 'boolean' %>
+            <div class="relative mt-1 rounded-md shadow-md border border-gray-300 w-96">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <%= heroicon 'cog', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+              </div>
+              <%= form.select "[settings][#{setting.id}]", options_for_select([['true', true], ['false', false]], setting.value), {}, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+            </div>
+          <% else %>
+            <div class="relative mt-1 rounded-md shadow-md border border-gray-300 w-96">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <%= heroicon 'cog', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
+              </div>
+              <%= form.text_field "[settings][#{setting.id}", placeholder: t(".#{setting.code}"), value: setting.value, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
+            </div>
+
+            <%= form.hidden_field :id, value: "[settings][#{setting.id}" %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class='w-full flex justify-end'>
+        <%= form.submit t('.submit'), class: "text-gray-600 inline-flex w-72 justify-center rounded-md border border-[#DDA77B] bg-white py-2 px-4 text-sm font-medium text-[#DDA77B] shadow-sm hover:bg-[#DDA77B] hover:text-white mt-2 cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+</div>

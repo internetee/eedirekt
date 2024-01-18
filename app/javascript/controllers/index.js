@@ -19,6 +19,9 @@ application.register("form--add-element", Form__AddElementController);
 import Form__MultiSelectController from "./form/multi_select_controller";
 application.register("form--multi-select", Form__MultiSelectController);
 
+import Form__AddInputController from "./form/add_input_controller";
+application.register("form--add-input", Form__AddInputController);
+
 import Behaviour__RemoveableController from "./behaviour/removeable_controller";
 application.register("behaviour--removeable", Behaviour__RemoveableController);
 

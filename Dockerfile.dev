@@ -16,10 +16,11 @@ RUN apk add --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpin
   postgresql13-dev \
   postgresql13 \
   postgresql13-client \
+  gcompat \
 #   python2 \
   tzdata
 
-ENV BUNDLER_VERSION 2.2.24
+ENV BUNDLER_VERSION 2.4.6
 ENV BUNDLE_JOBS 8
 ENV BUNDLE_RETRY 5
 ENV BUNDLE_CACHE_ALL true

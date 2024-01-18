@@ -21,7 +21,7 @@ module Registrar
     private
 
     def registrar_create_app_session
-      @registrar.app_sessions.create
+      @registrar.app_sessions.create!
     end
   end
 end

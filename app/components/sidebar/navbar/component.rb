@@ -54,14 +54,26 @@ module Sidebar
               href: registrar_poll_messages_path,
               name: I18n.t('poll_messages'),
               heroicon_name: 'envelope-open'
+            },
+            {
+              href: registrar_settings_path,
+              name: I18n.t('settings_item'),
+              heroicon_name: 'cog'
             }
           ]
         else
-          [{
-            href: registrant_domains_path,
-            name: I18n.t('domains'),
-            heroicon_name: 'globe-europe-africa'
-          },]
+          [
+            {
+              href: registrant_domains_path,
+              name: I18n.t('domains'),
+              heroicon_name: 'globe-europe-africa'
+            },
+            {
+              href: edit_registrant_profiles_path,
+              name: I18n.t('profile'),
+              heroicon_name: 'user'
+            }
+        ]
         end
       end
     end

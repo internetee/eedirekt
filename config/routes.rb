@@ -50,9 +50,16 @@ Rails.application.routes.draw do
     resources :renews, param: :uuid, only: %i[show update]
     resource :sessions, only: %i[new create destroy]
     resource :transfers, only: %i[show update]
+    resource :settings, only: %i[show update]
   end
 
   namespace :registrant do
     resources :domains, param: :uuid
+    resource :profiles, only: %i[edit update]
+
+    scope module: :invoices do
+      resource :pay_invoices, only: %i[create]
+      match '/pay_invoices_callback', via: %i[get], to: 'pay_invoices#callback', as: :pay_invoices_callback
+    end
   end
 end
