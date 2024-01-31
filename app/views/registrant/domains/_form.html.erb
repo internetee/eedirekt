@@ -7,9 +7,11 @@
       <%= component 'form/text_input', form: form, attribute: :name, heroicon_name: 'user', placeholder: 'example.ee' %>
     </div>
 
-    <div class='w-96'>
-      <%= component 'form/text_input', form: form, attribute: :registrant, heroicon_name: 'user', placeholder: 'example.ee' %>
-    </div>
+    <% if false %>
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :registrant, heroicon_name: 'user', placeholder: 'example.ee' %>
+      </div>
+    <% end %>
 
     <div class='w-96'>
       <%= component 'form/text_input', form: form, attribute: :reserved_pw, heroicon_name: 'user', placeholder: 'example.ee' %>

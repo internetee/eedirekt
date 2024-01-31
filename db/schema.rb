@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_17_115116) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_29_132536) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -160,6 +160,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_17_115116) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "errors_in_response", default: {}
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.index ["invoice_id"], name: "index_pending_actions_on_invoice_id"
     t.index ["user_id"], name: "index_pending_actions_on_user_id"
   end

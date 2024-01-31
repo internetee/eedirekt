@@ -30,8 +30,10 @@ class User < ApplicationRecord
   after_find :split_phone_into_code_and_number
 
   def self.from_omniauth(tara_params)
-    full_name = "#{tara_params.dig('info', 'given_name')} #{tara_params.dig('info', 'family_name')}"
+    full_name = "#{tara_params.dig('info', 'first_name')} #{tara_params.dig('info', 'last_name')}"
     ident = tara_params['uid'][2..]
+
+    print("TARA params: #{tara_params}")
 
     user = User.find_or_initialize_by(ident:)
     user.name = full_name
@@ -53,6 +55,11 @@ class User < ApplicationRecord
 
   def birthday(identity_code:)
     Date.parse(identity_code.slice(1..6))
+  end
+
+  def domains
+    contact = Contact.find_by(code: code)
+    Domain.where(registrant_id: contact.id)
   end
 
 end

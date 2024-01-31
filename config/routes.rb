@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   namespace :registrant do
     resources :domains, param: :uuid
     resource :profiles, only: %i[edit update]
+    resources :pending_actions, param: :uuid, only: %i[show]
 
     scope module: :invoices do
       resource :pay_invoices, only: %i[create]

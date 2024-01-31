@@ -11,20 +11,32 @@
     </dl>
   </td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-    <span class="py-1 px-4 rounded-3xl text-white bg-green-500"><%= pending_action.status %></span>
+    <% if pending_action.status == 'pending' %>
+      <span class="py-1 px-4 rounded-3xl text-white bg-yellow-500"><%= pending_action.status %></span>
+    <% elsif pending_action.status == 'completed' %>
+      <span class="py-1 px-4 rounded-3xl text-white bg-green-500"><%= pending_action.status %></span>
+    <% else %>
+      <span class="py-1 px-4 rounded-3xl text-white bg-red-500"><%= pending_action.status %></span>
+    <% end %>
   </td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">TODO: invoice link <%= link_to pending_action.invoice.number, '#', class: 'text-blue-400' if pending_action.invoice.present? %></td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-    <span class="py-1 px-4 rounded-3xl text-white bg-green-500">
-      <%= pending_action&.invoice&.status %>
-    </span>
+    <% if pending_action&.invoice&.status == 'issued' %>
+      <span class="py-1 px-4 rounded-3xl text-white bg-yellow-500"><%= pending_action&.invoice&.status %></span>
+    <% elsif pending_action&.invoice&.status == 'paid' %>
+      <span class="py-1 px-4 rounded-3xl text-white bg-green-500"><%= pending_action&.invoice&.status %></span>
+    <% elsif pending_action&.invoice&.status == 'canceled' %>
+      <span class="py-1 px-4 rounded-3xl text-white bg-gray-500"><%= pending_action&.invoice&.status %></span>
+    <% else %>
+      <span class="py-1 px-4 rounded-3xl text-white bg-red-500"><%= pending_action&.invoice&.status %></span>
+    <% end %>
   </td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><%= pending_action.created_at %></td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= l(Time.zone.now + 1.year) %></td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
     <%= button_to t('.pay_invoice'), registrant_pay_invoices_path(uuid: pending_action&.invoice&.uuid), class: "px-3 py-1 rounded-md text-white bg-green-400 hover:bg-green-500 cursor-pointer", target: '_top' %>
 
-    <%= link_to t('.show'), '#', class: "px-3 py-1 rounded-md text-white bg-yellow-400 hover:bg-yellow-500 cursor-pointer", target: '_top' %>
+    <%= link_to t('.show'), registrant_pending_action_path(uuid: pending_action.uuid), class: "px-3 py-1 rounded-md text-white bg-yellow-400 hover:bg-yellow-500 cursor-pointer", target: '_top' %>
 
     <%= link_to t('.edit'), '#', class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer", target: '_top' %>
 

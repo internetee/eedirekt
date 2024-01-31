@@ -1,0 +1,24 @@
+<tr>
+  <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+    <%= domain.name %>
+    <dl class="font-normal lg:hidden">
+      <dt class="sr-only"><%= domain.name %></dt>
+      <dd class="mt-1 truncate text-gray-700"><%= domain.name %></dd>
+      <dt class="sr-only sm:hidden">TODO: expire at</dt>
+    </dl>
+  </td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><%= domain.registrant.name %></td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+    <span class="py-1 px-4 rounded-3xl text-white <%= domain.state == "draft" ? "bg-gray-500" : "bg-green-500" %>"><%= domain.state %></span>
+  </td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">TODO: expire at</td>
+  <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
+    <%= link_to t('.renew'), '#', class: "px-3 py-1 rounded-md text-white bg-green-400 hover:bg-green-500 cursor-pointer", target: '_top' %>
+
+    <%= link_to t('.show'), '#', class: "px-3 py-1 rounded-md text-white bg-yellow-400 hover:bg-yellow-500 cursor-pointer", target: '_top' %>
+
+    <%= link_to t('.edit'), '#', class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer", target: '_top' %>
+
+    <%= button_to t('.delete'), '#', method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer", form: { data: { turbo_confirm: t(".confirm_delete") } } %>
+  </td>
+</tr>

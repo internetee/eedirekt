@@ -1,7 +1,7 @@
 class EstonianReppAdapter
   include AdapterInterface
 
-  def create_domain(payload:)
-    EstonianTld::DomainService.new(tld: Tld.first).create(payload:)
+  def create_domain(domain:, pending_action:)
+    EstonianTld::DomainService.new(tld: Tld.first).create(domain, pending_action)
   end
 end

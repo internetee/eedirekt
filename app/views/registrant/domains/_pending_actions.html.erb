@@ -20,11 +20,11 @@
       </table>
     </div>
 
-    <div class="flex justify-center">
-      <%# if @pagy.pages > 1 %>
+    <div class="flex justify-center mb-6">
+      <% if @pagy.pages > 1 %>
         <div class="footer flex text-center mt-4">
-          <%#== pagy_nav(@pagy)%>
+          <%== pagy_nav(@pagy)%>
         </div>
-      <%# end %>
+      <% end %>
     </div>
   <%# end %>

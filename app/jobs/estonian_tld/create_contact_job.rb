@@ -4,10 +4,6 @@ class EstonianTld::CreateContactJob < ApplicationJob
   def perform(user)
     contact = Contact.find_by(ident: user.ident)
 
-    puts '===='
-    puts contact
-    puts contact.code.present?
-
     if contact && contact.code.present?
       puts '== AU PIDAR'
       user.update!(code: contact.code) if user.code.blank?
@@ -17,8 +13,6 @@ class EstonianTld::CreateContactJob < ApplicationJob
     payload = contact_payload(user)
     response = EstonianTld::ContactService.new(tld: Tld.first).create_contact(payload:)
 
-    puts response
-
     if response.success
       code = response.body["data"]["contact"]["code"]
       
@@ -26,22 +20,16 @@ class EstonianTld::CreateContactJob < ApplicationJob
         ActiveRecord::Base.transaction do
           contact.update!(code: code)
           user.update!(code: code)
-          puts "ai ame here"
         end
       else
         ActiveRecord::Base.transaction do
           user.update!(code: code)
           create_contact(user)
-
-          puts "ai ame here"
-
         end
       end
     else
       Rails.logger.info response.body["message"]
     end
-
-    puts '====='
   end
 
   def create_contact(registrant_user)

@@ -6,6 +6,7 @@
       <% if admin? %>
         <%= turbo_stream_from "dashboards_#{@tld.uuid}" %>
         <div id="admin_banner"></div>
+        <div id="registrant_banner"></div>
 
         <%= render 'dashboards/admin' %>
       <% elsif registrar? %>

@@ -27,6 +27,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.5.0)
+      concurrent-ruby (~> 1.0)
     actioncable (7.0.8)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
@@ -235,6 +237,8 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.4-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     omniauth (2.1.1)
@@ -443,10 +447,11 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
-  x86_64-linux
   aarch64-linux-musl
+  x86_64-linux
 
 DEPENDENCIES
+  aasm
   annotate
   attr_encrypted
   bcrypt (~> 3.1.7)

@@ -51,9 +51,16 @@ module Registrant
         status = parsed_response[:payment_state] == 'settled' ? :paid : :failed
 
         invoice = Invoice.find_by!(number: invoice_number)
-        invoice.update!(status: status)
+        
+        if invoice.update(status: status)
+          EstonianTld::CreateDomainJob.perform_later(invoice.pending_action)
 
-        redirect_to registrant_domains_path
+          flash.notice = t('.domain_is_creating')
+          redirect_to registrant_domains_path, status: :see_other
+        else
+          flash.alert = t('.failed')
+          redirect_to registrant_domains_path, status: :see_other
+        end
       end
 
       private
