@@ -20,7 +20,19 @@ module EstonianTld
     private
 
     def parse_domain(domain, pending_action)
+      puts '-------- parse conacts --------'
+      puts contacts(domain.domain_contacts, 'AdminDomainContact')
+      puts contacts(domain.domain_contacts, 'TechDomainContact')
+      puts '-------- parse conacts --------'
+
+      # TODO: Some contact couldn't have code, so we need to create before contact in registry side
+      # and then we should create domain
+
       period_in_months = pending_action.info['period'].to_i
+
+      puts '--- DNS KEYS ---'
+      puts dnssec_keys(domain.dnssec_keys)
+      puts '--- DNS KEYS ---'
 
       {
         domain: {
@@ -30,21 +42,33 @@ module EstonianTld
           period_unit: 'm',
           period: period_in_months.to_i,
           nameservers_attributes: ns_attrs(domain.nameservers),
-          admin_contacts: contacts(domain.contacts, 'admin'),
-          tech_contacts: contacts(domain.contacts, 'tech'),
-          dnskeys_attributes: domain.dnssec_keys,
+          admin_contacts: contacts(domain.domain_contacts, 'AdminDomainContact'),
+          tech_contacts: contacts(domain.domain_contacts, 'TechDomainContact'),
+          dnskeys_attributes: dnssec_keys(domain.dnssec_keys),
         }
       }
     end
 
     def ns_attrs(nameservers)
-      nameservers.map { |n| n.extract!(:hostname, :ipv4, :ipv6) }
+      nameservers.map { |n| { hostname: n.hostname, ipv4: n.ipv4, ipv6: n.ipv6 } }
+    end
+
+    def dnssec_keys(dnssec_keys)
+      dnssec_keys.map do |k|
+        {
+          flags: k.flags.to_s,
+          protocol: k.protocol.to_s,
+          alg: k.algorithm.to_s,
+          public_key: k.public_key
+        }
+      end
     end
 
     def contacts(contacts, type)
       return [] unless contacts
 
-      contacts.select { |c| c[:type] == type }.pluck(:code)
+      contact_ids = contacts.select { |c| c[:type] == type }.pluck(:contact_id)
+      Contact.where(id: contact_ids).map(&:code)
     end
   end
 end

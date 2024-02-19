@@ -29,7 +29,7 @@ class PendingAction < ApplicationRecord
 
   def unable_to_update
     return if pending?
-    return if invoice.issued?
+    return if invoice.issued? || invoice.paid?
 
     errors.add(:base, I18n.t('errors.messages.unable_to_update'))
   end
@@ -49,9 +49,7 @@ class PendingAction < ApplicationRecord
 
   validates :user, :info, :action, :status, presence: true
 
-  def create_invoice_by_pending_action
-    # TODO: Implement sum depends of action and price list of registrar
-
-    Invoice.create_invoice_for_registrant(registrant_user: user, sum: 100, pending_action: self)
+  def create_invoice_by_pending_action(price)
+    Invoice.create_invoice_for_registrant(registrant_user: user, sum: price, pending_action: self)
   end
 end

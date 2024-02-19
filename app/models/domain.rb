@@ -19,7 +19,7 @@ class Domain < ApplicationRecord
   has_many :tech_contacts, through: :tech_domain_contacts, source: :contact
 
   store_accessor :information, :status_notes, :metadata
-  attr_accessor :period
+  attr_accessor :period, :domain_price
 
   accepts_nested_attributes_for :domain_contacts, allow_destroy: true
   accepts_nested_attributes_for :admin_domain_contacts,
@@ -68,6 +68,10 @@ class Domain < ApplicationRecord
 
   def registry_updated_at
     metadata['registry_updated_at'] if metadata
+  end
+
+  def activate!
+    self.active!
   end
 
   def to_h

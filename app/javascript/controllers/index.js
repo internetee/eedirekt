@@ -28,6 +28,12 @@ application.register("behaviour--removeable", Behaviour__RemoveableController);
 import Behaviour__Togglable_Controller from "./behaviour/togglable_controller";
 application.register("behaviour--togglable", Behaviour__Togglable_Controller);
 
+import Behaviour__SwitchableController from "./behaviour/switchable_controller";
+application.register("behaviour--switchable", Behaviour__SwitchableController);
+
+import Behaviour__HiddenableController from "./behaviour/hiddenable_controller";
+application.register("behaviour--hiddenable", Behaviour__HiddenableController);
+
 import Behaviour__DebounceController from "./behaviour/debounce_controller";
 application.register("behaviour--debounce", Behaviour__DebounceController);
 

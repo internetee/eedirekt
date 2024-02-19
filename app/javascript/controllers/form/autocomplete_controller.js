@@ -2,7 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["input", "results", "hiddenInput"]
-  static values = { searchUrl: String }
+  static values = {
+    searchUrl: String,
+    initiator: { type: String, default: "registrar" }
+  }
 
   connect() {
     this.handleClickOutside = this.handleClickOutside.bind(this)
@@ -10,13 +13,13 @@ export default class extends Controller {
     this.inputTarget.addEventListener('input', this.search.bind(this));
     this.inputTarget.addEventListener('keydown', this.handleKeydown.bind(this));
   }
-  
+
   disconnect() {
     document.removeEventListener('click', this.handleClickOutside)
     this.inputTarget.removeEventListener('input', this.search);
     this.inputTarget.removeEventListener('keydown', this.handleKeydown);
   }
-  
+
   handleClickOutside(event) {
     if (!this.element.contains(event.target)) {
       this.resultsTarget.style.display = 'none';
@@ -35,18 +38,30 @@ export default class extends Controller {
     }
 
     fetch(`${this.searchUrlValue}?query=${query}`)
-      .then((response) => { 
+      .then((response) => {
         console.log(response);
 
-        return response.json()})
+        return response.json()
+      })
       .then((contacts) => {
         console.log(contacts);
 
-        const html = contacts.map(contact => `
+        let html = ""
+
+        if (this.initiatorValue === "registrant") {
+          html = contacts.map(contact => `
           <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.id}">
-            ${contact.name} - ${contact.code}
+            ${contact.name} - ${contact.ident}
           </li>
         `).join('')
+        } else {
+          html = contacts.map(contact => `
+            <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.id}">
+              ${contact.name} - ${contact.code}
+            </li>
+          `).join('')
+        }
+
         this.resultsTarget.innerHTML = html
         this.resultsTarget.style.display = contacts.length > 0 ? 'block' : 'none';
 
@@ -68,8 +83,8 @@ export default class extends Controller {
 
   handleKeydown(event) {
     if (event.target !== this.inputTarget) return;
-  
-    switch(event.keyCode) {
+
+    switch (event.keyCode) {
       case 38: // arrow up
         event.preventDefault();
         this.moveHighlight('up');
@@ -95,14 +110,14 @@ export default class extends Controller {
       this.highlightFirstItem();
       return;
     }
-  
+
     let newHighlight;
     if (direction === 'up' && currentHighlight.previousElementSibling) {
       newHighlight = currentHighlight.previousElementSibling;
     } else if (direction === 'down' && currentHighlight.nextElementSibling) {
       newHighlight = currentHighlight.nextElementSibling;
     }
-  
+
     if (newHighlight) {
       currentHighlight.classList.remove('bg-indigo-200');
       newHighlight.classList.add('bg-indigo-200');

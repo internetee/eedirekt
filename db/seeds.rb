@@ -28,8 +28,31 @@ Setting.where(code: 'show_address_customer')
 
 # REGISTRAR GROUP:
 
+json_value_1 = {
+  hostname: 'ns1.example.com',
+  ipv4: '127.0.0.1',
+  ipv6: '0:0:0:0:0:0:0:1'
+}
+
+json_value_2 = {
+  hostname: 'ns2.example.com',
+  ipv4: '127.0.0.2',
+  ipv6: '0:0:0:0:0:0:0:2'
+}
 Setting.where(code: 'default_nameserver_records')
-       .first_or_create.update(code: 'default_nameserver_records', value: ['ns1.example.ee', 'ns2.example.ee'], format: 'array', group: 'registrar', description: 'Default nameserver records')
+       .first_or_create.update(
+        code: 'default_nameserver_records', value: [json_value_1.to_json, json_value_2.to_json], 
+        format: 'array', group: 'registrar', description: 'Default nameserver records')
+
+dns_sec_default_value = {
+  flags: '257',
+  protocol: '3',
+  algorithm: '13',
+  public_key: 'mdsswUyr3DPW132mOi8V9xESWE8jTo0dxCjjnopKl+GqJxpVXckHAeF+KkxLbxILfDLUT0rAK9iUzy1L53eKGQ=='
+}
+
+Setting.where(code: 'dnssec_default_value')
+        .first_or_create.update(code: 'dnssec_default_value', value: dns_sec_default_value.to_json, format: 'hash', group: 'registrar', description: 'Default DNSSEC value')
 
 Setting.where(code: 'dnssec_enabled')
        .first_or_create.update(code: 'dnssec_enabled', value: 'false', format: 'boolean', group: 'registrar', description: 'Enable DNSSEC')

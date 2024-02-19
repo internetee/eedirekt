@@ -26,6 +26,11 @@ module Sidebar
               href: admin_settings_path,
               name: I18n.t('settings_item'),
               heroicon_name: 'cog'
+            },
+            {
+              href: admin_domain_prices_path,
+              name: I18n.t('domain_prices'),
+              heroicon_name: 'cog'
             }
           ]
         elsif @current_user&.class&.name == 'RegistrarUser'

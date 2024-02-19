@@ -59,7 +59,14 @@ class User < ApplicationRecord
 
   def domains
     contact = Contact.find_by(code: code)
+    return if contact.blank?
+
     Domain.where(registrant_id: contact.id)
   end
 
+  def do_all_fields_are_completed?
+    return false if name.blank? || email.blank? || phone.blank? || ident.blank?
+
+    true
+  end
 end

@@ -11,6 +11,9 @@
     </dl>
   </td>
   <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+    <%= pending_action.info['name'] %>
+  </td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
     <% if pending_action.status == 'pending' %>
       <span class="py-1 px-4 rounded-3xl text-white bg-yellow-500"><%= pending_action.status %></span>
     <% elsif pending_action.status == 'completed' %>
