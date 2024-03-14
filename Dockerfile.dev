@@ -31,15 +31,14 @@ WORKDIR $APP_PATH
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler -v $BUNDLER_VERSION
 
-RUN bundle config --global frozen 1 && \
-  bundle install && \
+RUN bundle install && \
   rm -rf /usr/local/bundle/cache/*.gem && \
   find /usr/local/bundle/gems/ -name "*.c" -delete && \
   find /usr/local/bundle/gems/ -name "*.o" -delete
 
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --non-interactive --production
+RUN yarn install --non-interactive
 
 ADD . $APP_PATH
 
