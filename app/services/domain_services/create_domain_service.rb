@@ -7,12 +7,8 @@ module DomainServices
     end
 
     def call
-      # todo: check, do contacts exist in registry?
-      # crete contacts if not
-      # and after that run job
-      
-
-      EstonianTld::DomainCreationProcess::CreateDomainJob.perform_later(pending_action)
+      EstonianTld::DomainCreationProcess::CreateContactsJob.perform_later(pending_action)
+      # EstonianTld::DomainCreationProcess::CreateDomainJob.perform_later(pending_action)
     end
   end
 end

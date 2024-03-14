@@ -50,7 +50,6 @@ class EstonianTld::CreateContactJob < ApplicationJob
   end
 
   def contact_payload(user)
-
     {
       id: nil,
       name: user.name,
@@ -87,5 +86,4 @@ class EstonianTld::CreateContactJob < ApplicationJob
     { body: Base64.encode64(params.read),
       type: params.original_filename.split('.').last.downcase }
   end
-
 end

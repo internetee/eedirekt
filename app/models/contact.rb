@@ -7,6 +7,7 @@ class Contact < ApplicationRecord
   include Phone
 
   attr_accessor :phone_code
+  attr_accessor :registrar_format_phone
 
   has_many :domain_contacts
   has_many :domains, through: :domain_contacts

@@ -95,12 +95,12 @@ module Registrant
         tech_domain_contacts_attributes: [
           :id, 
           :_destroy, 
-          contact: [:role, :name, :email, :ident, :_destroy]
+          contact: [:role, :name, :email, :ident, :country_code, :_destroy, :phone, :phone_code, :state, :street, :city, :zip, :address_country_code]
         ],
         admin_domain_contacts_attributes: [
           :id, 
           :_destroy, 
-          contact: [:role, :name, :email, :ident, :_destroy]
+          contact: [:role, :name, :email, :ident, :_destroy, :country_code, :phone, :phone_code, :state, :street, :city, :zip, :address_country_code]
         ],
         nameservers_attributes: [
           :id,

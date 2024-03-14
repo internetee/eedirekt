@@ -14,11 +14,6 @@ module EstonianTld
         registrant_contact = Contact.find_by(code: pending_action.user.code)
 
         domain = Domain.find_by(name: pending_action.info['name'])
-        
-        
-        p '------- Setting[dnssec_enabled] -----'
-        p Setting.dnssec_enabled
-        p '------- Setting[dnssec_enabled] -----'
 
         if domain.nil?
           domain = Domain.new(
