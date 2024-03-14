@@ -1,0 +1,20 @@
+<div class="container mx-auto  mt-12 px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-semibold text-gray-900"><%= t('.title') %></h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
+    </div>
+    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none flex space-x-3">
+      <%= link_to t('.transfer'), '#', class: "flex w-64 inline items-center justify-center rounded-md border border-orange-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-50" %>
+      <%= link_to t('create_domain'), new_registrant_domain_path, class: "flex w-64 inline items-center justify-center rounded-md border border-indigo-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-indigo-50" %>
+    </div>
+  </div>
+
+  <%#= render 'filter' %>
+
+  <h1 class='text-center text-3xl'><%= t('user_pending_actions') %></h1>
+  <%= render 'pending_actions' %>
+
+  <h1 class='text-center text-3xl'><%= t('domains') %></h1>
+  <%= render 'domains' %>
+</div>

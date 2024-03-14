@@ -16,10 +16,11 @@ RUN apk add --no-cache --update --repository=http://dl-cdn.alpinelinux.org/alpin
   postgresql13-dev \
   postgresql13 \
   postgresql13-client \
+  gcompat \
 #   python2 \
   tzdata
 
-ENV BUNDLER_VERSION 2.2.24
+ENV BUNDLER_VERSION 2.4.6
 ENV BUNDLE_JOBS 8
 ENV BUNDLE_RETRY 5
 ENV BUNDLE_CACHE_ALL true
@@ -30,15 +31,14 @@ WORKDIR $APP_PATH
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler -v $BUNDLER_VERSION
 
-RUN bundle config --global frozen 1 && \
-  bundle install && \
+RUN bundle install && \
   rm -rf /usr/local/bundle/cache/*.gem && \
   find /usr/local/bundle/gems/ -name "*.c" -delete && \
   find /usr/local/bundle/gems/ -name "*.o" -delete
 
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --non-interactive --production
+RUN yarn install --non-interactive
 
 ADD . $APP_PATH
 

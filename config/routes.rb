@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :restore_services, only: %i[create]
 
     resources :registrar_users, param: :uuid
+    resources :domain_prices, param: :uuid, except: %i[show]
   end
 
   resource :sessions, only: %i[new]
@@ -50,5 +51,23 @@ Rails.application.routes.draw do
     resources :renews, param: :uuid, only: %i[show update]
     resource :sessions, only: %i[new create destroy]
     resource :transfers, only: %i[show update]
+    resource :settings, only: %i[show update]
+  end
+
+  namespace :registrant do
+    resources :domains, param: :uuid
+    resource :profiles, only: %i[edit update]
+    resources :pending_actions, param: :uuid, only: %i[show]
+
+    resources :contacts, param: :uuid do
+      collection do
+        get :search
+      end
+    end
+
+    scope module: :invoices do
+      resource :pay_invoices, only: %i[create]
+      match '/pay_invoices_callback', via: %i[get], to: 'pay_invoices#callback', as: :pay_invoices_callback
+    end
   end
 end

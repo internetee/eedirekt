@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_124831) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_05_093702) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -98,6 +98,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_124831) do
     t.index ["domain_id"], name: "index_domain_contacts_on_domain_id"
   end
 
+  create_table "domain_prices", force: :cascade do |t|
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.datetime "valid_from", default: -> { "now()" }, null: false
+    t.datetime "valid_to"
+    t.integer "duration"
+    t.integer "operation_category", default: 0, null: false
+    t.string "zone", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "domains", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "name"
@@ -152,6 +163,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_124831) do
     t.index ["domain_id"], name: "index_nameservers_on_domain_id"
   end
 
+  create_table "pending_actions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "invoice_id"
+    t.jsonb "info", default: {}, null: false
+    t.integer "action", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "errors_in_response", default: {}
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }
+    t.index ["invoice_id"], name: "index_pending_actions_on_invoice_id"
+    t.index ["user_id"], name: "index_pending_actions_on_user_id"
+  end
+
   create_table "registrar_users", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }
     t.string "name"
@@ -199,6 +224,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_124831) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "phone"
+    t.string "ident"
+    t.integer "role"
+    t.string "country_code"
+    t.string "city"
+    t.string "street"
+    t.string "zip"
+    t.string "state"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -206,4 +240,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_124831) do
   add_foreign_key "domains", "contacts", column: "registrant_id"
   add_foreign_key "invoice_items", "invoices"
   add_foreign_key "invoices", "contacts", column: "buyer_id"
+  add_foreign_key "pending_actions", "invoices"
+  add_foreign_key "pending_actions", "users"
 end

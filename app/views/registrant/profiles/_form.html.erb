@@ -1,0 +1,76 @@
+<div class="relative my-4">
+  <%= component 'divider', label: t('.general_info') %>
+
+  <div class='flex flex-row justify-evenly items-center'>
+    <div class='flex flex-col space-y-4'>
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :ident, heroicon_name: 'identification', placeholder: '2323232323', options: { readonly: true } %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/dropdown_input', form: form, attribute: :role, enum: User.human_enum_options(:role), heroicon_name: 'user-circle' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :code, heroicon_name: 'identification', placeholder: 'ABC:123', options: { readonly: true } %>
+      </div>
+    </div>
+
+    <div class='flex flex-col space-y-4'>
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :name, heroicon_name: 'user', placeholder: 'John Doe' %>
+      </div>
+
+      <div class='w-96'>
+        <%#= component 'form/text_input', form: form, attribute: :phone_code, heroicon_name: 'phone', placeholder: '+372' %>
+        <%#= component 'form/text_input', form: form, attribute: :phone, heroicon_name: 'phone', placeholder: '56722123' %>
+
+        <%= component 'form/phone_input', form: form, phone_attribute: :phone, code_attribute: :phone_code,
+                                          code_placeholder: '372', phone_placeholder: '56722123' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/email_input', form: form, attribute: :email, heroicon_name: 'envelope', placeholder: 'johndoe@example.com' %>
+      </div>
+    </div>
+  </div>
+
+<% if show_address? %>
+  <div class='h-8'></div>
+
+  <%= component 'divider', label: t('.address') %>
+
+  <div class='flex flex-row justify-evenly items-center'>
+    <div class='flex flex-col space-y-4'>
+      <div class='w-96'>
+        <%= component 'form/country_select_input', form: form, attribute: :country_code, heroicon_name: 'globe-americas' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :state, heroicon_name: 'home-modern', placeholder: 'NY' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :city, heroicon_name: 'home-modern', placeholder: 'New York' %>
+      </div>
+    </div>
+
+    <div class='flex flex-col space-y-4'>
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :zip, heroicon_name: 'home-modern', placeholder: '12345' %>
+      </div>
+
+      <div class='w-96'>
+        <%= component 'form/text_input', form: form, attribute: :street, heroicon_name: 'home-modern', placeholder: 'Somewhere' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+
+<div class='h-8'></div>
+
+<%= component 'divider', label: t('.legal_doc') %>
+
+
+<%= component 'form/image_field', label: I18n.t('.legal_document'), attribute: :legal_document, form: form %>

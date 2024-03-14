@@ -24,8 +24,8 @@ gem 'pagy', '~> 6.0'
 gem 'pg', '~> 1.1'
 gem 'phonelib'
 gem 'propshaft'
-gem 'puma', '>= 6.3.1'
-gem 'rails', '~> 7.0.5', '>= 7.0.7.1'
+gem 'puma', '>= 6.4.2'
+gem 'rails', '~> 7.0.5', '>= 7.0.8.1'
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
 gem 'sidekiq', '>=7'
@@ -34,6 +34,7 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uuidtools' # For unique IDs (used by the epp gem)
 gem 'view_component'
+gem 'aasm'
 
 # gem "kredis"
 # gem "image_processing", "~> 1.2"
@@ -50,11 +51,14 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
+  gem 'ruby-lsp'
 end
 
 group :development do
   gem 'i18n-debug'
   gem 'rubocop'
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
   gem 'web-console'
 end
 

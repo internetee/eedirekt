@@ -4,8 +4,10 @@ class Contact < ApplicationRecord
   include EstTld::LegalDoc
   include EstTld::Statuses
   include Contact::Searchable
+  include Phone
 
   attr_accessor :phone_code
+  attr_accessor :registrar_format_phone
 
   has_many :domain_contacts
   has_many :domains, through: :domain_contacts
@@ -31,6 +33,13 @@ class Contact < ApplicationRecord
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: I18n.t('.invalid_email_format') }
   validates :name, presence: true
   validates :role, inclusion: { in: Contact.roles }
+  
+  def self.create_contact_from_registrant_perform_later(registrant_user:)
+    c = Contact.find_by(ident: registrant_user.ident)
+    return c if c && c.code.present?
+
+    CreateContactJob.perform_later(registrant_user)
+  end
 
   def self.search(query)
     where('name ILIKE ? OR code ILIKE ?', "%#{query}%", "%#{query}%")
@@ -112,17 +121,5 @@ class Contact < ApplicationRecord
 
   def to_s
     "#{name} - #{code}"
-  end
-
-  private
-
-  def combine_phone_and_phone_code
-    self.phone = "+#{phone_code}#{Phonelib.parse(phone).national(false)}"
-  end
-
-  def split_phone_into_code_and_number
-    parsed_phone = Phonelib.parse(phone)
-    self.phone_code = parsed_phone.country_code
-    self.phone = parsed_phone.national(false)
   end
 end

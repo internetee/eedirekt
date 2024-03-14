@@ -17,7 +17,7 @@ class InvoiceItem < ApplicationRecord
     end
   end
 
-  def total
+  def total_sum
     (subtotal + vat_amount)
   end
 end

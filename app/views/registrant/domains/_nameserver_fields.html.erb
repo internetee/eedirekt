@@ -1,0 +1,20 @@
+      
+<div class='flex flex-col space-y-4 border-b border-gray-300 pb-6 contact-item' data-form--add-element-target="elementItem">
+    <div class='w-96'>
+      <%= component 'form/text_input', form: field, attribute: :hostname, heroicon_name: 'user', placeholder: 'example.ee' %>
+    </div>
+        <div class='w-96'>
+      <%= component 'form/text_input', form: field, attribute: :ipv4, heroicon_name: 'user', placeholder: 'example.ee' %>
+    </div>
+    <div class='w-96'>
+      <%= component 'form/text_input', form: field, attribute: :ipv6, heroicon_name: 'user', placeholder: 'example.ee' %>
+    </div>
+
+  <%= field.hidden_field :_destroy %>
+  
+  <%= tag.div class: 'flex justify-end' do %>
+    <a class='cursor-pointer rounded-full p-1 bg-red-400 hover:bg-red-600' data-action="click->form--add-element#removeElement">
+      <%= heroicon 'trash', variant: :solid, options: { class: 'h-5 w-5 text-white' } %>
+    </a>
+  <% end if remove_button %>
+</div>

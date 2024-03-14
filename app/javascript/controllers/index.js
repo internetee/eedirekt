@@ -19,11 +19,20 @@ application.register("form--add-element", Form__AddElementController);
 import Form__MultiSelectController from "./form/multi_select_controller";
 application.register("form--multi-select", Form__MultiSelectController);
 
+import Form__AddInputController from "./form/add_input_controller";
+application.register("form--add-input", Form__AddInputController);
+
 import Behaviour__RemoveableController from "./behaviour/removeable_controller";
 application.register("behaviour--removeable", Behaviour__RemoveableController);
 
 import Behaviour__Togglable_Controller from "./behaviour/togglable_controller";
 application.register("behaviour--togglable", Behaviour__Togglable_Controller);
+
+import Behaviour__SwitchableController from "./behaviour/switchable_controller";
+application.register("behaviour--switchable", Behaviour__SwitchableController);
+
+import Behaviour__HiddenableController from "./behaviour/hiddenable_controller";
+application.register("behaviour--hiddenable", Behaviour__HiddenableController);
 
 import Behaviour__DebounceController from "./behaviour/debounce_controller";
 application.register("behaviour--debounce", Behaviour__DebounceController);

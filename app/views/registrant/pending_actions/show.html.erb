@@ -1,0 +1,95 @@
+<div class='flex flex-col w-full mb-6'>
+  <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">Applicant Information</h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
+    </div>
+  </div>
+
+  <div class="px-4 py-5 sm:px-6 container mx-auto rounded-md shadow-md border border-gray-300 mt-12">
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.action_name') %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @pending_action.action.humanize(capitalize: true) %></dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.registrant_name ') %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @pending_action.user.name %></dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.created_at')%></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= l(@pending_action.created_at) %></dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.invoice')%></dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          TODO: invoice link <%= link_to @pending_action.invoice.number, '#', class: 'text-blue-400' if @pending_action.invoice.present? %>
+        </dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.info')%></dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <% @pending_action.info.each do |key, value| %>
+            <p><strong><%= key %>:</strong> <%= value %></p>
+          <% end %>
+        </dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.invoice_status')%></dt>
+        <dd class="mt-1">
+          <% if @pending_action&.invoice&.status == 'issued' %>
+            <span class="py-1 px-4 rounded-3xl text-white bg-yellow-500"><%= @pending_action&.invoice&.status %></span>
+          <% elsif @pending_action&.invoice&.status == 'paid' %>
+            <span class="py-1 px-4 rounded-3xl text-white bg-green-500"><%= @pending_action&.invoice&.status %></span>
+          <% elsif @pending_action&.invoice&.status == 'canceled' %>
+            <span class="py-1 px-4 rounded-3xl text-white bg-gray-500"><%= @pending_action&.invoice&.status %></span>
+          <% else %>
+            <span class="py-1 px-4 rounded-3xl text-white bg-red-500"><%= @pending_action&.invoice&.status %></span>
+          <% end %>
+        </dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.errors_in_response')%></dt>
+        <dd class="mt-1 text-sm text-gray-900">
+          <% @pending_action.errors_in_response.each do |key, value| %>
+            <p><strong><%= key %>:</strong> <%= value %></p>
+          <% end %>
+        </dd>
+      </div>
+
+      <div class="sm:col-span-1">
+        <dt class="text-sm font-medium text-gray-500"><%= t('.status')%></dt>
+        <dd class="mt-1">
+          <% if @pending_action.status == 'pending' %>
+            <span class="py-1 px-4 rounded-3xl text-white bg-yellow-500"><%= @pending_action.status %></span>
+          <% elsif @pending_action.status == 'completed' %>
+            <span class="py-1 px-4 rounded-3xl text-white bg-green-500"><%= @pending_action.status %></span>
+          <% else %>
+            <span class="py-1 px-4 rounded-3xl text-white bg-red-500"><%= @pending_action.status %></span>
+          <% end %>
+        </dd>
+      </div>
+      
+    <hr>
+
+      <div class='flex items-center justify-end space-x-3 mt-8 mb-8'>
+        <% if @pending_action.can_i_edit_it? %>
+          <%= link_to t('.edit'), '#', class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer" %>
+          <%= button_to t('.cancel'), '#', method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer", form: { data: { turbo_confirm: t(".confirm_delete") } } %>
+        <% end %>
+          <%= button_to t('.report_to_administrator'), '#', class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer" %>
+
+        <% if @pending_action&.invoice&.issued? %>
+          <%= button_to t('.pay_invoice'), registrant_pay_invoices_path(uuid: @pending_action&.invoice&.uuid), class: "px-3 py-1 rounded-md text-white bg-green-400 hover:bg-green-500 cursor-pointer", target: '_top' %>
+        <% end %>
+      </div>
+
+  </div>
+</div>
+

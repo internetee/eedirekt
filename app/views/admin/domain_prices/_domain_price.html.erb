@@ -1,0 +1,24 @@
+<tr>
+  <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+    <%= domain_price.zone %>
+    <dl class="font-normal lg:hidden">
+      <dt class="sr-only"><%= domain_price.zone %></dt>
+      <dd class="mt-1 truncate text-gray-700"><%= domain_price.price %></dd>
+      <dt class="sr-only sm:hidden"><%= domain_price.operation_category %></dt>
+      <dd class="mt-1 truncate text-gray-700"><%= domain_price.duration %></dd>
+      <dt class="mt-1 truncate text-gray-700"><%= domain_price.valid_from %></dt>
+      <dd class="mt-1 truncate text-gray-700"><%= domain_price.valid_to %></dd>
+    </dl>
+  </td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><%= domain_price.price %></td>
+  
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell"><%= domain_price.operation_category %></td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= domain_price.duration %></td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= domain_price.valid_from %></td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"><%= domain_price.valid_to %></td>
+  <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-end space-x-3">
+    <%= link_to t('.edit'), '#', class: "px-3 py-1 rounded-md text-white bg-blue-400 hover:bg-blue-500 cursor-pointer", target: '_top' %>
+
+    <%= button_to t('.delete'), '#', method: :delete, class: "px-3 py-1 rounded-md text-white bg-red-400 hover:bg-red-500 cursor-pointer", form: { data: { turbo_confirm: t(".confirm_delete") } } %>
+  </td>
+</tr>

@@ -19,7 +19,7 @@ class Domain < ApplicationRecord
   has_many :tech_contacts, through: :tech_domain_contacts, source: :contact
 
   store_accessor :information, :status_notes, :metadata
-  attr_accessor :period
+  attr_accessor :period, :domain_price
 
   accepts_nested_attributes_for :domain_contacts, allow_destroy: true
   accepts_nested_attributes_for :admin_domain_contacts,
@@ -44,6 +44,16 @@ class Domain < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-\.]+\z/ }
 
+  # def self.build_from_registrar(_payload: {})
+  #   new(
+      
+  #   )
+  # end
+
+  # def self.initiate_technical_contact
+  #   Contact.find_by_code(Setting.code_of_technical_contact)
+  # end
+
   def reserved_pw
     information['reserved_pw'] if information
   end
@@ -58,5 +68,26 @@ class Domain < ApplicationRecord
 
   def registry_updated_at
     metadata['registry_updated_at'] if metadata
+  end
+
+  def activate!
+    self.active!
+  end
+
+  def to_h
+    {
+      id: id,
+      uuid: uuid,
+      name: name,
+      statuses: statuses,
+      remote_created_at: remote_created_at,
+      remote_updated_at: remote_updated_at,
+      expire_at: expire_at,
+      information: information,
+      registrant_id: registrant_id,
+      created_at: created_at,
+      updated_at: updated_at,
+      state: state
+    }
   end
 end

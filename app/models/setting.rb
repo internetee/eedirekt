@@ -1,5 +1,5 @@
 class Setting < ApplicationRecord
-  validates :code, presence: true, uniqueness: true, format: { with: /\A([a-z])[a-z|_]+[a-z]\z/ }
+  validates :code, presence: true, uniqueness: true, format: { with:  /\A[a-z][a-z0-9_]*[a-z0-9]\z/ }
   validates :format, presence: true
   validates :group, presence: true
   validate :validate_value_format

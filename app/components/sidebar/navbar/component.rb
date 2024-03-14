@@ -26,6 +26,11 @@ module Sidebar
               href: admin_settings_path,
               name: I18n.t('settings_item'),
               heroicon_name: 'cog'
+            },
+            {
+              href: admin_domain_prices_path,
+              name: I18n.t('domain_prices'),
+              heroicon_name: 'cog'
             }
           ]
         elsif @current_user&.class&.name == 'RegistrarUser'
@@ -54,10 +59,26 @@ module Sidebar
               href: registrar_poll_messages_path,
               name: I18n.t('poll_messages'),
               heroicon_name: 'envelope-open'
+            },
+            {
+              href: registrar_settings_path,
+              name: I18n.t('settings_item'),
+              heroicon_name: 'cog'
             }
           ]
         else
-          []
+          [
+            {
+              href: registrant_domains_path,
+              name: I18n.t('domains'),
+              heroicon_name: 'globe-europe-africa'
+            },
+            {
+              href: edit_registrant_profiles_path,
+              name: I18n.t('profile'),
+              heroicon_name: 'user'
+            }
+        ]
         end
       end
     end
