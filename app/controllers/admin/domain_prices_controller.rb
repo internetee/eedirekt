@@ -7,6 +7,9 @@ module Admin
     end
 
     def create
+      # category = DomainPrice.operation_categories.keys[price_params[:operation_category].to_i]
+      # price_params[:operation_category] = category if category
+
       @price = DomainPrice.new(price_params)
       
       if @price.save

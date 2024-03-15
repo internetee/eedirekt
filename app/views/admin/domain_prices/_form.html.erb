@@ -1,30 +1,30 @@
-      <div class='flex flex-row justify-start space-x-96 items-start'>
-        <div class='flex flex-col space-y-4'>
+<div class='flex flex-row justify-start space-x-96 items-start'>
+  <div class='flex flex-col space-y-4'>
 
-          <%= component 'divider', label: t('.general') %>
+    <%= component 'divider', label: t('.general') %>
 
-          <%= tag.div class: 'w-96' do %>
-            <%= component 'form/dropdown_input', form: form, attribute: :zone, enum: options_for_select(DomainPrice::ZONES, selected: 1), heroicon_name: 'user-circle' %>
-          <% end %>
+    <%= tag.div class: 'w-96' do %>
+      <%= component 'form/dropdown_input', form: form, attribute: :zone, enum: options_for_select(DomainPrice::ZONES, selected: 1), heroicon_name: 'user-circle', include_blank: false %>
+    <% end %>
 
-          <%= tag.div class: 'w-96' do %>
-            <%= component 'form/dropdown_input', form: form, attribute: :operation_category, enum: options_for_select(DomainPrice.operation_categories, selected: 1), heroicon_name: 'user-circle' %>
-          <% end %>
+    <%= tag.div class: 'w-96' do %>
+      <%= component 'form/dropdown_input', form: form, attribute: :operation_category, enum: options_for_select(DomainPrice.operation_categories, selected: 1), heroicon_name: 'user-circle', include_blank: false %>
+    <% end %>
 
-          <%= tag.div class: 'w-96' do %>
-            <%= component 'form/dropdown_input', form: form, attribute: :duration, enum: options_for_select(DomainPrice.durations, selected: 1), heroicon_name: 'user-circle' %>
-          <% end %>
+    <%= tag.div class: 'w-96' do %>
+      <%= component 'form/dropdown_input', form: form, attribute: :duration, enum: options_for_select(DomainPrice.durations, selected: 1), heroicon_name: 'user-circle', include_blank: false %>
+    <% end %>
 
-          <div class='w-96'>
-            <%= component 'form/number_input', form: form, attribute: :price, heroicon_name: 'user', placeholder: '5.00' %>
-          </div>
+    <div class='w-96'>
+      <%= component 'form/number_input', form: form, attribute: :price, heroicon_name: 'user', placeholder: '5.00' %>
+    </div>
 
-          <div class='w-96'>
-            <%= component 'form/datetime_input', form: form, attribute: :valid_from, heroicon_name: 'user' %>
-          </div>
+    <div class='w-96'>
+      <%= component 'form/datetime_input', form: form, attribute: :valid_from, heroicon_name: 'user' %>
+    </div>
 
-          <div class='w-96'>
-            <%= component 'form/datetime_input', form: form, attribute: :valid_to, heroicon_name: 'user' %>
-          </div>
-        </div>
-      </div>
+    <div class='w-96'>
+      <%= component 'form/datetime_input', form: form, attribute: :valid_to, heroicon_name: 'user' %>
+    </div>
+  </div>
+</div>

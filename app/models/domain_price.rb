@@ -1,7 +1,8 @@
 class DomainPrice < ApplicationRecord
   ZONES = ['ee'].freeze
 
-  enum operation_category: { create_domain: 0, renew_domain: 1 }
+  # enum operation_category: { create_domain: 0, renew_domain: 1 }
+  enum operation_categories: [ :create_domain, :renew_domain ]
 
   # validates :price, :valid_from, :operation_category, :duration, presence: true
   # validates :operation_category, inclusion: { in: Proc.new { |price| price.class.operation_categories } }
