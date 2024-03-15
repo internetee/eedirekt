@@ -54,6 +54,16 @@ module Registrant
     def create
       # TODO: Need to add validation for ident of contacts, email and other attributes
 
+      unless DomainPrice.all.any?
+        flash.now[:alert] = t('.no_domain_prices')
+
+        render turbo_stream: [
+          turbo_stream.append('flash', partial: 'layouts/flash')
+        ]
+
+        return
+      end
+
       domain_price = DomainPrice.find(domain_params[:domain_price])
 
       pending = PendingAction.create(

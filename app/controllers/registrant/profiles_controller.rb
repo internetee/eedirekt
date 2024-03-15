@@ -16,7 +16,7 @@ module Registrant
 
     def user_params
       params.require(:user).permit(
-        :name, :email, :phone, :phone_code, :ident, :role, :country_code,
+        :name, :email, :phone, :phone_code, :ident, :country_code,
         :city, :street, :zip, :state, :legal_document, :code
       )
     end

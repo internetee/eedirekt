@@ -38,6 +38,8 @@ class User < ApplicationRecord
     user = User.find_or_initialize_by(ident:)
     user.name = full_name
     user.ident = ident
+    user.role = User.roles[:priv]
+    user.phone = tara_params.dig('info', 'phone_number') if user.phone.blank?
 
     user
   end

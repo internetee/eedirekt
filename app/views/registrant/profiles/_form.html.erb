@@ -8,10 +8,6 @@
       </div>
 
       <div class='w-96'>
-        <%= component 'form/dropdown_input', form: form, attribute: :role, enum: User.human_enum_options(:role), heroicon_name: 'user-circle' %>
-      </div>
-
-      <div class='w-96'>
         <%= component 'form/text_input', form: form, attribute: :code, heroicon_name: 'identification', placeholder: 'ABC:123', options: { readonly: true } %>
       </div>
     </div>
@@ -22,9 +18,6 @@
       </div>
 
       <div class='w-96'>
-        <%#= component 'form/text_input', form: form, attribute: :phone_code, heroicon_name: 'phone', placeholder: '+372' %>
-        <%#= component 'form/text_input', form: form, attribute: :phone, heroicon_name: 'phone', placeholder: '56722123' %>
-
         <%= component 'form/phone_input', form: form, phone_attribute: :phone, code_attribute: :phone_code,
                                           code_placeholder: '372', phone_placeholder: '56722123' %>
       </div>
