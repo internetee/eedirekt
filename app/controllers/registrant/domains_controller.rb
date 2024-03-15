@@ -18,6 +18,8 @@ module Registrant
       end
 
       Tld::Estonian::MIN_NAMESERVER_COUNT.times do |i|
+        next if Setting.default_nameserver_records[i].blank?
+
         current_nameserver = JSON.parse(Setting.default_nameserver_records[i])
         @domain.nameservers.build(
           hostname: current_nameserver['hostname'],

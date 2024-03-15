@@ -9,9 +9,15 @@
 
     <div class='w-96'>
       <b>Price list</b><br />
-      <% DomainPrice.all.each do |price| %>
-        <%= form.radio_button :domain_price, price.id, checked: DomainPrice.first == price ? true : false %> <%= price.price %> - <%= price.duration / 1.month %> months <br />
+
+      <% if DomainPrice.all.any? %>
+        <% DomainPrice.all.each do |price| %>
+          <%= form.radio_button :domain_price, price.id, checked: DomainPrice.first == price ? true : false %> <%= price.price %> - <%= price.duration / 1.month %> months <br />
+        <% end %>
+      <% else %>
+        <%= t('.no_price_lists') %>
       <% end %>
+
     </div>
     
     <%= component 'divider', label: t('.optional') %>
