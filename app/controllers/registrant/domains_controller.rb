@@ -79,13 +79,15 @@ module Registrant
       @invoice = pending.create_invoice_by_pending_action(domain_price.price.to_f)
 
       if @invoice
-        flash.now[:notice] = t('.success')
+        flash[:notice] = t('.success')
 
-        render turbo_stream: [
-          turbo_stream.append('flash', partial: 'layouts/flash'),
-          turbo_stream.append('payment_method', partial: 'registrant/domains/payment_form',
-                                               locals: { invoice: @invoice})
-        ]
+        redirect_to registrant_domains_path, status: :see_other
+
+        # render turbo_stream: [
+        #   turbo_stream.append('flash', partial: 'layouts/flash'),
+        #   turbo_stream.append('payment_method', partial: 'registrant/domains/payment_form',
+        #                                        locals: { invoice: @invoice})
+        # ]
       else
         flash[:alert] = @invoice.errors.full_messages
         render turbo_stream: turbo_stream.replace('flash', partial: 'layouts/flash')
