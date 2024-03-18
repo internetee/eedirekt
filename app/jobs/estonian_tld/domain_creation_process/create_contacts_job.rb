@@ -26,6 +26,7 @@ module EstonianTld
           next if v['contact']['_destroy'] == 'true'
   
           contact = Contact.find_by(ident: v['contact']['ident'])
+
           if contact.nil?
             contacts_what_not_exists << v
           elsif contact.code.blank?
@@ -81,7 +82,7 @@ module EstonianTld
       end
 
       after_perform do |job|
-        EstonianTld::DomainCreationProcess::CreateDomainJob.perform_later(@pending_action)
+        EstonianTld::DomainCreationProcess::CreateDomainJob.perform_now(@pending_action)
       end
     end
   end

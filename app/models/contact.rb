@@ -34,11 +34,11 @@ class Contact < ApplicationRecord
   validates :name, presence: true
   validates :role, inclusion: { in: Contact.roles }
   
-  def self.create_contact_from_registrant_perform_later(registrant_user:)
+  def self.create_contact_from_registrant_perform_now(registrant_user:)
     c = Contact.find_by(ident: registrant_user.ident)
     return c if c && c.code.present?
 
-    CreateContactJob.perform_later(registrant_user)
+    CreateContactJob.perform_now(registrant_user)
   end
 
   def self.search(query)

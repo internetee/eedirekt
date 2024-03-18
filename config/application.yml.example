@@ -37,3 +37,8 @@ tara_token_endpoint: '/oauth2/token'
 tara_auth_endpoint: '/oauth2/auth'
 tara_base_redirect_url: 'https://st-eedirekt.infra.tld.ee'
 tara_redirect_path: '/tara/callback'
+
+everypay_key: ""
+api_username: ''
+everypay_base: https://igw-demo.every-pay.com/api/v4
+account_name: 'EUR3D1'
