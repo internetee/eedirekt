@@ -25,6 +25,10 @@ Setting.where(code: 'days_to_keep_invoices_active')
 Setting.where(code: 'show_address_customer')
        .first_or_create.update(code: 'show_address_customer', value: 'false', format: 'boolean', group: 'contacts', description: 'Show and create address on customer page')
 
+# Setting.where(code: 'code_of_technical_contact')
+#        .first_or_create.update(code: 'code_of_technical_contact', value: nil, format: 'string', group: 'registrar', description: 'Code of technical contact')
+Setting.where(code: 'code_of_technical_contact')
+       .first_or_create.update(code: 'code_of_technical_contact', value: [], format: 'array', group: 'contacts', description: 'Code of technical contact')
 
 # REGISTRAR GROUP:
 
@@ -41,7 +45,7 @@ json_value_2 = {
 }
 Setting.where(code: 'default_nameserver_records')
        .first_or_create.update(
-        code: 'default_nameserver_records', value: [json_value_1.to_json, json_value_2.to_json], 
+        code: 'default_nameserver_records', value: [json_value_1, json_value_2], 
         format: 'array', group: 'registrar', description: 'Default nameserver records')
 
 dns_sec_default_value = {
@@ -62,9 +66,6 @@ Setting.where(code: 'opt_in')
 
 Setting.where(code: 'opt_out')
        .first_or_create.update(code: 'opt_out', value: 'false', format: 'boolean', group: 'registrar', description: 'Enable opt-out')
-
-Setting.where(code: 'code_of_technical_contact')
-       .first_or_create.update(code: 'code_of_technical_contact', value: nil, format: 'string', group: 'registrar', description: 'Code of technical contact')
 
 Setting.where(code: 'default_registration_and_renewal_period')
        .first_or_create.update(code: 'default_registration_and_renewal_period', value: '1y', format: 'integer', group: 'registrar', description: 'Default registration and renewal period')

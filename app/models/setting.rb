@@ -86,6 +86,7 @@ class Setting < ApplicationRecord
   end
 
   def array_format
-    JSON.parse(value).to_a
+    # JSON.parse(value).to_a
+    eval(value)
   end
 end

@@ -4,7 +4,8 @@ export default class extends Controller {
   static targets = ["input", "results", "hiddenInput"]
   static values = {
     searchUrl: String,
-    initiator: { type: String, default: "registrar" }
+    initiator: { type: String, default: "registrar" },
+    setCode: { type: Boolean, default: false }
   }
 
   connect() {
@@ -46,21 +47,7 @@ export default class extends Controller {
       .then((contacts) => {
         console.log(contacts);
 
-        let html = ""
-
-        if (this.initiatorValue === "registrant") {
-          html = contacts.map(contact => `
-          <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.id}">
-            ${contact.name} - ${contact.ident}
-          </li>
-        `).join('')
-        } else {
-          html = contacts.map(contact => `
-            <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.id}">
-              ${contact.name} - ${contact.code}
-            </li>
-          `).join('')
-        }
+        let html = this.assignDropboxValue(contacts);
 
         this.resultsTarget.innerHTML = html
         this.resultsTarget.style.display = contacts.length > 0 ? 'block' : 'none';
@@ -74,6 +61,47 @@ export default class extends Controller {
       })
 
     this.highlightFirstItem();
+  }
+
+  assignDropboxValue(contacts) {
+    let html = ""
+
+    console.log(this.setCodeValue);
+
+    if (this.initiatorValue === "registrant") {
+      if (this.setCodeValue) {
+          html = contacts.map(contact => `
+            <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.code}">
+              ${contact.name} - ${contact.code}
+            </li>
+          `).join('')
+        }
+      else {
+        html = contacts.map(contact => `
+        <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.id}">
+          ${contact.name} - ${contact.ident}
+        </li>
+      `).join('')
+      }
+
+    } else {
+      if (this.setCodeValue) {
+        html = contacts.map(contact => `
+          <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.code}">
+            ${contact.name} - ${contact.code}
+          </li>
+        `).join('')
+      }
+      else {
+        html = contacts.map(contact => `
+          <li data-action="click->form--autocomplete#select" data-value="${contact.name} - ${contact.code}" data-id="${contact.id}">
+            ${contact.name} - ${contact.code}
+          </li>
+        `).join('')
+      }
+    }
+
+    return html;
   }
 
   highlightFirstItem() {

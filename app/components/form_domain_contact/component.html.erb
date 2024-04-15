@@ -23,7 +23,7 @@
       <div class='flex flex-col items-start space-y-2 p-3 hidden' data-form--add-element-target="list" data-behaviour--hiddenable-target="elements">
         <% tech_form.fields_for :contact, domain_contact.contact do |contact_form| %>
           
-          <%= render 'contact_fields', form: contact_form, remove_button: false %>
+          <%= render 'contact_fields', form: contact_form, remove_button: false, contact_type: contact_type %>
 
         <% end %>
       </div>
@@ -34,7 +34,7 @@
     <%= form.fields_for contact_type_objects.to_sym, constanicize_contact_type.new, child_index: "new_contact" do |builder| %>
       <% builder.fields_for :contact, Contact.new do |contact_form| %>
 
-        <%= render 'contact_fields', form: contact_form, remove_button: true %>
+        <%= render 'contact_fields', form: contact_form, remove_button: true, contact_type: contact_type %>
       <% end %>
     <% end %>
   </div>

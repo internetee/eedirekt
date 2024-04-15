@@ -1,0 +1,48 @@
+<div class="flex flex-col w-full" data-controller="form--add-element behaviour--hiddenable" data-form--add-element-child-index-value="new_contact"
+  data-behaviour--hiddenable-props-class='hidden' data-form--add-element-limit-of-elements=9 
+  data-form--add-element-current-elements-value="<%= @parsed_data.count %>">
+
+  <div data-form--add-element-target="list">
+    <% @parsed_data.each_with_index do |item, index| %>
+      
+      <div class='flex space-y-2 space-x-2 justify-center items-center' data-controller='behaviour--removeable'>
+        <% item.each do |k, v| %>
+          <%= form.label k, "#{k.to_s.humanize} #{index + 1}", class: 'block text-sm font-medium text-gray-700 w-64' %>
+          <%= form.text_field "settings[#{setting.id}][][#{k}]", value: v, class: 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' %>
+        <% end %>
+
+        <a class='cursor-pointer rounded-full p-1 bg-red-400 hover:bg-red-600 w-8 text-white' data-action="behaviour--removeable#remove">
+          delete
+        </a>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class='text-right'>
+    <a class='rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500
+              focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 cursor-pointer add-contact-button' 
+              data-action="click->form--add-element#addElement"><%= t('.add_contact') %></a>
+  </div>
+
+  <template id="new-contact-template" data-form--add-element-target="template">
+    <% if setting.code == 'default_nameserver_records' %>
+      <div class='flex space-y-2 space-x-2 justify-center items-center' data-controller='behaviour--removeable'>
+        <%= form.label :hostname, "Hostname", class: 'block text-sm font-medium text-gray-700 w-64' %>
+        <%= form.text_field "settings[#{setting.id}][][hostname]", class: 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' %>
+
+        <%= form.label :ipv4, "ipv4", class: 'block text-sm font-medium text-gray-700 w-64' %>
+        <%= form.text_field "settings[#{setting.id}][][ipv4]", class: 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' %>
+
+        <%= form.label :ipv6, "ipv6", class: 'block text-sm font-medium text-gray-700 w-64' %>      
+        <%= form.text_field "settings[#{setting.id}][][ipv6]", class: 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' %>
+
+        <div class='p2 w-16'>
+        <a class='cursor-pointer rounded-full p-1 bg-red-400 hover:bg-red-600 w-8 text-white' data-action="behaviour--removeable#remove">
+          delete
+        </a>
+      </div>
+      </div>
+    <% end %>
+  </template>
+</div>

@@ -6,8 +6,8 @@ module Registrant
       @domain = Domain.new
 
       Tld::Estonian::MIN_DOMAIN_CONTACT_COUNT.times do |i|
-        admin_contact = Contact.find_by(code: current_user.code)
-        tech_contact = Contact.find_by(code: Setting.code_of_technical_contact)
+        admin_contact = Contact.find_by(code: current_user.code, role: :priv)
+        tech_contact = Contact.find_by(code: Setting.code_of_technical_contact || current_user.code)
 
         if i % 2 == 0
           @domain.admin_domain_contacts.build(contact: admin_contact)
