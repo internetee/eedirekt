@@ -1,0 +1,9 @@
+<% @contact_group.each do |setting| %>
+  <% if setting.format == 'array' and setting.code == 'code_of_technical_contact' %>
+    <%= component 'settings/tech_contact_field', form: form, setting: setting %>
+  <% else %>
+    <fieldset class="space-y-5">
+      <%= component 'form/checkbox_with_description', form: form, attribute: "[settings][#{setting.id}", label_name: setting.code, description: setting.description, value: setting.value == 'true' %>
+    </fieldset>
+  <% end %>
+<% end %>

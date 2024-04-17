@@ -8,68 +8,13 @@
   <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg p-8">
     <%= form_with url: admin_settings_path, method: :patch, class: 'w-full mt-8 space-y-4' do |form| %>
 
-    <% @invoice_group.each do |setting| %>
-      <div class='flex items-center space-y-2'>
+      <%= component 'admin/settings/invoice_group', form: form, invoice_group: @invoice_group %>
+      <%= component 'admin/settings/registrar_group', form: form, registrar_group: @registrar_group %>
+      <%= component 'admin/settings/contact_group', form: form, contact_group: @contact_group %>
 
-        <div class='w-52'>
-        <%= form.label setting.code, class: 'block text-sm font-bold text-gray-700' %>
-        </div>
-          <div class="relative mt-1 rounded-md shadow-md border border-gray-300 w-96">
-            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <%= heroicon 'cog', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
-            </div>
-            <%= form.text_field "[settings][#{setting.id}", placeholder: t(".#{setting.code}"), value: setting.value, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
-          </div>
-          <%= form.hidden_field :id, value: "[settings][#{setting.id}" %>
-        </div>
+      <div class='w-full flex justify-end'>
+        <%= form.submit t('.submit'), class: "text-gray-600 inline-flex w-72 justify-center rounded-md border border-[#DDA77B] bg-white py-2 px-4 text-sm font-medium text-[#DDA77B] shadow-sm hover:bg-[#DDA77B] hover:text-white mt-2 cursor-pointer" %>
+      </div>
     <% end %>
-
-    <% @registrar_group.each do |setting| %>
-
-      <div class='flex items-center space-y-2'>
-        <div class='w-52'>
-        <%= form.label setting.code, class: 'block text-sm font-bold text-gray-700' %>
-        </div>
-          <% if setting.format == 'array' and setting.code == 'default_nameserver_records' %>
-            <%= component 'settings/array_field', form: form, setting: setting %>
-
-          <% elsif setting.format == 'hash' %>
-            <%= component 'settings/hash_field', form: form, setting: setting %>
-
-          <% elsif setting.format == 'boolean' %>
-
-            <fieldset class="space-y-5">
-              <%= component 'form/checkbox_with_description', form: form, attribute: "[settings][#{setting.id}", label_name: setting.code, description: setting.description, value: setting.value == 'true' %>
-            </fieldset>
-          
-          <% else %>
-
-            <div class="relative mt-1 rounded-md shadow-md border border-gray-300 w-96">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <%= heroicon 'cog', variant: :solid, options: { class: 'h-5 w-5 text-gray-400' } %>
-              </div>
-              <%= form.text_field "[settings][#{setting.id}", placeholder: t(".#{setting.code}"), value: setting.value, class: 'block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2' %>
-            </div>
-
-          <% end %>
-
-          <%= form.hidden_field :id, value: "[settings][#{setting.id}" %>
-        </div>
-    <% end %>
-
-    <% @contact_group.each do |setting| %>
-      <% if setting.format == 'array' and setting.code == 'code_of_technical_contact' %>
-        <%= component 'settings/tech_contact_field', form: form, setting: setting %>
-      <% else %>
-        <fieldset class="space-y-5">
-          <%= component 'form/checkbox_with_description', form: form, attribute: "[settings][#{setting.id}", label_name: setting.code, description: setting.description, value: setting.value == 'true' %>
-        </fieldset>
-      <% end %>
-    <% end %>
-
-    <div class='w-full flex justify-end'>
-      <%= form.submit t('.submit'), class: "text-gray-600 inline-flex w-72 justify-center rounded-md border border-[#DDA77B] bg-white py-2 px-4 text-sm font-medium text-[#DDA77B] shadow-sm hover:bg-[#DDA77B] hover:text-white mt-2 cursor-pointer" %>
-    </div>
-  <% end %>
   </div>
 </div>

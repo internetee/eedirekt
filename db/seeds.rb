@@ -13,7 +13,7 @@ Setting.where(code: 'invoice_number_max')
        .first_or_create.update(code: 'invoice_number_max', value: '199999', format: 'integer', group: 'invoice', description: 'Maximum invoice number')
 
 Setting.where(code: 'vat')
-       .first_or_create.update(code: 'vat', value: '20.0', format: 'float', group: 'invoice', description: 'VAT rate')  
+       .first_or_create.update(code: 'vat', value: '22.0', format: 'float', group: 'invoice', description: 'VAT rate')  
 
 # BILLING GROUP:
 
