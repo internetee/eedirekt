@@ -20,8 +20,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ endsWith(matrix.ruby, 'head') || matrix.ruby == 'debug' }}
     
+    permissions:
+      contents: read
+      id-token: write # Required for OIDC
+    
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -44,7 +48,6 @@ jobs:
           RAILS_ENV: test
           COVERAGE: true
           DISABLE_SPRING: 1
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: |
           cp config/application.yml.example config/application.yml
           cp config/database_ci.yml config/database.yml
@@ -55,7 +58,12 @@ jobs:
           bundle exec rails assets:precompile
           bundle exec rspec spec
 
+      # Upload coverage to Qlty
+      - uses: qltysh/qlty-action/coverage@v2
+        with:
+          oidc: true
+          files: coverage/lcov.info
+
       - name: Dependabot
         if: ${{ github.event.label.name == 'dependencies' }}
         run: bundle exec rails assets:precompile
-
