@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
     resources :registrar_users, param: :uuid
     resources :domain_prices, param: :uuid, except: %i[show]
+
+    namespace :contacts do
+      resource :searches, only: %i[show]
+    end
   end
 
   resource :sessions, only: %i[new]

@@ -22,6 +22,9 @@ application.register("form--multi-select", Form__MultiSelectController);
 import Form__AddInputController from "./form/add_input_controller";
 application.register("form--add-input", Form__AddInputController);
 
+import Behaviour__AutoRemoveableController from "./behaviour/auto_removeable_controller";
+application.register("behaviour--auto-removeable", Behaviour__AutoRemoveableController);
+
 import Behaviour__RemoveableController from "./behaviour/removeable_controller";
 application.register("behaviour--removeable", Behaviour__RemoveableController);
 

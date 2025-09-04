@@ -1,13 +1,13 @@
 <%# locals: () -%>
 <div class="flex justify-center">
   <% if flash[:notice] %>
-    <div data-controller='behaviour--removeable' data-behaviour__removeable-delay-value="2" data-turbo-temporary class="max-w-sm opacity-95 border-t-4 border-green-600 rounded-b px-10 py-4 shadow-md bg-green-400" role="alert">
+    <div data-controller='behaviour--auto-removeable' data-behaviour__auto_removeable-delay-value="2" data-turbo-temporary class="max-w-sm opacity-95 border-t-4 border-green-600 rounded-b px-10 py-4 shadow-md bg-green-400" role="alert">
       <p class="text-small text-white"><%= flash[:notice] %></p>
     </div>
   <% end %>
 
   <% if flash[:alert] %> 
-    <div data-controller='behaviour--removeable' data-behaviour__removeable-delay-value="2" data-turbo-temporary class="max-w-sm opacity-95 border-t-4 border-red-600 rounded-b px-10 py-4 shadow-md bg-red-400" role="alert">
+    <div data-controller='behaviour--auto-removeable' data-behaviour__auto_removeable-delay-value="2" data-turbo-temporary class="max-w-sm opacity-95 border-t-4 border-red-600 rounded-b px-10 py-4 shadow-md bg-red-400" role="alert">
       <p class="text-small text-white"><%= flash[:alert] %></p>
     </div>
   <% end %>

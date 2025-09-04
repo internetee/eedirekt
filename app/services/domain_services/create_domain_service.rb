@@ -7,7 +7,7 @@ module DomainServices
     end
 
     def call
-      EstonianTld::DomainCreationProcess::CreateContactsJob.perform_later(pending_action)
+      EstonianTld::DomainCreationProcess::CreateContactsJob.perform_now(pending_action)
       # EstonianTld::DomainCreationProcess::CreateDomainJob.perform_later(pending_action)
     end
   end

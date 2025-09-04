@@ -6,8 +6,8 @@ module Registrant
       @domain = Domain.new
 
       Tld::Estonian::MIN_DOMAIN_CONTACT_COUNT.times do |i|
-        admin_contact = Contact.find_by(code: current_user.code)
-        tech_contact = Contact.find_by(code: Setting.code_of_technical_contact)
+        admin_contact = Contact.find_by(code: current_user.code, role: :priv)
+        tech_contact = Contact.find_by(code: Setting.code_of_technical_contact || current_user.code)
 
         if i % 2 == 0
           @domain.admin_domain_contacts.build(contact: admin_contact)
@@ -79,13 +79,15 @@ module Registrant
       @invoice = pending.create_invoice_by_pending_action(domain_price.price.to_f)
 
       if @invoice
-        flash.now[:notice] = t('.success')
+        flash[:notice] = t('.success')
 
-        render turbo_stream: [
-          turbo_stream.append('flash', partial: 'layouts/flash'),
-          turbo_stream.append('payment_method', partial: 'registrant/domains/payment_form',
-                                               locals: { invoice: @invoice})
-        ]
+        redirect_to registrant_domains_path, status: :see_other
+
+        # render turbo_stream: [
+        #   turbo_stream.append('flash', partial: 'layouts/flash'),
+        #   turbo_stream.append('payment_method', partial: 'registrant/domains/payment_form',
+        #                                        locals: { invoice: @invoice})
+        # ]
       else
         flash[:alert] = @invoice.errors.full_messages
         render turbo_stream: turbo_stream.replace('flash', partial: 'layouts/flash')
