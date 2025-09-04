@@ -25,7 +25,7 @@ gem 'pg', '~> 1.1'
 gem 'phonelib'
 gem 'propshaft'
 gem 'puma', '>= 6.4.2'
-gem 'rails', '~> 7.0.5', '>= 7.0.8.1'
+gem 'rails', '~> 7.1.5', '>= 7.1.5.2'
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
 gem 'sidekiq', '>=7'
@@ -43,7 +43,7 @@ group :development, :test do
   gem 'annotate'
   gem 'brakeman', require: false
   gem 'bundle-audit', require: false
-  gem 'database_cleaner'
+  gem 'database_cleaner', '>= 2.0.2'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
