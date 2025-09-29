@@ -8,29 +8,29 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', require: false
 gem 'cancancan'
 gem 'country_select'
-gem 'cssbundling-rails'
+gem 'cssbundling-rails', '>= 1.2.0'
 gem 'epp', github: 'internetee/epp', branch: :master
 gem 'epp-xml', '1.2.0', github: 'internetee/epp-xml', branch: :master
 gem 'faraday'
 gem 'figaro'
 gem 'heroicon'
-gem 'i18n-tasks', '~> 1.0.12'
+gem 'i18n-tasks', '~> 1.0.13'
 gem 'jbuilder'
-gem 'jsbundling-rails'
-gem 'omniauth', '>=2.0.0'
-gem 'omniauth-rails_csrf_protection'
+gem 'jsbundling-rails', '>= 1.1.2'
+gem 'omniauth', '>= 2.1.2'
+gem 'omniauth-rails_csrf_protection', '>= 1.0.2'
 gem 'omniauth-tara', github: 'internetee/omniauth-tara'
 gem 'pagy', '~> 6.0'
 gem 'pg', '~> 1.1'
 gem 'phonelib'
-gem 'propshaft'
+gem 'propshaft', '>= 0.9.0'
 gem 'puma', '>= 6.4.2'
-gem 'rails', '~> 7.0.5', '>= 7.0.8.1'
+gem 'rails', '~> 7.0.8', '>= 7.0.8.2'
 gem 'redis', '~> 4.0'
 gem 'redis-namespace'
-gem 'sidekiq', '>=7'
-gem 'stimulus-rails'
-gem 'turbo-rails'
+gem 'sidekiq', '>= 7.2.0'
+gem 'stimulus-rails', '>= 1.2.2'
+gem 'turbo-rails', '>= 1.5.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uuidtools' # For unique IDs (used by the epp gem)
 gem 'view_component'
@@ -45,10 +45,10 @@ group :development, :test do
   gem 'bundle-audit', require: false
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '>= 6.3.0'
   gem 'faker'
   gem 'pry'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 6.0.4'
   gem 'vcr'
   gem 'webmock'
   gem 'ruby-lsp'
@@ -58,12 +58,12 @@ group :development do
   gem 'i18n-debug'
   gem 'rubocop'
   gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
+  gem 'rubocop-rails', '>= 2.22.2', require: false
   gem 'web-console'
 end
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '>= 3.39.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
