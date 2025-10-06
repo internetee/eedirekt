@@ -56,9 +56,9 @@ end
 
 group :development do
   gem 'i18n-debug'
-  gem 'rubocop'
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
+  gem 'rubocop', '>= 1.66.0'
+  gem 'rubocop-performance', '>= 1.20.0', require: false
+  gem 'rubocop-rails', '>= 2.22.2', require: false
   gem 'web-console'
 end
 
