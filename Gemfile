@@ -42,7 +42,7 @@ gem 'aasm'
 group :development, :test do
   gem 'annotate'
   gem 'brakeman', require: false
-  gem 'bundle-audit', require: false
+  gem 'bundle-audit', '>= 0.2.0', require: false
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
