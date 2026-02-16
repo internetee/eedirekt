@@ -11,7 +11,7 @@ gem 'country_select'
 gem 'cssbundling-rails'
 gem 'epp', github: 'internetee/epp', branch: :master
 gem 'epp-xml', '1.2.0', github: 'internetee/epp-xml', branch: :master
-gem 'faraday'
+gem 'faraday', '>= 2.14.1'
 gem 'figaro'
 gem 'heroicon'
 gem 'i18n-tasks', '~> 1.0.12'
